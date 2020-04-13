@@ -1,0 +1,8 @@
+E:\SZKOLA\IV SEMESTR\testowanie oprogramowania i systemy kontroli wersji\PersonnelMenagement\PersonnelMenagement\bin\Debug\PersonnelMenagement.exe.config
+E:\SZKOLA\IV SEMESTR\testowanie oprogramowania i systemy kontroli wersji\PersonnelMenagement\PersonnelMenagement\bin\Debug\PersonnelMenagement.exe
+E:\SZKOLA\IV SEMESTR\testowanie oprogramowania i systemy kontroli wersji\PersonnelMenagement\PersonnelMenagement\bin\Debug\PersonnelMenagement.pdb
+E:\SZKOLA\IV SEMESTR\testowanie oprogramowania i systemy kontroli wersji\PersonnelMenagement\PersonnelMenagement\obj\Debug\PersonnelMenagement.csprojResolveAssemblyReference.cache
+E:\SZKOLA\IV SEMESTR\testowanie oprogramowania i systemy kontroli wersji\PersonnelMenagement\PersonnelMenagement\obj\Debug\PersonnelMenagement.Properties.Resources.resources
+E:\SZKOLA\IV SEMESTR\testowanie oprogramowania i systemy kontroli wersji\PersonnelMenagement\PersonnelMenagement\obj\Debug\PersonnelMenagement.csproj.GenerateResource.Cache
+E:\SZKOLA\IV SEMESTR\testowanie oprogramowania i systemy kontroli wersji\PersonnelMenagement\PersonnelMenagement\obj\Debug\PersonnelMenagement.exe
+E:\SZKOLA\IV SEMESTR\testowanie oprogramowania i systemy kontroli wersji\PersonnelMenagement\PersonnelMenagement\obj\Debug\PersonnelMenagement.pdb
