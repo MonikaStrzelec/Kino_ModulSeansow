@@ -51,6 +51,14 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Menagers\ScheduleMenager.cs" />
+    <Compile Include="Menagers\TaskMenagers.cs" />
+    <Compile Include="Menagers\UserMenager.cs" />
+    <Compile Include="Models\Permissions.cs" />
+    <Compile Include="Models\Schedule.cs" />
+    <Compile Include="Models\ScheduleStatus.cs" />
+    <Compile Include="Models\Task.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -75,8 +83,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

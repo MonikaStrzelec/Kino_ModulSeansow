@@ -8,14 +8,14 @@ namespace PersonnelMenagement.Models
 {
     public class User
     {
-        long id;
-        string firstName;
-        string lastName;
-        string login;
-        string passwordHash;
-        string codeHash;
-        decimal baseSalar;
-        decimal hourlyRate;
+        public long id;
+        public string firstName;
+        public string lastName;
+        public string login;
+        public string passwordHash;
+        public string codeHash;
+        public decimal baseSalar;
+        public decimal hourlyRate;
         List<Permissions> permissions;
     }
 }
