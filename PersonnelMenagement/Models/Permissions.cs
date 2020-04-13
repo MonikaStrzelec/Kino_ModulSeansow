@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PersonnelMenagement.Models
 {
-    class Permissions
+    public class Permissions
     {
     }
 }

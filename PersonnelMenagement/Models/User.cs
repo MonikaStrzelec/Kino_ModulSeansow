@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PersonnelMenagement.Models
 {
-    class User
+    public class User
     {
         long id;
         string firstName;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PersonnelMenagement.Models
 {
-    class Task
+    public class Task
     {
         long id;
         string name;

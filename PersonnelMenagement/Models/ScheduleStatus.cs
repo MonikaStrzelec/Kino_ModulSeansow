@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PersonnelMenagement.Models
 {
-    class ScheduleStatus
+    public class ScheduleStatus
     {
         long id;
         string name;
