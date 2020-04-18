@@ -8,11 +8,11 @@ namespace PersonnelMenagement.Models
 {
     public class Schedule
     {
-        long id;
-        long userId;
-        long taskId;
-        DateTime dateFrom;
-        DateTime dateTo;
-        ScheduleStatus statusId;
+        public long id;
+        public long userId;
+        public long taskId;
+        public DateTime dateFrom;
+        public DateTime dateTo;
+        public ScheduleStatus statusId;
     }
 }

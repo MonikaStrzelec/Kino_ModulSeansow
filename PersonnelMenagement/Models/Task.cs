@@ -8,8 +8,8 @@ namespace PersonnelMenagement.Models
 {
     public class Task
     {
-        long id;
-        string name;
-        string description;
+        public long id;
+        public string name;
+        public string description;
     }
 }
