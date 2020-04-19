@@ -31,13 +31,13 @@ namespace PersonnelMenagement.Menagers
                     StringBuilder sb = new StringBuilder();
 
                     // INSERT demo
-                    sb.Append("INSERT Task (id, name, description) ");
-                    sb.Append("VALUES (@id, @name, @description);");
+                    sb.Append("INSERT Task (name, description) ");
+                    sb.Append("VALUES (@name, @description);");
                     string sql = sb.ToString();
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        command.Parameters.AddWithValue("@name", task.name);
-                        command.Parameters.AddWithValue("@description", task.description);
+                        command.Parameters.AddWithValue("@name", name);
+                        command.Parameters.AddWithValue("@description", description);
 
                         int rowsAffected = command.ExecuteNonQuery();
                     }
@@ -51,7 +51,7 @@ namespace PersonnelMenagement.Menagers
 
         }
 
-        public void updateTask (Task task)
+        public void updateTask (Models.Task task)
         {
             try
             {
@@ -89,7 +89,7 @@ namespace PersonnelMenagement.Menagers
 
         }
 
-        public void deleteTask (Task task)
+        public void deleteTask (Models.Task task)
         {
             try
             {

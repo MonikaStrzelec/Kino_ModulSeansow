@@ -32,12 +32,11 @@ namespace PersonnelMenagement.Menagers
                     StringBuilder sb = new StringBuilder();
 
                     // INSERT demo
-                    sb.Append("INSERT User (id, firstName, lastName, login, passwordHash, codeHash, baseSalar, hourlyRate) ");
-                    sb.Append("VALUES (@id, @firstName, @lastName, @login, @passwordHash, @codeHash, @baseSalar, @hourlyRate);");
+                    sb.Append("INSERT User (firstName, lastName, login, passwordHash, codeHash, baseSalar, hourlyRate) ");
+                    sb.Append("VALUES (@firstName, @lastName, @login, @passwordHash, @codeHash, @baseSalar, @hourlyRate);");
                     string sql = sb.ToString();
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        command.Parameters.AddWithValue("@id", user.id);
                         command.Parameters.AddWithValue("@firstName", user.firstName);
                         command.Parameters.AddWithValue("@lastName", user.lastName);
                         command.Parameters.AddWithValue("@login", user.login);
