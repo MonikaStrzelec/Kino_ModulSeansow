@@ -18,12 +18,13 @@ namespace Login
         public Form1()
         {
             InitializeComponent();
+            
         }
 
         string connection = "Server=tcp:kinosql.database.windows.net,1433;Initial Catalog=Kino;Persist Security Info=False;User ID=student;Password=Pa$$w0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+            
         }
 
         public static byte[] StringHash(string str)
@@ -31,6 +32,7 @@ namespace Login
             HashAlgorithm algorithm = SHA1.Create();
             return algorithm.ComputeHash(Encoding.Unicode.GetBytes(str));
         }
+        
 
 
         private void label1_Click(object sender, EventArgs e)
@@ -49,15 +51,14 @@ namespace Login
                 }
                 else
                 {
-
+                    
                     SqlConnection con = new SqlConnection(connection);
 
                     SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.User WHERE login=@Login AND passwordHash=@PasswordHash;", con);
                     cmd.Parameters.AddWithValue("@Login", textBoxLogin.Text);
                     cmd.Parameters.AddWithValue("@PasswordHash", StringHash(textBoxPassword.Text));
 
-                    con.Open();
-
+                    con.Open();   
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataSet ds = new DataSet();
                     da.Fill(ds);
