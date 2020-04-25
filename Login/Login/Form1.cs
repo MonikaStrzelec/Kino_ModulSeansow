@@ -21,7 +21,7 @@ namespace Login
             
         }
 
-        string connection = "Server=tcp:kinosql.database.windows.net,1433;Initial Catalog=Kino;Persist Security Info=False;User ID=student;Password=Pa$$w0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        string connection = "Server=tcp:kinosql.database.windows.net,1433;Initial Catalog=modul_logowania_gr1;Persist Security Info=False;User ID=student;Password=Pa$$w0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         private void Form1_Load(object sender, EventArgs e)
         {
             
@@ -54,9 +54,9 @@ namespace Login
                     
                     SqlConnection con = new SqlConnection(connection);
 
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.User WHERE login=@Login AND passwordHash=@PasswordHash;", con);
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.uzytkownicy WHERE login=@Login AND haslo=@haslo;", con);
                     cmd.Parameters.AddWithValue("@Login", textBoxLogin.Text);
-                    cmd.Parameters.AddWithValue("@PasswordHash", StringHash(textBoxPassword.Text));
+                    cmd.Parameters.AddWithValue("@haslo", StringHash(textBoxPassword.Text));
 
                     con.Open();   
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
