@@ -45,9 +45,11 @@ namespace Login
             #region DATABASE LOGIN CONNECTION
             try
             {
-                if (textBoxLogin.Text == "" && textBoxPassword.Text == "")
+                if (string.IsNullOrWhiteSpace(textBoxLogin.Text) || string.IsNullOrWhiteSpace(textBoxPassword.Text))
                 {
-                    MessageBox.Show("Enter any Login or Password");
+                    MessageBox.Show("Enter login and password.");
+                    textBoxLogin.Focus();
+                    return;
                 }
                 else
                 {
@@ -77,14 +79,12 @@ namespace Login
                     
                 }
 
-                #endregion
-
-
-            }
+             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
+                #endregion
         }
     }
 }
