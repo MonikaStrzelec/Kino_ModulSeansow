@@ -1,0 +1,1121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="KinoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Dim">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DimsMovie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="movie" Type="int" Nullable="false" />
+          <Property Name="dim" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hall">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="availableParameters" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="1000" />
+          <Property Name="movieState" Type="int" Nullable="false" />
+          <Property Name="movieType" Type="int" Nullable="false" />
+          <Property Name="movieTime" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Kino.dbo.MoviePerson' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MoviePerson">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="movie" />
+            <PropertyRef Name="person" />
+            <PropertyRef Name="personType" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="movie" Type="int" Nullable="false" />
+          <Property Name="person" Type="int" Nullable="false" />
+          <Property Name="personType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MovieState">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MovieType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Performance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="movie" Type="int" Nullable="false" />
+          <Property Name="hall" Type="int" Nullable="false" />
+          <Property Name="adsDuration" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Permissions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="bornDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" />
+          <Property Name="taskId" Type="int" />
+          <Property Name="dateFrom" Type="date" />
+          <Property Name="dateTo" Type="date" />
+          <Property Name="statusId" Type="int" />
+        </EntityType>
+        <EntityType Name="ScheduleStatus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="30" />
+          <Property Name="description" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Timetable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="performance" Type="int" Nullable="false" />
+          <Property Name="performanceDate" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstName" Type="varchar" MaxLength="30" />
+          <Property Name="lastName" Type="varchar" MaxLength="30" />
+          <Property Name="login" Type="varchar" MaxLength="30" />
+          <Property Name="passwordHash" Type="varchar" MaxLength="30" />
+          <Property Name="codeHash" Type="varchar" MaxLength="30" />
+          <Property Name="baseSalary" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="hourlyRate" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="UserPermissions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" />
+          <Property Name="permissionsId" Type="int" />
+        </EntityType>
+        <Association Name="FK__Schedule__status__66603565">
+          <End Role="ScheduleStatus" Type="Self.ScheduleStatus" Multiplicity="0..1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScheduleStatus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Schedule__taskId__656C112C">
+          <End Role="Task" Type="Self.Task" Multiplicity="0..1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="taskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Schedule__userId__6477ECF3">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserPermi__permi__6A30C649">
+          <End Role="Permissions" Type="Self.Permissions" Multiplicity="0..1" />
+          <End Role="UserPermissions" Type="Self.UserPermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permissions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserPermissions">
+              <PropertyRef Name="permissionsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserPermi__userI__693CA210">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserPermissions" Type="Self.UserPermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserPermissions">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_dimmovie">
+          <End Role="Dim" Type="Self.Dim" Multiplicity="1" />
+          <End Role="DimsMovie" Type="Self.DimsMovie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dim">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DimsMovie">
+              <PropertyRef Name="dim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hall_Dim">
+          <End Role="Dim" Type="Self.Dim" Multiplicity="1" />
+          <End Role="Hall" Type="Self.Hall" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dim">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Hall">
+              <PropertyRef Name="availableParameters" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_movie">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+          <End Role="MoviePerson" Type="Self.MoviePerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MoviePerson">
+              <PropertyRef Name="movie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_moviedim">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+          <End Role="DimsMovie" Type="Self.DimsMovie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DimsMovie">
+              <PropertyRef Name="movie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_moviestate">
+          <End Role="MovieState" Type="Self.MovieState" Multiplicity="1" />
+          <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovieState">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Movie">
+              <PropertyRef Name="movieState" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_movietype">
+          <End Role="MovieType" Type="Self.MovieType" Multiplicity="1" />
+          <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovieType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Movie">
+              <PropertyRef Name="movieType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Performance_Hall">
+          <End Role="Hall" Type="Self.Hall" Multiplicity="1" />
+          <End Role="Performance" Type="Self.Performance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hall">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Performance">
+              <PropertyRef Name="hall" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Performance_Movie">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+          <End Role="Performance" Type="Self.Performance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Performance">
+              <PropertyRef Name="movie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="MoviePerson" Type="Self.MoviePerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MoviePerson">
+              <PropertyRef Name="person" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_persontype">
+          <End Role="PersonType" Type="Self.PersonType" Multiplicity="1" />
+          <End Role="MoviePerson" Type="Self.MoviePerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MoviePerson">
+              <PropertyRef Name="personType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Timetable_Performance">
+          <End Role="Performance" Type="Self.Performance" Multiplicity="1" />
+          <End Role="Timetable" Type="Self.Timetable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Performance">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Timetable">
+              <PropertyRef Name="performance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KinoModelStoreContainer">
+          <EntitySet Name="Dim" EntityType="Self.Dim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DimsMovie" EntityType="Self.DimsMovie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hall" EntityType="Self.Hall" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movie" EntityType="Self.Movie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MovieState" EntityType="Self.MovieState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MovieType" EntityType="Self.MovieType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Performance" EntityType="Self.Performance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Permissions" EntityType="Self.Permissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonType" EntityType="Self.PersonType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScheduleStatus" EntityType="Self.ScheduleStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Timetable" EntityType="Self.Timetable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserPermissions" EntityType="Self.UserPermissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MoviePerson" EntityType="Self.MoviePerson" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MoviePerson].[id] AS [id], 
+    [MoviePerson].[movie] AS [movie], 
+    [MoviePerson].[person] AS [person], 
+    [MoviePerson].[personType] AS [personType]
+    FROM [dbo].[MoviePerson] AS [MoviePerson]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Schedule__status__66603565" Association="Self.FK__Schedule__status__66603565">
+            <End Role="ScheduleStatus" EntitySet="ScheduleStatus" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Schedule__taskId__656C112C" Association="Self.FK__Schedule__taskId__656C112C">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Schedule__userId__6477ECF3" Association="Self.FK__Schedule__userId__6477ECF3">
+            <End Role="User" EntitySet="User" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserPermi__permi__6A30C649" Association="Self.FK__UserPermi__permi__6A30C649">
+            <End Role="Permissions" EntitySet="Permissions" />
+            <End Role="UserPermissions" EntitySet="UserPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserPermi__userI__693CA210" Association="Self.FK__UserPermi__userI__693CA210">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserPermissions" EntitySet="UserPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_dimmovie" Association="Self.fk_dimmovie">
+            <End Role="Dim" EntitySet="Dim" />
+            <End Role="DimsMovie" EntitySet="DimsMovie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hall_Dim" Association="Self.FK_Hall_Dim">
+            <End Role="Dim" EntitySet="Dim" />
+            <End Role="Hall" EntitySet="Hall" />
+          </AssociationSet>
+          <AssociationSet Name="fk_movie" Association="Self.fk_movie">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="MoviePerson" EntitySet="MoviePerson" />
+          </AssociationSet>
+          <AssociationSet Name="fk_moviedim" Association="Self.fk_moviedim">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="DimsMovie" EntitySet="DimsMovie" />
+          </AssociationSet>
+          <AssociationSet Name="fk_moviestate" Association="Self.fk_moviestate">
+            <End Role="MovieState" EntitySet="MovieState" />
+            <End Role="Movie" EntitySet="Movie" />
+          </AssociationSet>
+          <AssociationSet Name="fk_movietype" Association="Self.fk_movietype">
+            <End Role="MovieType" EntitySet="MovieType" />
+            <End Role="Movie" EntitySet="Movie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Performance_Hall" Association="Self.FK_Performance_Hall">
+            <End Role="Hall" EntitySet="Hall" />
+            <End Role="Performance" EntitySet="Performance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Performance_Movie" Association="Self.FK_Performance_Movie">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="Performance" EntitySet="Performance" />
+          </AssociationSet>
+          <AssociationSet Name="fk_person" Association="Self.fk_person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="MoviePerson" EntitySet="MoviePerson" />
+          </AssociationSet>
+          <AssociationSet Name="fk_persontype" Association="Self.fk_persontype">
+            <End Role="PersonType" EntitySet="PersonType" />
+            <End Role="MoviePerson" EntitySet="MoviePerson" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Timetable_Performance" Association="Self.FK_Timetable_Performance">
+            <End Role="Performance" EntitySet="Performance" />
+            <End Role="Timetable" EntitySet="Timetable" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KinoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Dim">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DimsMovies" Relationship="Self.fk_dimmovie" FromRole="Dim" ToRole="DimsMovie" />
+          <NavigationProperty Name="Halls" Relationship="Self.FK_Hall_Dim" FromRole="Dim" ToRole="Hall" />
+        </EntityType>
+        <EntityType Name="DimsMovie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="movie" Type="Int32" Nullable="false" />
+          <Property Name="dim" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Dim1" Relationship="Self.fk_dimmovie" FromRole="DimsMovie" ToRole="Dim" />
+          <NavigationProperty Name="Movie1" Relationship="Self.fk_moviedim" FromRole="DimsMovie" ToRole="Movie" />
+        </EntityType>
+        <EntityType Name="Hall">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="availableParameters" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Dim" Relationship="Self.FK_Hall_Dim" FromRole="Hall" ToRole="Dim" />
+          <NavigationProperty Name="Performances" Relationship="Self.FK_Performance_Hall" FromRole="Hall" ToRole="Performance" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="movieState" Type="Int32" Nullable="false" />
+          <Property Name="movieType" Type="Int32" Nullable="false" />
+          <Property Name="movieTime" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="DimsMovies" Relationship="Self.fk_moviedim" FromRole="Movie" ToRole="DimsMovie" />
+          <NavigationProperty Name="MoviePersons" Relationship="Self.fk_movie" FromRole="Movie" ToRole="MoviePerson" />
+          <NavigationProperty Name="MovieState1" Relationship="Self.fk_moviestate" FromRole="Movie" ToRole="MovieState" />
+          <NavigationProperty Name="MovieType1" Relationship="Self.fk_movietype" FromRole="Movie" ToRole="MovieType" />
+          <NavigationProperty Name="Performances" Relationship="Self.FK_Performance_Movie" FromRole="Movie" ToRole="Performance" />
+        </EntityType>
+        <EntityType Name="MovieState">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Movies" Relationship="Self.fk_moviestate" FromRole="MovieState" ToRole="Movie" />
+        </EntityType>
+        <EntityType Name="MovieType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Movies" Relationship="Self.fk_movietype" FromRole="MovieType" ToRole="Movie" />
+        </EntityType>
+        <EntityType Name="Performance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="movie" Type="Int32" Nullable="false" />
+          <Property Name="hall" Type="Int32" Nullable="false" />
+          <Property Name="adsDuration" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Hall1" Relationship="Self.FK_Performance_Hall" FromRole="Performance" ToRole="Hall" />
+          <NavigationProperty Name="Movie1" Relationship="Self.FK_Performance_Movie" FromRole="Performance" ToRole="Movie" />
+          <NavigationProperty Name="Timetables" Relationship="Self.FK_Timetable_Performance" FromRole="Performance" ToRole="Timetable" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserPermissions" Relationship="Self.FK__UserPermi__permi__6A30C649" FromRole="Permissions" ToRole="UserPermissions" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bornDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="MoviePersons" Relationship="Self.fk_person" FromRole="Person" ToRole="MoviePerson" />
+        </EntityType>
+        <EntityType Name="PersonType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="MoviePersons" Relationship="Self.fk_persontype" FromRole="PersonType" ToRole="MoviePerson" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="taskId" Type="Int32" />
+          <Property Name="dateFrom" Type="DateTime" Precision="0" />
+          <Property Name="dateTo" Type="DateTime" Precision="0" />
+          <Property Name="statusId" Type="Int32" />
+          <NavigationProperty Name="ScheduleStatu" Relationship="Self.FK__Schedule__status__66603565" FromRole="Schedule" ToRole="ScheduleStatus" />
+          <NavigationProperty Name="Task" Relationship="Self.FK__Schedule__taskId__656C112C" FromRole="Schedule" ToRole="Task" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Schedule__userId__6477ECF3" FromRole="Schedule" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ScheduleStatu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Schedules" Relationship="Self.FK__Schedule__status__66603565" FromRole="ScheduleStatus" ToRole="Schedule" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Schedules" Relationship="Self.FK__Schedule__taskId__656C112C" FromRole="Task" ToRole="Schedule" />
+        </EntityType>
+        <EntityType Name="Timetable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="performance" Type="Int32" Nullable="false" />
+          <Property Name="performanceDate" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Performance1" Relationship="Self.FK_Timetable_Performance" FromRole="Timetable" ToRole="Performance" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="lastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="login" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="passwordHash" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="codeHash" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="baseSalary" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="hourlyRate" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Schedules" Relationship="Self.FK__Schedule__userId__6477ECF3" FromRole="User" ToRole="Schedule" />
+          <NavigationProperty Name="UserPermissions" Relationship="Self.FK__UserPermi__userI__693CA210" FromRole="User" ToRole="UserPermissions" />
+        </EntityType>
+        <EntityType Name="UserPermission">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="permissionsId" Type="Int32" />
+          <NavigationProperty Name="Permission" Relationship="Self.FK__UserPermi__permi__6A30C649" FromRole="UserPermissions" ToRole="Permissions" />
+          <NavigationProperty Name="User" Relationship="Self.FK__UserPermi__userI__693CA210" FromRole="UserPermissions" ToRole="User" />
+        </EntityType>
+        <EntityType Name="MoviePerson">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="movie" />
+            <PropertyRef Name="person" />
+            <PropertyRef Name="personType" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="movie" Type="Int32" Nullable="false" />
+          <Property Name="person" Type="Int32" Nullable="false" />
+          <Property Name="personType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Movie1" Relationship="Self.fk_movie" FromRole="MoviePerson" ToRole="Movie" />
+          <NavigationProperty Name="Person1" Relationship="Self.fk_person" FromRole="MoviePerson" ToRole="Person" />
+          <NavigationProperty Name="PersonType1" Relationship="Self.fk_persontype" FromRole="MoviePerson" ToRole="PersonType" />
+        </EntityType>
+        <Association Name="fk_dimmovie">
+          <End Role="Dim" Type="Self.Dim" Multiplicity="1" />
+          <End Role="DimsMovie" Type="Self.DimsMovie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dim">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DimsMovie">
+              <PropertyRef Name="dim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hall_Dim">
+          <End Role="Dim" Type="Self.Dim" Multiplicity="1" />
+          <End Role="Hall" Type="Self.Hall" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dim">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Hall">
+              <PropertyRef Name="availableParameters" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_moviedim">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+          <End Role="DimsMovie" Type="Self.DimsMovie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DimsMovie">
+              <PropertyRef Name="movie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Performance_Hall">
+          <End Role="Hall" Type="Self.Hall" Multiplicity="1" />
+          <End Role="Performance" Type="Self.Performance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hall">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Performance">
+              <PropertyRef Name="hall" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_movie">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+          <End Role="MoviePerson" Type="Self.MoviePerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MoviePerson">
+              <PropertyRef Name="movie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_moviestate">
+          <End Role="MovieState" Type="Self.MovieState" Multiplicity="1" />
+          <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovieState">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Movie">
+              <PropertyRef Name="movieState" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_movietype">
+          <End Role="MovieType" Type="Self.MovieType" Multiplicity="1" />
+          <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovieType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Movie">
+              <PropertyRef Name="movieType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Performance_Movie">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+          <End Role="Performance" Type="Self.Performance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Performance">
+              <PropertyRef Name="movie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Timetable_Performance">
+          <End Role="Performance" Type="Self.Performance" Multiplicity="1" />
+          <End Role="Timetable" Type="Self.Timetable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Performance">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Timetable">
+              <PropertyRef Name="performance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserPermi__permi__6A30C649">
+          <End Role="Permissions" Type="Self.Permission" Multiplicity="0..1" />
+          <End Role="UserPermissions" Type="Self.UserPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permissions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserPermissions">
+              <PropertyRef Name="permissionsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="MoviePerson" Type="Self.MoviePerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MoviePerson">
+              <PropertyRef Name="person" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_persontype">
+          <End Role="PersonType" Type="Self.PersonType" Multiplicity="1" />
+          <End Role="MoviePerson" Type="Self.MoviePerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MoviePerson">
+              <PropertyRef Name="personType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Schedule__status__66603565">
+          <End Role="ScheduleStatus" Type="Self.ScheduleStatu" Multiplicity="0..1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScheduleStatus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Schedule__taskId__656C112C">
+          <End Role="Task" Type="Self.Task" Multiplicity="0..1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="taskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Schedule__userId__6477ECF3">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserPermi__userI__693CA210">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserPermissions" Type="Self.UserPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserPermissions">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KinoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Dims" EntityType="Self.Dim" />
+          <EntitySet Name="DimsMovies" EntityType="Self.DimsMovie" />
+          <EntitySet Name="Halls" EntityType="Self.Hall" />
+          <EntitySet Name="Movies" EntityType="Self.Movie" />
+          <EntitySet Name="MovieStates" EntityType="Self.MovieState" />
+          <EntitySet Name="MovieTypes" EntityType="Self.MovieType" />
+          <EntitySet Name="Performances" EntityType="Self.Performance" />
+          <EntitySet Name="Permissions" EntityType="Self.Permission" />
+          <EntitySet Name="People" EntityType="Self.Person" />
+          <EntitySet Name="PersonTypes" EntityType="Self.PersonType" />
+          <EntitySet Name="Schedules" EntityType="Self.Schedule" />
+          <EntitySet Name="ScheduleStatus" EntityType="Self.ScheduleStatu" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Tasks" EntityType="Self.Task" />
+          <EntitySet Name="Timetables" EntityType="Self.Timetable" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserPermissions" EntityType="Self.UserPermission" />
+          <EntitySet Name="MoviePersons" EntityType="Self.MoviePerson" />
+          <AssociationSet Name="fk_dimmovie" Association="Self.fk_dimmovie">
+            <End Role="Dim" EntitySet="Dims" />
+            <End Role="DimsMovie" EntitySet="DimsMovies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hall_Dim" Association="Self.FK_Hall_Dim">
+            <End Role="Dim" EntitySet="Dims" />
+            <End Role="Hall" EntitySet="Halls" />
+          </AssociationSet>
+          <AssociationSet Name="fk_moviedim" Association="Self.fk_moviedim">
+            <End Role="Movie" EntitySet="Movies" />
+            <End Role="DimsMovie" EntitySet="DimsMovies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Performance_Hall" Association="Self.FK_Performance_Hall">
+            <End Role="Hall" EntitySet="Halls" />
+            <End Role="Performance" EntitySet="Performances" />
+          </AssociationSet>
+          <AssociationSet Name="fk_movie" Association="Self.fk_movie">
+            <End Role="Movie" EntitySet="Movies" />
+            <End Role="MoviePerson" EntitySet="MoviePersons" />
+          </AssociationSet>
+          <AssociationSet Name="fk_moviestate" Association="Self.fk_moviestate">
+            <End Role="MovieState" EntitySet="MovieStates" />
+            <End Role="Movie" EntitySet="Movies" />
+          </AssociationSet>
+          <AssociationSet Name="fk_movietype" Association="Self.fk_movietype">
+            <End Role="MovieType" EntitySet="MovieTypes" />
+            <End Role="Movie" EntitySet="Movies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Performance_Movie" Association="Self.FK_Performance_Movie">
+            <End Role="Movie" EntitySet="Movies" />
+            <End Role="Performance" EntitySet="Performances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Timetable_Performance" Association="Self.FK_Timetable_Performance">
+            <End Role="Performance" EntitySet="Performances" />
+            <End Role="Timetable" EntitySet="Timetables" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserPermi__permi__6A30C649" Association="Self.FK__UserPermi__permi__6A30C649">
+            <End Role="Permissions" EntitySet="Permissions" />
+            <End Role="UserPermissions" EntitySet="UserPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_person" Association="Self.fk_person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="MoviePerson" EntitySet="MoviePersons" />
+          </AssociationSet>
+          <AssociationSet Name="fk_persontype" Association="Self.fk_persontype">
+            <End Role="PersonType" EntitySet="PersonTypes" />
+            <End Role="MoviePerson" EntitySet="MoviePersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Schedule__status__66603565" Association="Self.FK__Schedule__status__66603565">
+            <End Role="ScheduleStatus" EntitySet="ScheduleStatus" />
+            <End Role="Schedule" EntitySet="Schedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Schedule__taskId__656C112C" Association="Self.FK__Schedule__taskId__656C112C">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="Schedule" EntitySet="Schedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Schedule__userId__6477ECF3" Association="Self.FK__Schedule__userId__6477ECF3">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Schedule" EntitySet="Schedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserPermi__userI__693CA210" Association="Self.FK__UserPermi__userI__693CA210">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserPermissions" EntitySet="UserPermissions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KinoModelStoreContainer" CdmEntityContainer="KinoEntities">
+          <EntitySetMapping Name="Dims">
+            <EntityTypeMapping TypeName="KinoModel.Dim">
+              <MappingFragment StoreEntitySet="Dim">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DimsMovies">
+            <EntityTypeMapping TypeName="KinoModel.DimsMovie">
+              <MappingFragment StoreEntitySet="DimsMovie">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="movie" ColumnName="movie" />
+                <ScalarProperty Name="dim" ColumnName="dim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Halls">
+            <EntityTypeMapping TypeName="KinoModel.Hall">
+              <MappingFragment StoreEntitySet="Hall">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="availableParameters" ColumnName="availableParameters" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movies">
+            <EntityTypeMapping TypeName="KinoModel.Movie">
+              <MappingFragment StoreEntitySet="Movie">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="movieState" ColumnName="movieState" />
+                <ScalarProperty Name="movieType" ColumnName="movieType" />
+                <ScalarProperty Name="movieTime" ColumnName="movieTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MovieStates">
+            <EntityTypeMapping TypeName="KinoModel.MovieState">
+              <MappingFragment StoreEntitySet="MovieState">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MovieTypes">
+            <EntityTypeMapping TypeName="KinoModel.MovieType">
+              <MappingFragment StoreEntitySet="MovieType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Performances">
+            <EntityTypeMapping TypeName="KinoModel.Performance">
+              <MappingFragment StoreEntitySet="Performance">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="movie" ColumnName="movie" />
+                <ScalarProperty Name="hall" ColumnName="hall" />
+                <ScalarProperty Name="adsDuration" ColumnName="adsDuration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permissions">
+            <EntityTypeMapping TypeName="KinoModel.Permission">
+              <MappingFragment StoreEntitySet="Permissions">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="KinoModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="bornDate" ColumnName="bornDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonTypes">
+            <EntityTypeMapping TypeName="KinoModel.PersonType">
+              <MappingFragment StoreEntitySet="PersonType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedules">
+            <EntityTypeMapping TypeName="KinoModel.Schedule">
+              <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="taskId" ColumnName="taskId" />
+                <ScalarProperty Name="dateFrom" ColumnName="dateFrom" />
+                <ScalarProperty Name="dateTo" ColumnName="dateTo" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScheduleStatus">
+            <EntityTypeMapping TypeName="KinoModel.ScheduleStatu">
+              <MappingFragment StoreEntitySet="ScheduleStatus">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="KinoModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="KinoModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Timetables">
+            <EntityTypeMapping TypeName="KinoModel.Timetable">
+              <MappingFragment StoreEntitySet="Timetable">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="performance" ColumnName="performance" />
+                <ScalarProperty Name="performanceDate" ColumnName="performanceDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="KinoModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="passwordHash" ColumnName="passwordHash" />
+                <ScalarProperty Name="codeHash" ColumnName="codeHash" />
+                <ScalarProperty Name="baseSalary" ColumnName="baseSalary" />
+                <ScalarProperty Name="hourlyRate" ColumnName="hourlyRate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserPermissions">
+            <EntityTypeMapping TypeName="KinoModel.UserPermission">
+              <MappingFragment StoreEntitySet="UserPermissions">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="permissionsId" ColumnName="permissionsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MoviePersons">
+            <EntityTypeMapping TypeName="KinoModel.MoviePerson">
+              <MappingFragment StoreEntitySet="MoviePerson">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="movie" ColumnName="movie" />
+                <ScalarProperty Name="person" ColumnName="person" />
+                <ScalarProperty Name="personType" ColumnName="personType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
