@@ -27,7 +27,7 @@ namespace Kino.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=kinosql.database.windows.net;Initial Catalog=Kino;Persist Security In" +
-            "fo=True;User ID=newstudent")]
+            "fo=True;User ID=")]
         public string KinoConnectionString {
             get {
                 return ((string)(this["KinoConnectionString"]));
