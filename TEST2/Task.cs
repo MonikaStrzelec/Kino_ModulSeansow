@@ -17,7 +17,7 @@ namespace Kino
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Task()
         {
-            this.Schedule = new HashSet<Schedule>();
+            this.Schedules = new HashSet<Schedule>();
         }
     
         public int id { get; set; }
@@ -25,6 +25,6 @@ namespace Kino
         public string description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Schedule> Schedule { get; set; }
+        public virtual ICollection<Schedule> Schedules { get; set; }
     }
 }

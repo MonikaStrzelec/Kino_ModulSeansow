@@ -17,16 +17,16 @@ namespace Kino
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Dim()
         {
-            this.DimsMovie = new HashSet<DimsMovie>();
-            this.Hall = new HashSet<Hall>();
+            this.DimsMovies = new HashSet<DimsMovie>();
+            this.Halls = new HashSet<Hall>();
         }
     
         public int id { get; set; }
         public string name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DimsMovie> DimsMovie { get; set; }
+        public virtual ICollection<DimsMovie> DimsMovies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Hall> Hall { get; set; }
+        public virtual ICollection<Hall> Halls { get; set; }
     }
 }

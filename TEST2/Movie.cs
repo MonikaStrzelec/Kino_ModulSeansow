@@ -17,9 +17,9 @@ namespace Kino
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Movie()
         {
-            this.DimsMovie = new HashSet<DimsMovie>();
-            this.MoviePerson = new HashSet<MoviePerson>();
-            this.Performance = new HashSet<Performance>();
+            this.DimsMovies = new HashSet<DimsMovie>();
+            this.MoviePersons = new HashSet<MoviePerson>();
+            this.Performances = new HashSet<Performance>();
         }
     
         public int id { get; set; }
@@ -30,12 +30,12 @@ namespace Kino
         public System.TimeSpan movieTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DimsMovie> DimsMovie { get; set; }
+        public virtual ICollection<DimsMovie> DimsMovies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MoviePerson> MoviePerson { get; set; }
+        public virtual ICollection<MoviePerson> MoviePersons { get; set; }
         public virtual MovieState MovieState1 { get; set; }
         public virtual MovieType MovieType1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Performance> Performance { get; set; }
+        public virtual ICollection<Performance> Performances { get; set; }
     }
 }

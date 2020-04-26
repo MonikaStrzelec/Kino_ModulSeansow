@@ -17,7 +17,7 @@ namespace Kino
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Person()
         {
-            this.MoviePerson = new HashSet<MoviePerson>();
+            this.MoviePersons = new HashSet<MoviePerson>();
         }
     
         public int id { get; set; }
@@ -26,6 +26,6 @@ namespace Kino
         public System.DateTime bornDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MoviePerson> MoviePerson { get; set; }
+        public virtual ICollection<MoviePerson> MoviePersons { get; set; }
     }
 }

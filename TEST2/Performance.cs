@@ -17,7 +17,7 @@ namespace Kino
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Performance()
         {
-            this.Timetable = new HashSet<Timetable>();
+            this.Timetables = new HashSet<Timetable>();
         }
     
         public int id { get; set; }
@@ -28,6 +28,6 @@ namespace Kino
         public virtual Hall Hall1 { get; set; }
         public virtual Movie Movie1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Timetable> Timetable { get; set; }
+        public virtual ICollection<Timetable> Timetables { get; set; }
     }
 }
