@@ -1,4 +1,4 @@
-﻿namespace TEST2
+﻿namespace Kino
 {
     partial class Form1
     {
@@ -216,7 +216,7 @@
             // 
             // timetableBindingSource2
             // 
-            this.timetableBindingSource2.DataSource = typeof(TEST2.Timetable);
+            this.timetableBindingSource2.DataSource = typeof(Kino.Timetable);
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -276,23 +276,23 @@
             // 
             // performanceBindingSource1
             // 
-            this.performanceBindingSource1.DataSource = typeof(TEST2.Performance);
+            this.performanceBindingSource1.DataSource = typeof(Kino.Performance);
             // 
             // userBindingSource
             // 
-            this.userBindingSource.DataSource = typeof(TEST2.User);
+            this.userBindingSource.DataSource = typeof(Kino.User);
             // 
             // userBindingSource1
             // 
-            this.userBindingSource1.DataSource = typeof(TEST2.User);
+            this.userBindingSource1.DataSource = typeof(Kino.User);
             // 
             // userBindingSource2
             // 
-            this.userBindingSource2.DataSource = typeof(TEST2.User);
+            this.userBindingSource2.DataSource = typeof(Kino.User);
             // 
             // performanceBindingSource
             // 
-            this.performanceBindingSource.DataSource = typeof(TEST2.Performance);
+            this.performanceBindingSource.DataSource = typeof(Kino.Performance);
             // 
             // Form1
             // 

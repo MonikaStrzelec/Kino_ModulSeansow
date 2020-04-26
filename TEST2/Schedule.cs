@@ -21,7 +21,7 @@ namespace Kino
         public Nullable<System.DateTime> dateTo { get; set; }
         public Nullable<int> statusId { get; set; }
     
-        public virtual ScheduleStatus ScheduleStatus { get; set; }
+        public virtual ScheduleStatu ScheduleStatu { get; set; }
         public virtual Task Task { get; set; }
         public virtual User User { get; set; }
     }

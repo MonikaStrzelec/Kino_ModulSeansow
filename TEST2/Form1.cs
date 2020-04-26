@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TEST2
+namespace Kino
 {
     public partial class Form1 : Form
     {

@@ -17,13 +17,13 @@ namespace Kino
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MovieState()
         {
-            this.Movie = new HashSet<Movie>();
+            this.Movies = new HashSet<Movie>();
         }
     
         public int id { get; set; }
         public string name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Movie> Movie { get; set; }
+        public virtual ICollection<Movie> Movies { get; set; }
     }
 }

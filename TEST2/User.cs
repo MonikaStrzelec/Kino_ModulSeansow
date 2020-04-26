@@ -17,8 +17,8 @@ namespace Kino
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.Schedule = new HashSet<Schedule>();
-            this.UserPermissions = new HashSet<UserPermissions>();
+            this.Schedules = new HashSet<Schedule>();
+            this.UserPermissions = new HashSet<UserPermission>();
         }
     
         public int id { get; set; }
@@ -31,8 +31,8 @@ namespace Kino
         public Nullable<decimal> hourlyRate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Schedule> Schedule { get; set; }
+        public virtual ICollection<Schedule> Schedules { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserPermissions> UserPermissions { get; set; }
+        public virtual ICollection<UserPermission> UserPermissions { get; set; }
     }
 }

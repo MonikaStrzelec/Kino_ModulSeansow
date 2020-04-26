@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
-namespace TEST2
+namespace Kino
 {
     class DatabaseUtil
     {
