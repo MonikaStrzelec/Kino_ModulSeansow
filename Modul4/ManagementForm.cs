@@ -23,8 +23,7 @@ namespace Modul4
 
         private void ManagementForm_Load(object sender, EventArgs e)
         {
-            projektkinoEntities1 projektkinoEntities1 = new projektkinoEntities1();
-            dataGridView2.DataSource = projektkinoEntities1.Product.ToList<Product>();
+            Refresh();
 
         }
 
