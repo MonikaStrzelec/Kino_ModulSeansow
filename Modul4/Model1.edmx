@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="projektkinoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Pack">
+          <Key>
+            <PropertyRef Name="IDPack" />
+          </Key>
+          <Property Name="IDPack" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PackPO">
+          <Key>
+            <PropertyRef Name="IDPackPO" />
+          </Key>
+          <Property Name="IDPackPO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PackID" Type="int" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="IDProduct" />
+          </Key>
+          <Property Name="IDProduct" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="IDSale" />
+          </Key>
+          <Property Name="IDSale" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="SaleDate" Type="datetime" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SalePO">
+          <Key>
+            <PropertyRef Name="IDSalePO" />
+          </Key>
+          <Property Name="IDSalePO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SaleID" Type="int" />
+          <Property Name="PackID" Type="int" />
+          <Property Name="Price" Type="money" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__PackPO__PackID__2E1BDC42">
+          <End Role="Pack" Type="Self.Pack" Multiplicity="0..1" />
+          <End Role="PackPO" Type="Self.PackPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pack">
+              <PropertyRef Name="IDPack" />
+            </Principal>
+            <Dependent Role="PackPO">
+              <PropertyRef Name="PackID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PackPO__ProductI__2F10007B">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="PackPO" Type="Self.PackPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="IDProduct" />
+            </Principal>
+            <Dependent Role="PackPO">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SalePO__PackID__2B3F6F97">
+          <End Role="Pack" Type="Self.Pack" Multiplicity="0..1" />
+          <End Role="SalePO" Type="Self.SalePO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pack">
+              <PropertyRef Name="IDPack" />
+            </Principal>
+            <Dependent Role="SalePO">
+              <PropertyRef Name="PackID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SalePO__SaleID__2A4B4B5E">
+          <End Role="Sale" Type="Self.Sale" Multiplicity="0..1" />
+          <End Role="SalePO" Type="Self.SalePO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale">
+              <PropertyRef Name="IDSale" />
+            </Principal>
+            <Dependent Role="SalePO">
+              <PropertyRef Name="SaleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="projektkinoModelStoreContainer">
+          <EntitySet Name="Pack" EntityType="Self.Pack" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PackPO" EntityType="Self.PackPO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sale" EntityType="Self.Sale" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalePO" EntityType="Self.SalePO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__PackPO__PackID__2E1BDC42" Association="Self.FK__PackPO__PackID__2E1BDC42">
+            <End Role="Pack" EntitySet="Pack" />
+            <End Role="PackPO" EntitySet="PackPO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PackPO__ProductI__2F10007B" Association="Self.FK__PackPO__ProductI__2F10007B">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="PackPO" EntitySet="PackPO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SalePO__PackID__2B3F6F97" Association="Self.FK__SalePO__PackID__2B3F6F97">
+            <End Role="Pack" EntitySet="Pack" />
+            <End Role="SalePO" EntitySet="SalePO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SalePO__SaleID__2A4B4B5E" Association="Self.FK__SalePO__SaleID__2A4B4B5E">
+            <End Role="Sale" EntitySet="Sale" />
+            <End Role="SalePO" EntitySet="SalePO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="projektkinoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Pack">
+          <Key>
+            <PropertyRef Name="IDPack" />
+          </Key>
+          <Property Name="IDPack" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PackPO">
+          <Key>
+            <PropertyRef Name="IDPackPO" />
+          </Key>
+          <Property Name="IDPackPO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PackID" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="IDProduct" />
+          </Key>
+          <Property Name="IDProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="IDSale" />
+          </Key>
+          <Property Name="IDSale" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="SaleDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SalePO">
+          <Key>
+            <PropertyRef Name="IDSalePO" />
+          </Key>
+          <Property Name="IDSalePO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SaleID" Type="Int32" />
+          <Property Name="PackID" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__PackPO__PackID__2E1BDC42">
+          <End Role="Pack" Type="Self.Pack" Multiplicity="0..1" />
+          <End Role="PackPO" Type="Self.PackPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pack">
+              <PropertyRef Name="IDPack" />
+            </Principal>
+            <Dependent Role="PackPO">
+              <PropertyRef Name="PackID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SalePO__PackID__2B3F6F97">
+          <End Role="Pack" Type="Self.Pack" Multiplicity="0..1" />
+          <End Role="SalePO" Type="Self.SalePO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pack">
+              <PropertyRef Name="IDPack" />
+            </Principal>
+            <Dependent Role="SalePO">
+              <PropertyRef Name="PackID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PackPO__ProductI__2F10007B">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="PackPO" Type="Self.PackPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="IDProduct" />
+            </Principal>
+            <Dependent Role="PackPO">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SalePO__SaleID__2A4B4B5E">
+          <End Role="Sale" Type="Self.Sale" Multiplicity="0..1" />
+          <End Role="SalePO" Type="Self.SalePO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale">
+              <PropertyRef Name="IDSale" />
+            </Principal>
+            <Dependent Role="SalePO">
+              <PropertyRef Name="SaleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="projektkinoEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Pack" EntityType="Self.Pack" />
+          <EntitySet Name="PackPO" EntityType="Self.PackPO" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="Sale" EntityType="Self.Sale" />
+          <EntitySet Name="SalePO" EntityType="Self.SalePO" />
+          <AssociationSet Name="FK__PackPO__PackID__2E1BDC42" Association="Self.FK__PackPO__PackID__2E1BDC42">
+            <End Role="Pack" EntitySet="Pack" />
+            <End Role="PackPO" EntitySet="PackPO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SalePO__PackID__2B3F6F97" Association="Self.FK__SalePO__PackID__2B3F6F97">
+            <End Role="Pack" EntitySet="Pack" />
+            <End Role="SalePO" EntitySet="SalePO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PackPO__ProductI__2F10007B" Association="Self.FK__PackPO__ProductI__2F10007B">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="PackPO" EntitySet="PackPO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SalePO__SaleID__2A4B4B5E" Association="Self.FK__SalePO__SaleID__2A4B4B5E">
+            <End Role="Sale" EntitySet="Sale" />
+            <End Role="SalePO" EntitySet="SalePO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="projektkinoModelStoreContainer" CdmEntityContainer="projektkinoEntities1">
+          <EntitySetMapping Name="Pack">
+            <EntityTypeMapping TypeName="projektkinoModel.Pack">
+              <MappingFragment StoreEntitySet="Pack">
+                <ScalarProperty Name="IDPack" ColumnName="IDPack" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PackPO">
+            <EntityTypeMapping TypeName="projektkinoModel.PackPO">
+              <MappingFragment StoreEntitySet="PackPO">
+                <ScalarProperty Name="IDPackPO" ColumnName="IDPackPO" />
+                <ScalarProperty Name="PackID" ColumnName="PackID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="projektkinoModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sale">
+            <EntityTypeMapping TypeName="projektkinoModel.Sale">
+              <MappingFragment StoreEntitySet="Sale">
+                <ScalarProperty Name="IDSale" ColumnName="IDSale" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalePO">
+            <EntityTypeMapping TypeName="projektkinoModel.SalePO">
+              <MappingFragment StoreEntitySet="SalePO">
+                <ScalarProperty Name="IDSalePO" ColumnName="IDSalePO" />
+                <ScalarProperty Name="SaleID" ColumnName="SaleID" />
+                <ScalarProperty Name="PackID" ColumnName="PackID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
