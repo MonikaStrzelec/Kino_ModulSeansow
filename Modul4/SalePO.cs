@@ -11,7 +11,8 @@ namespace Modul4
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Windows.Forms;
+
     public partial class SalePO
     {
         public int IDSalePO { get; set; }

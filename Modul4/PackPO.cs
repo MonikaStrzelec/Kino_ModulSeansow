@@ -11,7 +11,8 @@ namespace Modul4
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Windows.Forms;
+
     public partial class PackPO
     {
         public int IDPackPO { get; set; }
@@ -19,5 +20,18 @@ namespace Modul4
         public Nullable<int> ProductID { get; set; }
         public int Amount { get; set; }
         public decimal Price { get; set; }
+
+
+
+        public void add(int amount, int PackID, Product product)
+        {
+            this.PackID = PackID;
+            this.ProductID = product.IDProduct;
+            using (var context = new projektkinoEntities1())
+            {
+                context.PackPO.Add(this);
+                context.SaveChanges();
+            }
+        }
     }
 }

@@ -38,6 +38,8 @@ namespace Modul4
         {
             projektkinoEntities1 projektkinoEntities1 = new projektkinoEntities1();
             dataGridView2.DataSource = projektkinoEntities1.Product.ToList<Product>();
+            dataGridView1.DataSource = projektkinoEntities1.Pack.ToList<Pack>();
+            dataGridView3.DataSource = projektkinoEntities1.PackPO.ToList();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -58,6 +60,23 @@ namespace Modul4
 
         private void tabPage1_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            NewPackForm newPackForm = new NewPackForm();
+            newPackForm.Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            int index = Helpers.getIndex(dataGridView1);
 
         }
     }

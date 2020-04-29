@@ -17,5 +17,18 @@ namespace Modul4
         public int IDPack { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
+
+
+        public int add(String name, decimal price)
+        {
+            this.Name = name;
+            this.Price = price;
+            using (var context = new projektkinoEntities1())
+            {
+                context.Pack.Add(this);
+                context.SaveChanges();
+                return this.IDPack;
+            }
+        }
     }
 }

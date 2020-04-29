@@ -58,5 +58,10 @@ namespace Modul4
             }
             MessageBox.Show("Item deleted!");
         }
+
+        public override string ToString()
+        {
+            return Name + " --- " + Price + " PLN";
+        }
     }
 }
