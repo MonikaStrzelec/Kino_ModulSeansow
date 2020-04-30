@@ -49,14 +49,18 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.ButtonClearCode = new System.Windows.Forms.Button();
             this.ButtonLogInWithCode = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxLogin
             // 
-            this.textBoxLogin.Location = new System.Drawing.Point(210, 106);
-            this.textBoxLogin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxLogin.Location = new System.Drawing.Point(88, 71);
+            this.textBoxLogin.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxLogin.Name = "textBoxLogin";
             this.textBoxLogin.Size = new System.Drawing.Size(144, 20);
             this.textBoxLogin.TabIndex = 0;
@@ -64,8 +68,9 @@
             // buttonLogin
             // 
             this.buttonLogin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonLogin.Location = new System.Drawing.Point(187, 228);
-            this.buttonLogin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonLogin.Location = new System.Drawing.Point(65, 193);
+            this.buttonLogin.Margin = new System.Windows.Forms.Padding(2);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(151, 35);
             this.buttonLogin.TabIndex = 3;
@@ -75,8 +80,8 @@
             // 
             // textBoxPassword
             // 
-            this.textBoxPassword.Location = new System.Drawing.Point(210, 167);
-            this.textBoxPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxPassword.Location = new System.Drawing.Point(88, 132);
+            this.textBoxPassword.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.PasswordChar = '*';
             this.textBoxPassword.Size = new System.Drawing.Size(144, 20);
@@ -86,7 +91,7 @@
             // splitter1
             // 
             this.splitter1.Location = new System.Drawing.Point(0, 0);
-            this.splitter1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitter1.Margin = new System.Windows.Forms.Padding(2);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(2, 411);
             this.splitter1.TabIndex = 5;
@@ -95,7 +100,7 @@
             // splitter2
             // 
             this.splitter2.Location = new System.Drawing.Point(2, 0);
-            this.splitter2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitter2.Margin = new System.Windows.Forms.Padding(2);
             this.splitter2.Name = "splitter2";
             this.splitter2.Size = new System.Drawing.Size(2, 411);
             this.splitter2.TabIndex = 6;
@@ -103,27 +108,29 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(521, 105);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox3.Location = new System.Drawing.Point(83, 57);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(114, 20);
+            this.textBox3.Size = new System.Drawing.Size(122, 20);
             this.textBox3.TabIndex = 7;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(538, 73);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(95, 25);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 13);
+            this.label1.Size = new System.Drawing.Size(99, 16);
             this.label1.TabIndex = 8;
-            this.label1.Text = "CODE LOGIN:";
+            this.label1.Text = "CODE LOGIN";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(533, 130);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button1.Location = new System.Drawing.Point(83, 82);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(31, 29);
+            this.button1.Size = new System.Drawing.Size(43, 38);
             this.button1.TabIndex = 11;
             this.button1.Text = "1";
             this.button1.UseVisualStyleBackColor = true;
@@ -131,9 +138,10 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(563, 130);
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button2.Location = new System.Drawing.Point(125, 82);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(31, 29);
+            this.button2.Size = new System.Drawing.Size(39, 38);
             this.button2.TabIndex = 12;
             this.button2.Text = "2";
             this.button2.UseVisualStyleBackColor = true;
@@ -141,9 +149,10 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(593, 130);
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button3.Location = new System.Drawing.Point(163, 82);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(31, 29);
+            this.button3.Size = new System.Drawing.Size(42, 38);
             this.button3.TabIndex = 13;
             this.button3.Text = "3";
             this.button3.UseVisualStyleBackColor = true;
@@ -151,9 +160,10 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(533, 158);
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button4.Location = new System.Drawing.Point(83, 119);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(31, 29);
+            this.button4.Size = new System.Drawing.Size(43, 39);
             this.button4.TabIndex = 14;
             this.button4.Text = "4";
             this.button4.UseVisualStyleBackColor = true;
@@ -161,9 +171,10 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(563, 158);
+            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button5.Location = new System.Drawing.Point(125, 119);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(31, 29);
+            this.button5.Size = new System.Drawing.Size(39, 39);
             this.button5.TabIndex = 15;
             this.button5.Text = "5";
             this.button5.UseVisualStyleBackColor = true;
@@ -171,9 +182,10 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(593, 158);
+            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button6.Location = new System.Drawing.Point(163, 119);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(31, 29);
+            this.button6.Size = new System.Drawing.Size(42, 39);
             this.button6.TabIndex = 16;
             this.button6.Text = "6";
             this.button6.UseVisualStyleBackColor = true;
@@ -181,9 +193,10 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(533, 186);
+            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button7.Location = new System.Drawing.Point(83, 157);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(31, 29);
+            this.button7.Size = new System.Drawing.Size(43, 38);
             this.button7.TabIndex = 17;
             this.button7.Text = "7";
             this.button7.UseVisualStyleBackColor = true;
@@ -191,9 +204,10 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(563, 186);
+            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button8.Location = new System.Drawing.Point(125, 157);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(31, 29);
+            this.button8.Size = new System.Drawing.Size(39, 38);
             this.button8.TabIndex = 18;
             this.button8.Text = "8";
             this.button8.UseVisualStyleBackColor = true;
@@ -201,9 +215,10 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(593, 186);
+            this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button9.Location = new System.Drawing.Point(163, 157);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(31, 29);
+            this.button9.Size = new System.Drawing.Size(42, 38);
             this.button9.TabIndex = 19;
             this.button9.Text = "9";
             this.button9.UseVisualStyleBackColor = true;
@@ -211,9 +226,10 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(533, 214);
+            this.button10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button10.Location = new System.Drawing.Point(83, 194);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(91, 25);
+            this.button10.Size = new System.Drawing.Size(122, 25);
             this.button10.TabIndex = 20;
             this.button10.Text = "0";
             this.button10.UseVisualStyleBackColor = true;
@@ -224,7 +240,7 @@
             this.pictureBox2.BackColor = System.Drawing.Color.White;
             this.pictureBox2.BackgroundImage = global::Login.Properties.Resources.lockpass;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Location = new System.Drawing.Point(159, 158);
+            this.pictureBox2.Location = new System.Drawing.Point(37, 123);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(35, 36);
             this.pictureBox2.TabIndex = 22;
@@ -236,7 +252,7 @@
             this.pictureBox1.BackgroundImage = global::Login.Properties.Resources.userNew;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Image = global::Login.Properties.Resources.userNew;
-            this.pictureBox1.Location = new System.Drawing.Point(159, 100);
+            this.pictureBox1.Location = new System.Drawing.Point(37, 65);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(35, 37);
             this.pictureBox1.TabIndex = 21;
@@ -245,10 +261,11 @@
             // ButtonClearCode
             // 
             this.ButtonClearCode.BackColor = System.Drawing.Color.White;
-            this.ButtonClearCode.BackgroundImage = global::Login.Properties.Resources.close;
+            this.ButtonClearCode.BackgroundImage = global::Login.Properties.Resources.shapes_and_symbols;
             this.ButtonClearCode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ButtonClearCode.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ButtonClearCode.Location = new System.Drawing.Point(571, 269);
+            this.ButtonClearCode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonClearCode.Location = new System.Drawing.Point(157, 225);
             this.ButtonClearCode.Name = "ButtonClearCode";
             this.ButtonClearCode.Size = new System.Drawing.Size(39, 37);
             this.ButtonClearCode.TabIndex = 10;
@@ -258,51 +275,75 @@
             // ButtonLogInWithCode
             // 
             this.ButtonLogInWithCode.BackColor = System.Drawing.Color.White;
-            this.ButtonLogInWithCode.BackgroundImage = global::Login.Properties.Resources.signs;
-            this.ButtonLogInWithCode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ButtonLogInWithCode.BackgroundImage = global::Login.Properties.Resources.login;
+            this.ButtonLogInWithCode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ButtonLogInWithCode.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ButtonLogInWithCode.Location = new System.Drawing.Point(526, 269);
+            this.ButtonLogInWithCode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonLogInWithCode.Location = new System.Drawing.Point(98, 225);
             this.ButtonLogInWithCode.Name = "ButtonLogInWithCode";
             this.ButtonLogInWithCode.Size = new System.Drawing.Size(39, 37);
             this.ButtonLogInWithCode.TabIndex = 9;
             this.ButtonLogInWithCode.UseVisualStyleBackColor = false;
             this.ButtonLogInWithCode.Click += new System.EventHandler(this.ButtonLogInWithCode_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.Color.White;
+            this.groupBox1.Controls.Add(this.pictureBox1);
+            this.groupBox1.Controls.Add(this.pictureBox2);
+            this.groupBox1.Controls.Add(this.textBoxLogin);
+            this.groupBox1.Controls.Add(this.buttonLogin);
+            this.groupBox1.Controls.Add(this.textBoxPassword);
+            this.groupBox1.Location = new System.Drawing.Point(47, 52);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(287, 289);
+            this.groupBox1.TabIndex = 23;
+            this.groupBox1.TabStop = false;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.BackColor = System.Drawing.Color.White;
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.textBox3);
+            this.groupBox2.Controls.Add(this.button10);
+            this.groupBox2.Controls.Add(this.ButtonLogInWithCode);
+            this.groupBox2.Controls.Add(this.button9);
+            this.groupBox2.Controls.Add(this.ButtonClearCode);
+            this.groupBox2.Controls.Add(this.button8);
+            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.button7);
+            this.groupBox2.Controls.Add(this.button2);
+            this.groupBox2.Controls.Add(this.button6);
+            this.groupBox2.Controls.Add(this.button3);
+            this.groupBox2.Controls.Add(this.button5);
+            this.groupBox2.Controls.Add(this.button4);
+            this.groupBox2.Location = new System.Drawing.Point(340, 52);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(282, 289);
+            this.groupBox2.TabIndex = 24;
+            this.groupBox2.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(737, 411);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.button10);
-            this.Controls.Add(this.button9);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.ButtonClearCode);
-            this.Controls.Add(this.ButtonLogInWithCode);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox3);
+            this.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.ClientSize = new System.Drawing.Size(659, 411);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.splitter2);
             this.Controls.Add(this.splitter1);
-            this.Controls.Add(this.textBoxPassword);
-            this.Controls.Add(this.buttonLogin);
-            this.Controls.Add(this.textBoxLogin);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -329,6 +370,8 @@
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
 
