@@ -111,6 +111,7 @@
             this.textBox3.Location = new System.Drawing.Point(83, 57);
             this.textBox3.Margin = new System.Windows.Forms.Padding(2);
             this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
             this.textBox3.Size = new System.Drawing.Size(122, 20);
             this.textBox3.TabIndex = 7;
             // 
@@ -294,7 +295,7 @@
             this.groupBox1.Controls.Add(this.textBoxLogin);
             this.groupBox1.Controls.Add(this.buttonLogin);
             this.groupBox1.Controls.Add(this.textBoxPassword);
-            this.groupBox1.Location = new System.Drawing.Point(47, 52);
+            this.groupBox1.Location = new System.Drawing.Point(43, 54);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(287, 289);
             this.groupBox1.TabIndex = 23;
@@ -317,7 +318,7 @@
             this.groupBox2.Controls.Add(this.button3);
             this.groupBox2.Controls.Add(this.button5);
             this.groupBox2.Controls.Add(this.button4);
-            this.groupBox2.Location = new System.Drawing.Point(340, 52);
+            this.groupBox2.Location = new System.Drawing.Point(336, 54);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(282, 289);
             this.groupBox2.TabIndex = 24;
@@ -327,7 +328,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.BackColor = System.Drawing.Color.Teal;
             this.ClientSize = new System.Drawing.Size(659, 411);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -335,7 +336,7 @@
             this.Controls.Add(this.splitter1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Cinema Management App";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

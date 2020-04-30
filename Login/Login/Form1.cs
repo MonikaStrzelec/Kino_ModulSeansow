@@ -47,7 +47,7 @@ namespace Login
             {
                 if (string.IsNullOrWhiteSpace(textBoxLogin.Text) || string.IsNullOrWhiteSpace(textBoxPassword.Text))
                 {
-                    MessageBox.Show("Enter login and password.");
+                    MessageBox.Show("Enter login and password");
                     textBoxLogin.Focus();
                     return;
                 }
@@ -71,11 +71,11 @@ namespace Login
 
                     if (count == 1)
                     {
-                        MessageBox.Show("Successful.");
+                        MessageBox.Show("Successful");        //przejście do menu głównego
                     }
                     else
                     {
-                        MessageBox.Show("Login failed. Check your login and password and try again.");
+                        MessageBox.Show("Login failed. Check your login and password and try again");
                     }
 
                 }
@@ -118,7 +118,7 @@ namespace Login
 
                     if (count == 1)
                     {
-                        MessageBox.Show("Successful.");
+                        MessageBox.Show("Successful.");        //przejście do menu głównego
                     }
                     else
                     {
