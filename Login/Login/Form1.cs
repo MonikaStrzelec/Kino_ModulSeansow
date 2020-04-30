@@ -91,7 +91,7 @@ namespace Login
 
         private void ButtonLogInWithCode_Click(object sender, EventArgs e)
         {
-
+            #region DATABASE CODE CONNECTION
             try
             {
                 if (string.IsNullOrWhiteSpace(textBox3.Text))
@@ -132,7 +132,7 @@ namespace Login
                 MessageBox.Show(ex.ToString());
             }
 
-
+            #endregion
         }
 
         #region NumericKeyboard

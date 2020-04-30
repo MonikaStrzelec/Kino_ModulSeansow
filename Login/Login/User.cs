@@ -14,12 +14,10 @@ namespace Login
 
         
         public int Id { get => id; set => id = value; }
-        public string FirstName { get => firstName; set => firstName = value; }
-        public string LastName { get => lastName; set => lastName = value; }
+
         public string Login { get => login; set => login = value; }
         public string Password { get => password; set => password = value; }
         public string Code { get => code; set => code = value; }
-        public double BaseSalary { get => baseSalary; set => baseSalary = value; }
-        public double HourlyRate { get => hourlyRate; set => hourlyRate = value; }
+    
     }
 }
