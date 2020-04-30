@@ -77,7 +77,8 @@ namespace Modul4
         private void button5_Click(object sender, EventArgs e)
         {
             int index = Helpers.getIndex(dataGridView1);
-
+            EditPackForm editPackForm = new EditPackForm(index);
+            editPackForm.Show();
         }
     }
 }

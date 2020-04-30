@@ -30,7 +30,6 @@ namespace Modul4
         private void button2_Click(object sender, EventArgs e)
         {
             listBox2.Items.Add(listBox1.SelectedItem);
-            listBox1.Items.Remove(listBox1.SelectedItem);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -40,7 +39,7 @@ namespace Modul4
             foreach (Product product in listBox2.Items)
             {
                 PackPO packPO = new PackPO();
-                packPO.add(10, id, product);
+                packPO.add(id, product);
             }
         }
 
@@ -54,6 +53,11 @@ namespace Modul4
             listBox1.Items.Add(listBox2.SelectedItem);
             listBox2.Items.Remove(listBox2.SelectedItem);
             
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

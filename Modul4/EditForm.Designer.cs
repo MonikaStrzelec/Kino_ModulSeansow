@@ -134,6 +134,7 @@
             this.Controls.Add(this.button1);
             this.Name = "EditForm";
             this.Text = "EditForm";
+            this.Load += new System.EventHandler(this.EditForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);

@@ -36,5 +36,10 @@ namespace Modul4
         {
             Close();
         }
+
+        private void EditForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

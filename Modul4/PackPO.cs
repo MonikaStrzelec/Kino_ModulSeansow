@@ -23,10 +23,12 @@ namespace Modul4
 
 
 
-        public void add(int amount, int PackID, Product product)
+        public void add(int PackID, Product product)
         {
             this.PackID = PackID;
             this.ProductID = product.IDProduct;
+            this.Amount = product.Amount;
+            this.Price = product.Price;
             using (var context = new projektkinoEntities1())
             {
                 context.PackPO.Add(this);
