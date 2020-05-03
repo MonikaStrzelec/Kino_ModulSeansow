@@ -34,7 +34,7 @@ namespace Modul4
 
         }
 
-        private void Refresh()
+        new private void Refresh()
         {
             projektkinoEntities1 projektkinoEntities1 = new projektkinoEntities1();
             dataGridView2.DataSource = projektkinoEntities1.Product.ToList<Product>();

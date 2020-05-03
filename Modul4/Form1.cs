@@ -25,7 +25,7 @@ namespace Modul4
         private void button2_Click(object sender, EventArgs e)
         {
             ManagementForm managementForm = new ManagementForm();
-            managementForm.Show();
+            managementForm.ShowDialog();
         }
     }
 }
