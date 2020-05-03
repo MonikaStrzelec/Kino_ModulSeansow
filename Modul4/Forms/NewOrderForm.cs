@@ -102,8 +102,10 @@ namespace Modul4
             {
                 var query = from st in context.PackPO
                             where st.PackID == temp.IDPack
-                            select st;
-                infoGrid.DataSource = query.ToList<PackPO>();
+                            from sy in context.Product
+                            where st.ProductID == sy.IDProduct
+                            select sy;
+                infoGrid.DataSource = query.ToList<Product>();
             }
         }
     }
