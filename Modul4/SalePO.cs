@@ -19,5 +19,17 @@ namespace Modul4
         public Nullable<int> SaleID { get; set; }
         public Nullable<int> PackID { get; set; }
         public decimal Price { get; set; } = .00M;
+
+        public void add(int SaleID, Pack pack)
+        {
+            this.SaleID = SaleID;
+            this.PackID = pack.IDPack;
+            this.Price = pack.Price;
+            using (var context = new projektkinoEntities1())
+            {
+                context.SalePO.Add(this);
+                context.SaveChanges();
+            }
+        }
     }
 }

@@ -18,5 +18,18 @@ namespace Modul4
         public int UserID { get; set; }
         public System.DateTime SaleDate { get; set; }
         public decimal Price { get; set; } = .00M;
+
+        public int add(int UserID, DateTime date, decimal Price)
+        {
+            this.UserID = UserID;
+            this.SaleDate = date;
+            this.Price = Price;
+            using (var context = new projektkinoEntities1())
+            {
+                context.Sale.Add(this);
+                context.SaveChanges();
+                return this.IDSale;
+            }
+        }
     }
 }

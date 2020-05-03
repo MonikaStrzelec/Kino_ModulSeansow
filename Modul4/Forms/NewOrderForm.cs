@@ -19,11 +19,15 @@ namespace Modul4
 
         new private void Refresh()
         {
+            listBox1.Items.Clear();
+            listBox2.Items.Clear();
             projektkinoEntities1 projektkinoEntities1 = new projektkinoEntities1();
             foreach (Pack pack in projektkinoEntities1.Pack.ToList())
             {
                 listBox1.Items.Add(pack);
             }
+
+            infoGrid.DataSource = projektkinoEntities1.Sale.ToList<Sale>();
         }
 
         private void NewOrderForm_Load(object sender, EventArgs e)
@@ -57,8 +61,16 @@ namespace Modul4
                 return;
             }
 
-
-
+            Sale sale = new Sale();
+            int userId = 1; // Do zmiany uprawnień
+            int id = sale.add(userId, DateTime.Now, GetPrice());
+            foreach (Pack pack in listBox2.Items)
+            {
+                SalePO salePO = new SalePO();
+                salePO.add(id, pack);
+            }
+            MessageBox.Show("Dodano zestaw");
+            Refresh();
 
         }
 
