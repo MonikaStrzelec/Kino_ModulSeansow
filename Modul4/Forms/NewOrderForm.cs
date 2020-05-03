@@ -27,7 +27,7 @@ namespace Modul4
                 listBox1.Items.Add(pack);
             }
 
-            infoGrid.DataSource = projektkinoEntities1.Sale.ToList<Sale>();
+            listBox1.SelectedIndex = 0;
         }
 
         private void NewOrderForm_Load(object sender, EventArgs e)
@@ -87,6 +87,24 @@ namespace Modul4
                 value += pack.Price;
             }
             return value;
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SetGridView();
+        }
+
+        private void SetGridView()
+        {
+            Pack temp = listBox1.SelectedItem as Pack;
+
+            using (var context = new projektkinoEntities1())
+            {
+                var query = from st in context.PackPO
+                            where st.PackID == temp.IDPack
+                            select st;
+                infoGrid.DataSource = query.ToList<PackPO>();
+            }
         }
     }
 }
