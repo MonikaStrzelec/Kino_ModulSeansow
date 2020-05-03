@@ -16,5 +16,16 @@ namespace Modul4
         {
             InitializeComponent();
         }
+
+        new private void Refresh()
+        {
+            projektkinoEntities1 projektkinoEntities1 = new projektkinoEntities1();
+            packGrid.DataSource = projektkinoEntities1.Pack.ToList<Pack>();
+        }
+
+        private void NewOrderForm_Load(object sender, EventArgs e)
+        {
+            Refresh();
+        }
     }
 }

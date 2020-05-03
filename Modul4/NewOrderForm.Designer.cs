@@ -28,119 +28,120 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            this.packGrid = new System.Windows.Forms.DataGridView();
+            this.orderGrid = new System.Windows.Forms.DataGridView();
+            this.infoGrid = new System.Windows.Forms.DataGridView();
+            this.backBtn = new System.Windows.Forms.Button();
+            this.cancelOrderBtn = new System.Windows.Forms.Button();
+            this.confirmOrderBtn = new System.Windows.Forms.Button();
+            this.addBtn = new System.Windows.Forms.Button();
+            this.undoBtn = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.packGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.orderGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.infoGrid)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // packGrid
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 42);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(329, 355);
-            this.dataGridView1.TabIndex = 0;
+            this.packGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.packGrid.Location = new System.Drawing.Point(12, 42);
+            this.packGrid.Name = "packGrid";
+            this.packGrid.Size = new System.Drawing.Size(329, 355);
+            this.packGrid.TabIndex = 0;
             // 
-            // dataGridView2
+            // orderGrid
             // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(459, 42);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(329, 355);
-            this.dataGridView2.TabIndex = 1;
+            this.orderGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.orderGrid.Location = new System.Drawing.Point(459, 42);
+            this.orderGrid.Name = "orderGrid";
+            this.orderGrid.Size = new System.Drawing.Size(329, 355);
+            this.orderGrid.TabIndex = 1;
             // 
-            // dataGridView3
+            // infoGrid
             // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(13, 457);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(328, 150);
-            this.dataGridView3.TabIndex = 2;
+            this.infoGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.infoGrid.Location = new System.Drawing.Point(13, 457);
+            this.infoGrid.Name = "infoGrid";
+            this.infoGrid.Size = new System.Drawing.Size(328, 150);
+            this.infoGrid.TabIndex = 2;
             // 
-            // button1
+            // backBtn
             // 
-            this.button1.Location = new System.Drawing.Point(13, 13);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.backBtn.Location = new System.Drawing.Point(13, 13);
+            this.backBtn.Name = "backBtn";
+            this.backBtn.Size = new System.Drawing.Size(75, 23);
+            this.backBtn.TabIndex = 3;
+            this.backBtn.Text = "Go back";
+            this.backBtn.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // cancelOrderBtn
             // 
-            this.button2.Location = new System.Drawing.Point(497, 561);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.cancelOrderBtn.Location = new System.Drawing.Point(497, 561);
+            this.cancelOrderBtn.Name = "cancelOrderBtn";
+            this.cancelOrderBtn.Size = new System.Drawing.Size(100, 23);
+            this.cancelOrderBtn.TabIndex = 4;
+            this.cancelOrderBtn.Text = "Cancel order";
+            this.cancelOrderBtn.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // confirmOrderBtn
             // 
-            this.button3.Location = new System.Drawing.Point(685, 561);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            this.confirmOrderBtn.Location = new System.Drawing.Point(625, 561);
+            this.confirmOrderBtn.Name = "confirmOrderBtn";
+            this.confirmOrderBtn.Size = new System.Drawing.Size(135, 23);
+            this.confirmOrderBtn.TabIndex = 5;
+            this.confirmOrderBtn.Text = "Confirm order";
+            this.confirmOrderBtn.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // addBtn
             // 
-            this.button4.Location = new System.Drawing.Point(360, 132);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 6;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
+            this.addBtn.Location = new System.Drawing.Point(360, 132);
+            this.addBtn.Name = "addBtn";
+            this.addBtn.Size = new System.Drawing.Size(75, 23);
+            this.addBtn.TabIndex = 6;
+            this.addBtn.Text = ">>>";
+            this.addBtn.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // undoBtn
             // 
-            this.button5.Location = new System.Drawing.Point(360, 204);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 7;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
+            this.undoBtn.Location = new System.Drawing.Point(360, 204);
+            this.undoBtn.Name = "undoBtn";
+            this.undoBtn.Size = new System.Drawing.Size(75, 23);
+            this.undoBtn.TabIndex = 7;
+            this.undoBtn.Text = "<<<";
+            this.undoBtn.UseVisualStyleBackColor = true;
             // 
             // NewOrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 619);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.dataGridView3);
-            this.Controls.Add(this.dataGridView2);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.undoBtn);
+            this.Controls.Add(this.addBtn);
+            this.Controls.Add(this.confirmOrderBtn);
+            this.Controls.Add(this.cancelOrderBtn);
+            this.Controls.Add(this.backBtn);
+            this.Controls.Add(this.infoGrid);
+            this.Controls.Add(this.orderGrid);
+            this.Controls.Add(this.packGrid);
             this.Name = "NewOrderForm";
             this.Text = "NewOrderForm";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            this.Load += new System.EventHandler(this.NewOrderForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.packGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.orderGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.infoGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridView dataGridView3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.DataGridView packGrid;
+        private System.Windows.Forms.DataGridView orderGrid;
+        private System.Windows.Forms.DataGridView infoGrid;
+        private System.Windows.Forms.Button backBtn;
+        private System.Windows.Forms.Button cancelOrderBtn;
+        private System.Windows.Forms.Button confirmOrderBtn;
+        private System.Windows.Forms.Button addBtn;
+        private System.Windows.Forms.Button undoBtn;
     }
 }

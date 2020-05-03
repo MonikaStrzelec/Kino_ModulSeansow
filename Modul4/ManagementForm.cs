@@ -47,8 +47,8 @@ namespace Modul4
 
             int index = Helpers.getIndex(dataGridView2);
             EditForm editForm = new EditForm(index);
-            editForm.Show();
-
+            editForm.ShowDialog();
+            Refresh();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -71,14 +71,16 @@ namespace Modul4
         private void button4_Click(object sender, EventArgs e)
         {
             NewPackForm newPackForm = new NewPackForm();
-            newPackForm.Show();
+            newPackForm.ShowDialog();
+            Refresh();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             int index = Helpers.getIndex(dataGridView1);
             EditPackForm editPackForm = new EditPackForm(index);
-            editPackForm.Show();
+            editPackForm.ShowDialog();
+            Refresh();
         }
     }
 }

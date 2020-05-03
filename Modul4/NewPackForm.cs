@@ -41,6 +41,8 @@ namespace Modul4
                 PackPO packPO = new PackPO();
                 packPO.add(id, product);
             }
+            MessageBox.Show("Dodano zestaw");
+            listBox2.Items.Clear();
         }
 
         private void label2_Click(object sender, EventArgs e)

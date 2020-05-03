@@ -19,7 +19,8 @@ namespace Modul4
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            NewOrderForm form = new NewOrderForm();
+            form.ShowDialog();
         }
 
         private void button2_Click(object sender, EventArgs e)
