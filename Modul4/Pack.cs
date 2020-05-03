@@ -11,7 +11,8 @@ namespace Modul4
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Windows.Forms;
+
     public partial class Pack
     {
         public int IDPack { get; set; }
@@ -29,6 +30,17 @@ namespace Modul4
                 context.SaveChanges();
                 return this.IDPack;
             }
+        }
+
+        public static void Delete(int index)
+        {
+            using (var context = new projektkinoEntities1())
+            {
+                Pack pack = context.Pack.Find(index);
+                context.Entry(pack).State = System.Data.Entity.EntityState.Deleted;
+                context.SaveChanges();
+            }
+            MessageBox.Show("Item deleted!");
         }
     }
 }

@@ -82,5 +82,12 @@ namespace Modul4
             editPackForm.ShowDialog();
             Refresh();
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            int index = Helpers.getIndex(dataGridView1);
+            Pack.Delete(index);
+            Refresh();
+        }
     }
 }
