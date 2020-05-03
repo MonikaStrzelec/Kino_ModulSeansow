@@ -108,5 +108,10 @@ namespace Modul4
                 infoGrid.DataSource = query.ToList<Product>();
             }
         }
+
+        private void backBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

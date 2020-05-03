@@ -57,6 +57,7 @@
             this.backBtn.TabIndex = 3;
             this.backBtn.Text = "Go back";
             this.backBtn.UseVisualStyleBackColor = true;
+            this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
             // cancelOrderBtn
             // 
