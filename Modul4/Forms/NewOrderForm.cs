@@ -20,12 +20,42 @@ namespace Modul4
         new private void Refresh()
         {
             projektkinoEntities1 projektkinoEntities1 = new projektkinoEntities1();
-            packGrid.DataSource = projektkinoEntities1.Pack.ToList<Pack>();
+            foreach (Pack pack in projektkinoEntities1.Pack.ToList())
+            {
+                listBox1.Items.Add(pack);
+            }
         }
 
         private void NewOrderForm_Load(object sender, EventArgs e)
         {
             Refresh();
+        }
+
+        private void addBtn_Click(object sender, EventArgs e)
+        {
+            listBox2.Items.Add(listBox1.SelectedItem);
+        }
+
+        private void undoBtn_Click(object sender, EventArgs e)
+        {
+            listBox2.Items.Remove(listBox2.SelectedItem);
+        }
+
+        private void cancelOrderBtn_Click(object sender, EventArgs e)
+        {
+            valueLabel.Text = "0.00";
+            listBox2.Items.Clear();
+        }
+
+        private void confirmOrderBtn_Click(object sender, EventArgs e)
+        {
+            if(!(listBox2.Items.Count > 0))
+            {
+                MessageBox.Show("Musisz coś dodać do zamówienia");
+                return;
+            }
+
+
         }
     }
 }
