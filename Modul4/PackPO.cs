@@ -19,7 +19,7 @@ namespace Modul4
         public Nullable<int> PackID { get; set; }
         public Nullable<int> ProductID { get; set; }
         public int Amount { get; set; }
-        public decimal Price { get; set; }
+        public decimal Price { get; set; } = .00M;
 
 
 

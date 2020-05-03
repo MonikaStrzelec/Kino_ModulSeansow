@@ -18,6 +18,6 @@ namespace Modul4
         public int IDSalePO { get; set; }
         public Nullable<int> SaleID { get; set; }
         public Nullable<int> PackID { get; set; }
-        public decimal Price { get; set; }
+        public decimal Price { get; set; } = .00M;
     }
 }

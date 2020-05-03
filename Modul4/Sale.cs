@@ -17,6 +17,6 @@ namespace Modul4
         public int IDSale { get; set; }
         public int UserID { get; set; }
         public System.DateTime SaleDate { get; set; }
-        public decimal Price { get; set; }
+        public decimal Price { get; set; } = .00M;
     }
 }

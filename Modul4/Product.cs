@@ -16,7 +16,7 @@ namespace Modul4
     public partial class Product
     {
         public int IDProduct { get; set; }
-        public decimal Price { get; set; }
+        public decimal Price { get; set; } = .00M;
         public string Name { get; set; }
         public int Amount { get; set; }
 

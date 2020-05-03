@@ -17,7 +17,7 @@ namespace Modul4
     {
         public int IDPack { get; set; }
         public string Name { get; set; }
-        public decimal Price { get; set; }
+        public decimal Price { get; set; } = .00M;
 
 
         public int add(String name, decimal price)
