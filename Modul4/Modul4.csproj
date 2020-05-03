@@ -74,29 +74,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EditPackForm.cs">
+    <Compile Include="Forms\EditPackForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditPackForm.Designer.cs">
+    <Compile Include="Forms\EditPackForm.Designer.cs">
       <DependentUpon>EditPackForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers.cs" />
-    <Compile Include="EditForm.cs">
+    <Compile Include="Forms\EditForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditForm.Designer.cs">
+    <Compile Include="Forms\EditForm.Designer.cs">
       <DependentUpon>EditForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="Forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="ManagementForm.cs">
+    <Compile Include="Forms\ManagementForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ManagementForm.Designer.cs">
+    <Compile Include="Forms\ManagementForm.Designer.cs">
       <DependentUpon>ManagementForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Model1.Context.cs">
@@ -114,16 +114,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
-    <Compile Include="NewOrderForm.cs">
+    <Compile Include="Forms\NewOrderForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewOrderForm.Designer.cs">
+    <Compile Include="Forms\NewOrderForm.Designer.cs">
       <DependentUpon>NewOrderForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewPackForm.cs">
+    <Compile Include="Forms\NewPackForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewPackForm.Designer.cs">
+    <Compile Include="Forms\NewPackForm.Designer.cs">
       <DependentUpon>NewPackForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Pack.cs">
@@ -143,22 +143,22 @@
     <Compile Include="SalePO.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="EditForm.resx">
+    <EmbeddedResource Include="Forms\EditForm.resx">
       <DependentUpon>EditForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditPackForm.resx">
+    <EmbeddedResource Include="Forms\EditPackForm.resx">
       <DependentUpon>EditPackForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManagementForm.resx">
+    <EmbeddedResource Include="Forms\ManagementForm.resx">
       <DependentUpon>ManagementForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewOrderForm.resx">
+    <EmbeddedResource Include="Forms\NewOrderForm.resx">
       <DependentUpon>NewOrderForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewPackForm.resx">
+    <EmbeddedResource Include="Forms\NewPackForm.resx">
       <DependentUpon>NewPackForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
