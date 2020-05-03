@@ -34,11 +34,13 @@ namespace Modul4
         private void addBtn_Click(object sender, EventArgs e)
         {
             listBox2.Items.Add(listBox1.SelectedItem);
+            UpdateValueLabel();
         }
 
         private void undoBtn_Click(object sender, EventArgs e)
         {
             listBox2.Items.Remove(listBox2.SelectedItem);
+            UpdateValueLabel();
         }
 
         private void cancelOrderBtn_Click(object sender, EventArgs e)
@@ -56,6 +58,23 @@ namespace Modul4
             }
 
 
+
+
+        }
+
+        private void UpdateValueLabel()
+        {
+            valueLabel.Text = GetPrice().ToString();
+        }
+
+        private decimal GetPrice()
+        {
+            decimal value = 0.00M;
+            foreach (Pack pack in listBox2.Items)
+            {
+                value += pack.Price;
+            }
+            return value;
         }
     }
 }
