@@ -1,0 +1,1057 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="KinoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Dim">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DimsMovie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="movie" Type="int" Nullable="false" />
+          <Property Name="dim" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hall">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="parameter" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="1000" />
+          <Property Name="movieState" Type="int" Nullable="false" />
+          <Property Name="movieType" Type="int" Nullable="false" />
+          <Property Name="movieTime" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Kino.dbo.MoviePerson' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MoviePerson">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="movie" />
+            <PropertyRef Name="person" />
+            <PropertyRef Name="personType" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="movie" Type="int" Nullable="false" />
+          <Property Name="person" Type="int" Nullable="false" />
+          <Property Name="personType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MovieState">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MovieType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pack">
+          <Key>
+            <PropertyRef Name="IDPack" />
+          </Key>
+          <Property Name="IDPack" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PackPO">
+          <Key>
+            <PropertyRef Name="IDPackPO" />
+          </Key>
+          <Property Name="IDPackPO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PackID" Type="int" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Performance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="movie" Type="int" Nullable="false" />
+          <Property Name="hall" Type="int" Nullable="false" />
+          <Property Name="adsDuration" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="bornDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="IDProduct" />
+          </Key>
+          <Property Name="IDProduct" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="IDSale" />
+          </Key>
+          <Property Name="IDSale" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="SaleDate" Type="datetime" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SalePO">
+          <Key>
+            <PropertyRef Name="IDSalePO" />
+          </Key>
+          <Property Name="IDSalePO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SaleID" Type="int" />
+          <Property Name="PackID" Type="int" />
+          <Property Name="Price" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Timetable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="performance" Type="int" Nullable="false" />
+          <Property Name="performanceDate" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__PackPO__PackID__4F7CD00D">
+          <End Role="Pack" Type="Self.Pack" Multiplicity="0..1" />
+          <End Role="PackPO" Type="Self.PackPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pack">
+              <PropertyRef Name="IDPack" />
+            </Principal>
+            <Dependent Role="PackPO">
+              <PropertyRef Name="PackID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PackPO__ProductI__5070F446">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="PackPO" Type="Self.PackPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="IDProduct" />
+            </Principal>
+            <Dependent Role="PackPO">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SalePO__PackID__5441852A">
+          <End Role="Pack" Type="Self.Pack" Multiplicity="0..1" />
+          <End Role="SalePO" Type="Self.SalePO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pack">
+              <PropertyRef Name="IDPack" />
+            </Principal>
+            <Dependent Role="SalePO">
+              <PropertyRef Name="PackID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SalePO__SaleID__534D60F1">
+          <End Role="Sale" Type="Self.Sale" Multiplicity="0..1" />
+          <End Role="SalePO" Type="Self.SalePO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale">
+              <PropertyRef Name="IDSale" />
+            </Principal>
+            <Dependent Role="SalePO">
+              <PropertyRef Name="SaleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_dimmovie">
+          <End Role="Dim" Type="Self.Dim" Multiplicity="1" />
+          <End Role="DimsMovie" Type="Self.DimsMovie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dim">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DimsMovie">
+              <PropertyRef Name="dim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hall_Dim">
+          <End Role="Dim" Type="Self.Dim" Multiplicity="1" />
+          <End Role="Hall" Type="Self.Hall" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dim">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Hall">
+              <PropertyRef Name="parameter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_movie">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+          <End Role="MoviePerson" Type="Self.MoviePerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MoviePerson">
+              <PropertyRef Name="movie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_moviedim">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+          <End Role="DimsMovie" Type="Self.DimsMovie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DimsMovie">
+              <PropertyRef Name="movie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_moviestate">
+          <End Role="MovieState" Type="Self.MovieState" Multiplicity="1" />
+          <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovieState">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Movie">
+              <PropertyRef Name="movieState" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_movietype">
+          <End Role="MovieType" Type="Self.MovieType" Multiplicity="1" />
+          <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovieType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Movie">
+              <PropertyRef Name="movieType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Performance_Hall">
+          <End Role="Hall" Type="Self.Hall" Multiplicity="1" />
+          <End Role="Performance" Type="Self.Performance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hall">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Performance">
+              <PropertyRef Name="hall" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Performance_Movie">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+          <End Role="Performance" Type="Self.Performance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Performance">
+              <PropertyRef Name="movie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="MoviePerson" Type="Self.MoviePerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MoviePerson">
+              <PropertyRef Name="person" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_persontype">
+          <End Role="PersonType" Type="Self.PersonType" Multiplicity="1" />
+          <End Role="MoviePerson" Type="Self.MoviePerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MoviePerson">
+              <PropertyRef Name="personType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Timetable_Performance">
+          <End Role="Performance" Type="Self.Performance" Multiplicity="1" />
+          <End Role="Timetable" Type="Self.Timetable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Performance">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Timetable">
+              <PropertyRef Name="performance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KinoModelStoreContainer">
+          <EntitySet Name="Dim" EntityType="Self.Dim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DimsMovie" EntityType="Self.DimsMovie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hall" EntityType="Self.Hall" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movie" EntityType="Self.Movie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MovieState" EntityType="Self.MovieState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MovieType" EntityType="Self.MovieType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pack" EntityType="Self.Pack" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PackPO" EntityType="Self.PackPO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Performance" EntityType="Self.Performance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonType" EntityType="Self.PersonType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sale" EntityType="Self.Sale" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalePO" EntityType="Self.SalePO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Timetable" EntityType="Self.Timetable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MoviePerson" EntityType="Self.MoviePerson" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MoviePerson].[id] AS [id], 
+    [MoviePerson].[movie] AS [movie], 
+    [MoviePerson].[person] AS [person], 
+    [MoviePerson].[personType] AS [personType]
+    FROM [dbo].[MoviePerson] AS [MoviePerson]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__PackPO__PackID__4F7CD00D" Association="Self.FK__PackPO__PackID__4F7CD00D">
+            <End Role="Pack" EntitySet="Pack" />
+            <End Role="PackPO" EntitySet="PackPO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PackPO__ProductI__5070F446" Association="Self.FK__PackPO__ProductI__5070F446">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="PackPO" EntitySet="PackPO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SalePO__PackID__5441852A" Association="Self.FK__SalePO__PackID__5441852A">
+            <End Role="Pack" EntitySet="Pack" />
+            <End Role="SalePO" EntitySet="SalePO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SalePO__SaleID__534D60F1" Association="Self.FK__SalePO__SaleID__534D60F1">
+            <End Role="Sale" EntitySet="Sale" />
+            <End Role="SalePO" EntitySet="SalePO" />
+          </AssociationSet>
+          <AssociationSet Name="fk_dimmovie" Association="Self.fk_dimmovie">
+            <End Role="Dim" EntitySet="Dim" />
+            <End Role="DimsMovie" EntitySet="DimsMovie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hall_Dim" Association="Self.FK_Hall_Dim">
+            <End Role="Dim" EntitySet="Dim" />
+            <End Role="Hall" EntitySet="Hall" />
+          </AssociationSet>
+          <AssociationSet Name="fk_movie" Association="Self.fk_movie">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="MoviePerson" EntitySet="MoviePerson" />
+          </AssociationSet>
+          <AssociationSet Name="fk_moviedim" Association="Self.fk_moviedim">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="DimsMovie" EntitySet="DimsMovie" />
+          </AssociationSet>
+          <AssociationSet Name="fk_moviestate" Association="Self.fk_moviestate">
+            <End Role="MovieState" EntitySet="MovieState" />
+            <End Role="Movie" EntitySet="Movie" />
+          </AssociationSet>
+          <AssociationSet Name="fk_movietype" Association="Self.fk_movietype">
+            <End Role="MovieType" EntitySet="MovieType" />
+            <End Role="Movie" EntitySet="Movie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Performance_Hall" Association="Self.FK_Performance_Hall">
+            <End Role="Hall" EntitySet="Hall" />
+            <End Role="Performance" EntitySet="Performance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Performance_Movie" Association="Self.FK_Performance_Movie">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="Performance" EntitySet="Performance" />
+          </AssociationSet>
+          <AssociationSet Name="fk_person" Association="Self.fk_person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="MoviePerson" EntitySet="MoviePerson" />
+          </AssociationSet>
+          <AssociationSet Name="fk_persontype" Association="Self.fk_persontype">
+            <End Role="PersonType" EntitySet="PersonType" />
+            <End Role="MoviePerson" EntitySet="MoviePerson" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Timetable_Performance" Association="Self.FK_Timetable_Performance">
+            <End Role="Performance" EntitySet="Performance" />
+            <End Role="Timetable" EntitySet="Timetable" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KinoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Dim">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DimsMovies" Relationship="Self.fk_dimmovie" FromRole="Dim" ToRole="DimsMovie" />
+          <NavigationProperty Name="Halls" Relationship="Self.FK_Hall_Dim" FromRole="Dim" ToRole="Hall" />
+        </EntityType>
+        <EntityType Name="DimsMovie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="movie" Type="Int32" Nullable="false" />
+          <Property Name="dim" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Dim1" Relationship="Self.fk_dimmovie" FromRole="DimsMovie" ToRole="Dim" />
+          <NavigationProperty Name="Movie1" Relationship="Self.fk_moviedim" FromRole="DimsMovie" ToRole="Movie" />
+        </EntityType>
+        <EntityType Name="Hall">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="parameter" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Dim" Relationship="Self.FK_Hall_Dim" FromRole="Hall" ToRole="Dim" />
+          <NavigationProperty Name="Performances" Relationship="Self.FK_Performance_Hall" FromRole="Hall" ToRole="Performance" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="movieState" Type="Int32" Nullable="false" />
+          <Property Name="movieType" Type="Int32" Nullable="false" />
+          <Property Name="movieTime" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="DimsMovies" Relationship="Self.fk_moviedim" FromRole="Movie" ToRole="DimsMovie" />
+          <NavigationProperty Name="MoviePersons" Relationship="Self.fk_movie" FromRole="Movie" ToRole="MoviePerson" />
+          <NavigationProperty Name="MovieState1" Relationship="Self.fk_moviestate" FromRole="Movie" ToRole="MovieState" />
+          <NavigationProperty Name="MovieType1" Relationship="Self.fk_movietype" FromRole="Movie" ToRole="MovieType" />
+          <NavigationProperty Name="Performances" Relationship="Self.FK_Performance_Movie" FromRole="Movie" ToRole="Performance" />
+        </EntityType>
+        <EntityType Name="MovieState">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Movies" Relationship="Self.fk_moviestate" FromRole="MovieState" ToRole="Movie" />
+        </EntityType>
+        <EntityType Name="MovieType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Movies" Relationship="Self.fk_movietype" FromRole="MovieType" ToRole="Movie" />
+        </EntityType>
+        <EntityType Name="Pack">
+          <Key>
+            <PropertyRef Name="IDPack" />
+          </Key>
+          <Property Name="IDPack" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="PackPOes" Relationship="Self.FK__PackPO__PackID__4F7CD00D" FromRole="Pack" ToRole="PackPO" />
+          <NavigationProperty Name="SalePOes" Relationship="Self.FK__SalePO__PackID__5441852A" FromRole="Pack" ToRole="SalePO" />
+        </EntityType>
+        <EntityType Name="PackPO">
+          <Key>
+            <PropertyRef Name="IDPackPO" />
+          </Key>
+          <Property Name="IDPackPO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PackID" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Pack" Relationship="Self.FK__PackPO__PackID__4F7CD00D" FromRole="PackPO" ToRole="Pack" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__PackPO__ProductI__5070F446" FromRole="PackPO" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Performance">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="movie" Type="Int32" Nullable="false" />
+          <Property Name="hall" Type="Int32" Nullable="false" />
+          <Property Name="adsDuration" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Hall1" Relationship="Self.FK_Performance_Hall" FromRole="Performance" ToRole="Hall" />
+          <NavigationProperty Name="Movie1" Relationship="Self.FK_Performance_Movie" FromRole="Performance" ToRole="Movie" />
+          <NavigationProperty Name="Timetables" Relationship="Self.FK_Timetable_Performance" FromRole="Performance" ToRole="Timetable" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bornDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="MoviePersons" Relationship="Self.fk_person" FromRole="Person" ToRole="MoviePerson" />
+        </EntityType>
+        <EntityType Name="PersonType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="MoviePersons" Relationship="Self.fk_persontype" FromRole="PersonType" ToRole="MoviePerson" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="IDProduct" />
+          </Key>
+          <Property Name="IDProduct" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PackPOes" Relationship="Self.FK__PackPO__ProductI__5070F446" FromRole="Product" ToRole="PackPO" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="IDSale" />
+          </Key>
+          <Property Name="IDSale" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="SaleDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="SalePOes" Relationship="Self.FK__SalePO__SaleID__534D60F1" FromRole="Sale" ToRole="SalePO" />
+        </EntityType>
+        <EntityType Name="SalePO">
+          <Key>
+            <PropertyRef Name="IDSalePO" />
+          </Key>
+          <Property Name="IDSalePO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SaleID" Type="Int32" />
+          <Property Name="PackID" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Pack" Relationship="Self.FK__SalePO__PackID__5441852A" FromRole="SalePO" ToRole="Pack" />
+          <NavigationProperty Name="Sale" Relationship="Self.FK__SalePO__SaleID__534D60F1" FromRole="SalePO" ToRole="Sale" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Timetable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="performance" Type="Int32" Nullable="false" />
+          <Property Name="performanceDate" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Performance1" Relationship="Self.FK_Timetable_Performance" FromRole="Timetable" ToRole="Performance" />
+        </EntityType>
+        <EntityType Name="MoviePerson">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="movie" />
+            <PropertyRef Name="person" />
+            <PropertyRef Name="personType" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="movie" Type="Int32" Nullable="false" />
+          <Property Name="person" Type="Int32" Nullable="false" />
+          <Property Name="personType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Movie1" Relationship="Self.fk_movie" FromRole="MoviePerson" ToRole="Movie" />
+          <NavigationProperty Name="Person1" Relationship="Self.fk_person" FromRole="MoviePerson" ToRole="Person" />
+          <NavigationProperty Name="PersonType1" Relationship="Self.fk_persontype" FromRole="MoviePerson" ToRole="PersonType" />
+        </EntityType>
+        <Association Name="fk_dimmovie">
+          <End Role="Dim" Type="Self.Dim" Multiplicity="1" />
+          <End Role="DimsMovie" Type="Self.DimsMovie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dim">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DimsMovie">
+              <PropertyRef Name="dim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hall_Dim">
+          <End Role="Dim" Type="Self.Dim" Multiplicity="1" />
+          <End Role="Hall" Type="Self.Hall" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dim">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Hall">
+              <PropertyRef Name="parameter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_moviedim">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+          <End Role="DimsMovie" Type="Self.DimsMovie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DimsMovie">
+              <PropertyRef Name="movie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Performance_Hall">
+          <End Role="Hall" Type="Self.Hall" Multiplicity="1" />
+          <End Role="Performance" Type="Self.Performance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hall">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Performance">
+              <PropertyRef Name="hall" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_movie">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+          <End Role="MoviePerson" Type="Self.MoviePerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MoviePerson">
+              <PropertyRef Name="movie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_moviestate">
+          <End Role="MovieState" Type="Self.MovieState" Multiplicity="1" />
+          <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovieState">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Movie">
+              <PropertyRef Name="movieState" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_movietype">
+          <End Role="MovieType" Type="Self.MovieType" Multiplicity="1" />
+          <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MovieType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Movie">
+              <PropertyRef Name="movieType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Performance_Movie">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+          <End Role="Performance" Type="Self.Performance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Performance">
+              <PropertyRef Name="movie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PackPO__PackID__4F7CD00D">
+          <End Role="Pack" Type="Self.Pack" Multiplicity="0..1" />
+          <End Role="PackPO" Type="Self.PackPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pack">
+              <PropertyRef Name="IDPack" />
+            </Principal>
+            <Dependent Role="PackPO">
+              <PropertyRef Name="PackID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SalePO__PackID__5441852A">
+          <End Role="Pack" Type="Self.Pack" Multiplicity="0..1" />
+          <End Role="SalePO" Type="Self.SalePO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pack">
+              <PropertyRef Name="IDPack" />
+            </Principal>
+            <Dependent Role="SalePO">
+              <PropertyRef Name="PackID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PackPO__ProductI__5070F446">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="PackPO" Type="Self.PackPO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="IDProduct" />
+            </Principal>
+            <Dependent Role="PackPO">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Timetable_Performance">
+          <End Role="Performance" Type="Self.Performance" Multiplicity="1" />
+          <End Role="Timetable" Type="Self.Timetable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Performance">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Timetable">
+              <PropertyRef Name="performance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="MoviePerson" Type="Self.MoviePerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MoviePerson">
+              <PropertyRef Name="person" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_persontype">
+          <End Role="PersonType" Type="Self.PersonType" Multiplicity="1" />
+          <End Role="MoviePerson" Type="Self.MoviePerson" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MoviePerson">
+              <PropertyRef Name="personType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SalePO__SaleID__534D60F1">
+          <End Role="Sale" Type="Self.Sale" Multiplicity="0..1" />
+          <End Role="SalePO" Type="Self.SalePO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale">
+              <PropertyRef Name="IDSale" />
+            </Principal>
+            <Dependent Role="SalePO">
+              <PropertyRef Name="SaleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KinoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Dims" EntityType="Self.Dim" />
+          <EntitySet Name="DimsMovies" EntityType="Self.DimsMovie" />
+          <EntitySet Name="Halls" EntityType="Self.Hall" />
+          <EntitySet Name="Movies" EntityType="Self.Movie" />
+          <EntitySet Name="MovieStates" EntityType="Self.MovieState" />
+          <EntitySet Name="MovieTypes" EntityType="Self.MovieType" />
+          <EntitySet Name="Packs" EntityType="Self.Pack" />
+          <EntitySet Name="PackPOes" EntityType="Self.PackPO" />
+          <EntitySet Name="Performances" EntityType="Self.Performance" />
+          <EntitySet Name="People" EntityType="Self.Person" />
+          <EntitySet Name="PersonTypes" EntityType="Self.PersonType" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Sales" EntityType="Self.Sale" />
+          <EntitySet Name="SalePOes" EntityType="Self.SalePO" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Timetables" EntityType="Self.Timetable" />
+          <EntitySet Name="MoviePersons" EntityType="Self.MoviePerson" />
+          <AssociationSet Name="fk_dimmovie" Association="Self.fk_dimmovie">
+            <End Role="Dim" EntitySet="Dims" />
+            <End Role="DimsMovie" EntitySet="DimsMovies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hall_Dim" Association="Self.FK_Hall_Dim">
+            <End Role="Dim" EntitySet="Dims" />
+            <End Role="Hall" EntitySet="Halls" />
+          </AssociationSet>
+          <AssociationSet Name="fk_moviedim" Association="Self.fk_moviedim">
+            <End Role="Movie" EntitySet="Movies" />
+            <End Role="DimsMovie" EntitySet="DimsMovies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Performance_Hall" Association="Self.FK_Performance_Hall">
+            <End Role="Hall" EntitySet="Halls" />
+            <End Role="Performance" EntitySet="Performances" />
+          </AssociationSet>
+          <AssociationSet Name="fk_movie" Association="Self.fk_movie">
+            <End Role="Movie" EntitySet="Movies" />
+            <End Role="MoviePerson" EntitySet="MoviePersons" />
+          </AssociationSet>
+          <AssociationSet Name="fk_moviestate" Association="Self.fk_moviestate">
+            <End Role="MovieState" EntitySet="MovieStates" />
+            <End Role="Movie" EntitySet="Movies" />
+          </AssociationSet>
+          <AssociationSet Name="fk_movietype" Association="Self.fk_movietype">
+            <End Role="MovieType" EntitySet="MovieTypes" />
+            <End Role="Movie" EntitySet="Movies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Performance_Movie" Association="Self.FK_Performance_Movie">
+            <End Role="Movie" EntitySet="Movies" />
+            <End Role="Performance" EntitySet="Performances" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PackPO__PackID__4F7CD00D" Association="Self.FK__PackPO__PackID__4F7CD00D">
+            <End Role="Pack" EntitySet="Packs" />
+            <End Role="PackPO" EntitySet="PackPOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SalePO__PackID__5441852A" Association="Self.FK__SalePO__PackID__5441852A">
+            <End Role="Pack" EntitySet="Packs" />
+            <End Role="SalePO" EntitySet="SalePOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PackPO__ProductI__5070F446" Association="Self.FK__PackPO__ProductI__5070F446">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="PackPO" EntitySet="PackPOes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Timetable_Performance" Association="Self.FK_Timetable_Performance">
+            <End Role="Performance" EntitySet="Performances" />
+            <End Role="Timetable" EntitySet="Timetables" />
+          </AssociationSet>
+          <AssociationSet Name="fk_person" Association="Self.fk_person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="MoviePerson" EntitySet="MoviePersons" />
+          </AssociationSet>
+          <AssociationSet Name="fk_persontype" Association="Self.fk_persontype">
+            <End Role="PersonType" EntitySet="PersonTypes" />
+            <End Role="MoviePerson" EntitySet="MoviePersons" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SalePO__SaleID__534D60F1" Association="Self.FK__SalePO__SaleID__534D60F1">
+            <End Role="Sale" EntitySet="Sales" />
+            <End Role="SalePO" EntitySet="SalePOes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KinoModelStoreContainer" CdmEntityContainer="KinoEntities">
+          <EntitySetMapping Name="Dims">
+            <EntityTypeMapping TypeName="KinoModel.Dim">
+              <MappingFragment StoreEntitySet="Dim">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DimsMovies">
+            <EntityTypeMapping TypeName="KinoModel.DimsMovie">
+              <MappingFragment StoreEntitySet="DimsMovie">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="movie" ColumnName="movie" />
+                <ScalarProperty Name="dim" ColumnName="dim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Halls">
+            <EntityTypeMapping TypeName="KinoModel.Hall">
+              <MappingFragment StoreEntitySet="Hall">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="parameter" ColumnName="parameter" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movies">
+            <EntityTypeMapping TypeName="KinoModel.Movie">
+              <MappingFragment StoreEntitySet="Movie">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="movieState" ColumnName="movieState" />
+                <ScalarProperty Name="movieType" ColumnName="movieType" />
+                <ScalarProperty Name="movieTime" ColumnName="movieTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MovieStates">
+            <EntityTypeMapping TypeName="KinoModel.MovieState">
+              <MappingFragment StoreEntitySet="MovieState">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MovieTypes">
+            <EntityTypeMapping TypeName="KinoModel.MovieType">
+              <MappingFragment StoreEntitySet="MovieType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Packs">
+            <EntityTypeMapping TypeName="KinoModel.Pack">
+              <MappingFragment StoreEntitySet="Pack">
+                <ScalarProperty Name="IDPack" ColumnName="IDPack" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PackPOes">
+            <EntityTypeMapping TypeName="KinoModel.PackPO">
+              <MappingFragment StoreEntitySet="PackPO">
+                <ScalarProperty Name="IDPackPO" ColumnName="IDPackPO" />
+                <ScalarProperty Name="PackID" ColumnName="PackID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Performances">
+            <EntityTypeMapping TypeName="KinoModel.Performance">
+              <MappingFragment StoreEntitySet="Performance">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="movie" ColumnName="movie" />
+                <ScalarProperty Name="hall" ColumnName="hall" />
+                <ScalarProperty Name="adsDuration" ColumnName="adsDuration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="KinoModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="bornDate" ColumnName="bornDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PersonTypes">
+            <EntityTypeMapping TypeName="KinoModel.PersonType">
+              <MappingFragment StoreEntitySet="PersonType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="KinoModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales">
+            <EntityTypeMapping TypeName="KinoModel.Sale">
+              <MappingFragment StoreEntitySet="Sale">
+                <ScalarProperty Name="IDSale" ColumnName="IDSale" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalePOes">
+            <EntityTypeMapping TypeName="KinoModel.SalePO">
+              <MappingFragment StoreEntitySet="SalePO">
+                <ScalarProperty Name="IDSalePO" ColumnName="IDSalePO" />
+                <ScalarProperty Name="SaleID" ColumnName="SaleID" />
+                <ScalarProperty Name="PackID" ColumnName="PackID" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="KinoModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Timetables">
+            <EntityTypeMapping TypeName="KinoModel.Timetable">
+              <MappingFragment StoreEntitySet="Timetable">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="performance" ColumnName="performance" />
+                <ScalarProperty Name="performanceDate" ColumnName="performanceDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MoviePersons">
+            <EntityTypeMapping TypeName="KinoModel.MoviePerson">
+              <MappingFragment StoreEntitySet="MoviePerson">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="movie" ColumnName="movie" />
+                <ScalarProperty Name="person" ColumnName="person" />
+                <ScalarProperty Name="personType" ColumnName="personType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

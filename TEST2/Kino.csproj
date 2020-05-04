@@ -58,113 +58,94 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dim.cs">
-      <DependentUpon>KinoEntities.tt</DependentUpon>
+    <Compile Include="Domena\DomainFilm.cs" />
+    <Compile Include="Properties\Dim.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DimsMovie.cs">
-      <DependentUpon>KinoEntities.tt</DependentUpon>
+    <Compile Include="Properties\DimsMovie.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Properties\Hall.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\KinoEntityDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KinoEntityDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\KinoEntityDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\KinoEntityDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KinoEntityDataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Movie.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\MoviePerson.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\MovieState.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\MovieType.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Pack.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\PackPO.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Performance.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Person.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\PersonType.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Product.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Sale.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\SalePO.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\sysdiagram.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Timetable.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SeanseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="SeanseForm.Designer.cs">
+      <DependentUpon>SeanseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Hall.cs">
-      <DependentUpon>KinoEntities.tt</DependentUpon>
+    <Compile Include="FormularzSzczegolyFilmy.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="KinoEntities.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>KinoEntities.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="KinoEntities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>KinoEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="KinoEntities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>KinoEntities.edmx</DependentUpon>
+    <Compile Include="FormularzSzczegolyFilmy.Designer.cs">
+      <DependentUpon>FormularzSzczegolyFilmy.cs</DependentUpon>
     </Compile>
     <Compile Include="ListaParametrów.cs" />
-    <Compile Include="Model1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Movie.cs">
-      <DependentUpon>KinoEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MoviePerson.cs">
-      <DependentUpon>KinoEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MovieState.cs">
-      <DependentUpon>KinoEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MovieType.cs">
-      <DependentUpon>KinoEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Performance.cs">
-      <DependentUpon>KinoEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Permission.cs">
-      <DependentUpon>KinoEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Permissions.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Person.cs">
-      <DependentUpon>KinoEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PersonType.cs">
-      <DependentUpon>KinoEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Schedule.cs">
-      <DependentUpon>KinoEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ScheduleStatu.cs">
-      <DependentUpon>KinoEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ScheduleStatus.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>KinoEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Task.cs">
-      <DependentUpon>KinoEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Timetable.cs">
-      <DependentUpon>KinoEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="User.cs">
-      <DependentUpon>KinoEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserPermission.cs">
-      <DependentUpon>KinoEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserPermissions.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="SeanseForm.resx">
+      <DependentUpon>SeanseForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormularzSzczegolyFilmy.resx">
+      <DependentUpon>FormularzSzczegolyFilmy.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -176,23 +157,34 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EntityDeploy Include="Model1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <EntityDeploy Include="KinoEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>KinoEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="KinoEntities.edmx.diagram">
-      <DependentUpon>KinoEntities.edmx</DependentUpon>
-    </None>
-    <None Include="Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\Performance.datasource" />
-    <None Include="Properties\DataSources\Timetable.datasource" />
+    <EntityDeploy Include="Properties\KinoEntityDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>KinoEntityDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Properties\DataSources\Kino.Properties.Dim.datasource" />
+    <None Include="Properties\DataSources\Kino.Properties.DimsMovie.datasource" />
+    <None Include="Properties\DataSources\Kino.Properties.Hall.datasource" />
+    <None Include="Properties\DataSources\Kino.Properties.KinoEntities.datasource" />
+    <None Include="Properties\DataSources\Kino.Properties.Movie.datasource" />
+    <None Include="Properties\DataSources\Kino.Properties.MoviePerson.datasource" />
+    <None Include="Properties\DataSources\Kino.Properties.MovieState.datasource" />
+    <None Include="Properties\DataSources\Kino.Properties.MovieType.datasource" />
+    <None Include="Properties\DataSources\Kino.Properties.Pack.datasource" />
+    <None Include="Properties\DataSources\Kino.Properties.PackPO.datasource" />
+    <None Include="Properties\DataSources\Kino.Properties.Performance.datasource" />
+    <None Include="Properties\DataSources\Kino.Properties.Person.datasource" />
+    <None Include="Properties\DataSources\Kino.Properties.PersonType.datasource" />
+    <None Include="Properties\DataSources\Kino.Properties.Product.datasource" />
+    <None Include="Properties\DataSources\Kino.Properties.Resources.datasource" />
+    <None Include="Properties\DataSources\Kino.Properties.Sale.datasource" />
+    <None Include="Properties\DataSources\Kino.Properties.SalePO.datasource" />
+    <None Include="Properties\DataSources\Kino.Properties.Settings.datasource" />
+    <None Include="Properties\DataSources\Kino.Properties.sysdiagram.datasource" />
+    <None Include="Properties\DataSources\Kino.Properties.Timetable.datasource" />
+    <None Include="Properties\KinoEntityDataModel.edmx.diagram">
+      <DependentUpon>KinoEntityDataModel.edmx</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -207,29 +199,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="KinoEntities.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>KinoEntities.edmx</DependentUpon>
-      <LastGenOutput>KinoEntities.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="KinoEntities.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>KinoEntities.edmx</DependentUpon>
-      <LastGenOutput>KinoEntities.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="Properties\KinoEntityDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>KinoEntityDataModel.edmx</DependentUpon>
+      <LastGenOutput>KinoEntityDataModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Properties\KinoEntityDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>KinoEntityDataModel.edmx</DependentUpon>
+      <LastGenOutput>KinoEntityDataModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
