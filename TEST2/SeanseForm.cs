@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,8 @@ namespace Kino
         SqlCommandBuilder scb;
         DataTable dt;
 
+       private List<Timetable> timetableFilterList = null;
+
         KinoEntities context;
         public SeanseForm()
         {
@@ -30,111 +33,72 @@ namespace Kino
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
-            this.dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;  //liknięcie w dowolnym miejscu w wierszu automatycznie zaznacza cały wiersz
-            this.dataGridView1.MultiSelect = false;
-
-
-
-
-            //    //uzyskanie wiersza wybranego z DataGridView1
-            dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
-
-            int selectedRowCount = dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
-            if (selectedRowCount > 0)
-            {
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-
-                for (int i = 0; i < selectedRowCount; i++)
-                {
-                    sb.Append(dataGridView1.SelectedRows[i].Index.ToString());
-                }
-
-                sb.Append("Zaznaczony: " + selectedRowCount.ToString());
-
-            }
-
-
-
-
-            //try
-            //{ 
-            //    BindingSource BindingSource1 = new BindingSource();
-            //    SqlConnection conetionString = new SqlConnection (@"Server = tcp:kinosql.database.windows.net,1433; Initial Catalog = Kino; Persist Security Info = False; User ID = student; Password = Pa$$w0rd; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30");
-            //    SqlDataAdapter seanseAdapter = new SqlDataAdapter("Select * FROM Timetable", conetionString);
-            //    DataTable tabelaSeansow = new DataTable();
-
-            //    seanseAdapter.Fill(tabelaSeansow);
-            //    BindingSource1.DataSource = tabelaSeansow;
-            //    BindingSource1.Filter = "";    //dane pobrane z listBox
-
-            //    dataGridView2.DataSource = BindingSource1; //Ustaw źródło danych dla dataGridView2 na BindingSource1.
-
-            //    dataGridView2.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;  //// Automatycznie zmienia rozmiar widocznych wierszy.
-            //}
-            //catch (SqlException)
-            //{
-            //    MessageBox.Show("Nie udało się połączyć z bazą");
-            //    System.Threading.Thread.CurrentThread.Abort();
-            //}
-
         }
 
 
         private void button2_Click(object sender, EventArgs e)
         {
 
-            if (monthCalendar1 == null && checkedListBox1.Items.Count == 0) {
-                MessageBox.Show("nie wybrałeś żadnych filtrów ");
+            if (monthCalendar1 == null && checkedListBox1.CheckedItems.Count == 0) 
+            {
                 return;
             }
 
-            SelectionRange sr = new SelectionRange();
-            sr.Start = DateTime.Parse (this.textBox1.Text);
-            sr.End = DateTime.Parse(this.textBox2.Text);
-
-            List<Timetable> timetableFilterList = null;
-
-            this.monthCalendar1.SelectionRange = sr;
-
-            if (monthCalendar1 != null)
+            try
             {
-                if (sr.End != null)
+                SelectionRange sr = new SelectionRange();
+                sr.Start = DateTime.Parse(this.textBox1.Text);
+                sr.End = DateTime.Parse(this.textBox2.Text);
+               
+
+                //this.monthCalendar1.SelectionRange = sr;
+
+                if (sr.Start != null)
                 {
-                    timetableFilterList = context.Timetables.Local.Where(timetable => timetable.performanceDate >= sr.Start && sr.End >= timetable.performanceDate).ToList();
+                    if (sr.End != null)
+                    {
+                        timetableFilterList = context.Timetables.Local.Where(timetable => timetable.performanceDate >= sr.Start && sr.End >= timetable.performanceDate).ToList();
+                    }
+                    else
+                    {
+                        timetableFilterList = context.Timetables.Local.Where(timetable => timetable.performanceDate == sr.Start).ToList();
+                    }
                 }
                 else
                 {
-                    timetableFilterList = context.Timetables.Local.Where(timetable => timetable.performanceDate == sr.Start).ToList();
+                    timetableFilterList = context.Timetables.Local.ToList();
                 }
-            } 
-            else 
-            {
-
-                timetableFilterList = context.Timetables.Local.ToList();
-            }
 
 
-            if (checkedListBox1.Items.Count > 0) {
 
-                string dimParametersString = "";
-
-                for (int x = 0; x < checkedListBox1.CheckedItems.Count; x++)
+                if (checkedListBox1.CheckedItems.Count > 0) 
                 {
+                    string dimParametersString = "";
 
-                    dimParametersString += checkedListBox1.CheckedItems[x].ToString() + " ,";
+                    for (int x = 0; x < checkedListBox1.CheckedItems.Count; x++)
+                    {
+                        dimParametersString += checkedListBox1.CheckedItems[x].ToString() + " ,";
+                    }
+
+                    timetableFilterList = timetableFilterList.Where(timetable => dimParametersString.Contains(timetable.Performance1.Hall1.Dim.name)).ToList();
                 }
 
-                timetableFilterList = timetableFilterList.Where(timetable => dimParametersString.Contains(timetable.Performance1.Hall1.Dim.name)).ToList();
+                  bindingSource2.DataSource = new BindingList<Timetable>( timetableFilterList);
+             }
 
+            catch
+            {
+               MessageBox.Show("Nie wybrałeś żadnego filtru!");
             }
 
-        bindingSource2.DataSource = new BindingList<Timetable>( timetableFilterList);
+
         }
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
-            monthCalendar1.CalendarDimensions = new System.Drawing.Size(2, 1);
-            this.monthCalendar1.ScrollChange = 1; //jeden miesiąc na raz za pomoca strzałek
+            this.monthCalendar1.ScrollChange = 3; //jeden miesiąc na raz za pomoca strzałek
+            this.monthCalendar1.CalendarDimensions = new System.Drawing.Size(3, 2);
+            this.monthCalendar1.MaxSelectionCount = 150; //max 150 dni można wybrać
             this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             this.textBox1.Text = monthCalendar1.SelectionRange.Start.Date.ToShortDateString();
             this.textBox2.Text = monthCalendar1.SelectionRange.End.Date.ToShortDateString();
@@ -149,40 +113,6 @@ namespace Kino
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {     
-            //KinoEntities context = new KinoEntities();
-            //var Timetable = from p in entities.Timetable
-            //                select new
-            //                {
-            //                    TimetableId = p.TimetableID,
-            //                    Name = p.Name,
-            //                    PerformanceDate = p.PerformanceDate
-            //                };
-            //dataGridView1.DataSource = timetable.ToList();
-
-
-
-
-
-            //uzyskanie wiersza wybranego z DataGridView2
-            dataGridView2.Rows.GetRowCount(DataGridViewElementStates.Selected);
-
-            int selectedRowCount = dataGridView2.Rows.GetRowCount(DataGridViewElementStates.Selected);
-            if (selectedRowCount > 0)
-            {
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-
-                for (int i = 0; i < selectedRowCount; i++)
-                {
-                    sb.Append(dataGridView2.SelectedRows[i].Index.ToString());
-                }
-
-                sb.Append("Zaznaczony: " + selectedRowCount.ToString());
-            }
-            this.dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
-            this.dataGridView2.MultiSelect = false;
-
-
 
         }
 
@@ -191,21 +121,22 @@ namespace Kino
         {
             string[] parametry = { "2D", "3D", "VR" };
             checkedListBox1.Items.AddRange(parametry);
+            //this.IsMdiContainer = true; //możliwość pracy wielookienkowej
+
+            this.dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;  //liknięcie w dowolnym miejscu w wierszu automatycznie zaznacza cały wiersz
+            this.dataGridView1.MultiSelect = false;
+            this.dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect; //Cały wiersz zostanie wybrany przez kliknięcie nagłówka jego wiersza lub komórki zawartej w tym wierszu.
+            this.dataGridView2.MultiSelect = false;
+
 
             try
             { 
                 context = new KinoEntities(); //tworzenie obiekyu bazy danych
 
-
                 context.Timetables.Load(); //ładowanie tabeli
-                this.bindingSource1.DataSource = context.Timetables.Local.ToBindingList().Where(timetable => timetable.performanceDate >= DateTime.Now);  //wiązanie formatki z tabelą
+                this.timetableFilterList = context.Timetables.Local.ToBindingList().Where(timetable => timetable.performanceDate >= DateTime.Now).ToList();
+                this.bindingSource1.DataSource = new BindingList<Timetable>(this.timetableFilterList);  //wiązanie formatki z tabelą
             
-                //context.DimsMovies.Load();
-                //this.timetableBindingSource1.DataSource = context.DimsMovies.Local.ToBindingList();
-
-                //context.Dims.Load();
-                //this.timetableBindingSource1.DataSource = context.Dims.Local.ToBindingList();
-
                 //context.Movies.Load();
                 //this.timetableBindingSource1.DataSource = context.Movies.Local.ToBindingList();
             }
@@ -215,10 +146,45 @@ namespace Kino
             }
         }
 
+        private void doubleClickViewOnDataGridView1(object sender, EventArgs e)
+        {
+            moveToDetailsMovie(dataGridView1);
+        }
+
+        private void doubleClickViewOnDataGridView2(object sender, EventArgs e)
+        {
+            moveToDetailsMovie(dataGridView2);
+        }
+        private void moveToDetailsMovie(DataGridView dataGridView)
+        {
+            int selectedRowCount = dataGridView.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount > 0)
+            {
+
+                Timetable selectedElement = timetableFilterList[dataGridView.SelectedRows[0].Index];
+                FormularzSzczegolyFilmy formularzSeanse = new FormularzSzczegolyFilmy(selectedElement);
+                formularzSeanse.Show();
+
+                //jak to sb.ToString() wpisać do form2?  a gdyby pobrać tylko id z tego seansu? i po id wyświetlanie?
+            }
+        }
+
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+
 
 
         //private void wywolanieFormatkiZSeansem(object sender, DataGridViewCellFormattingEventArgs e)

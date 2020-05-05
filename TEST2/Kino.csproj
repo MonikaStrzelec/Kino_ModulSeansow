@@ -182,6 +182,7 @@
     <None Include="Properties\DataSources\Kino.Properties.Settings.datasource" />
     <None Include="Properties\DataSources\Kino.Properties.sysdiagram.datasource" />
     <None Include="Properties\DataSources\Kino.Properties.Timetable.datasource" />
+    <None Include="Properties\DataSources\TimetableDomainClass.datasource" />
     <None Include="Properties\KinoEntityDataModel.edmx.diagram">
       <DependentUpon>KinoEntityDataModel.edmx</DependentUpon>
     </None>

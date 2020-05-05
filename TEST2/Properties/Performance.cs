@@ -32,7 +32,7 @@ namespace Kino.Properties
 
         public override string ToString()
         {
-            return Movie1.title + "  " + Hall1.name;
+            return "FILM: " + Movie1.title + "   -  SALA: " + Hall1.name;
         }
 
     }
