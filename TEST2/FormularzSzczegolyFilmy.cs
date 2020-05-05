@@ -62,6 +62,8 @@ namespace Kino
         public string hallName { get; set; }
         public string hallType { get; set; }
 
+        public TimeSpan movieTime { get; set; }
+
         public TimetableDomainClass(Timetable t) {
             this.title = t.Performance1.Movie1.title;
             this.description = t.Performance1.Movie1.description;
@@ -69,6 +71,7 @@ namespace Kino
             this.dataTime = t.performanceDate;
             this.hallName = t.Performance1.Hall1.name;
             this.hallType = t.Performance1.Hall1.Dim.name;
+            this.movieTime = t.Performance1.Movie1.movieTime;
 
         }
         
