@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.Cryptography;
+
 
 namespace Login
 {
@@ -19,8 +21,13 @@ namespace Login
 
         private void Button1_Click(object sender, EventArgs e)
         {
+            this.Hide();
+            Form1 formlogin = new Form1();
+            formlogin.ShowDialog();
             this.Close();
-            
+
         }
+
+      
     }
 }

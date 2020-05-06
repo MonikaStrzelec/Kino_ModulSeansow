@@ -18,19 +18,29 @@ namespace Login
         public Form1()
         {
             InitializeComponent();
+         }
 
-        }
+        string connection = "Data Source=35.228.52.182,1433;Network Library = DBMSSOCN; Initial Catalog =Kino;User ID = sqlserver; Password=Pa$$w0rd";
 
-        string connection = "Server=tcp:kinosql.database.windows.net,1433;Initial Catalog=kino;Persist Security Info=False;User ID=student;Password=Pa$$w0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        int attempts = 3;
+        DateTime lastLoginAttempt = DateTime.Now;
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
+            label2.Text = "Login attempts left: " + attempts.ToString();
         }
 
-        public static byte[] StringHash(string str)
+        public string HashString(string str)
         {
-            HashAlgorithm algorithm = SHA1.Create();
-            return algorithm.ComputeHash(Encoding.Unicode.GetBytes(str));
+            SHA1CryptoServiceProvider sh = new SHA1CryptoServiceProvider();
+            sh.ComputeHash(ASCIIEncoding.ASCII.GetBytes(str));
+            byte[] re = sh.Hash;
+            StringBuilder sb = new StringBuilder();
+            foreach (byte bt in re)
+                sb.Append(bt.ToString("x2"));
+
+            return sb.ToString();
+
         }
 
 
@@ -56,9 +66,9 @@ namespace Login
 
                     SqlConnection con = new SqlConnection(connection);
 
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.User WHERE login=@Login AND password=@password;", con);
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.g1_user WHERE login=@Login AND password=@password;", con);
                     cmd.Parameters.AddWithValue("@Login", textBoxLogin.Text);
-                    cmd.Parameters.AddWithValue("@password", StringHash(textBoxPassword.Text));
+                    cmd.Parameters.AddWithValue("@password", HashString(textBoxPassword.Text));
 
 
                     con.Open();
@@ -71,20 +81,29 @@ namespace Login
 
                     if (count == 1)
                     {
-                        MessageBox.Show("Successful");        //przejście do menu głównego
+                        this.Hide();
+                        MainMenu mainmenu = new MainMenu();
+                        mainmenu.ShowDialog();
+                        this.Close();
                     }
                     else
                     {
                         MessageBox.Show("Login failed. Check your login and password and try again");
+
+                        attempts--;
+                        if(attempts==0)
+
+                        return;
+                        
                     }
 
                 }
 
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 MessageBox.Show(ex.ToString());
-            }
+             }
             #endregion
         }
 
@@ -105,8 +124,8 @@ namespace Login
 
                     SqlConnection con = new SqlConnection(connection);
 
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.User WHERE code=@Code;", con);
-                    cmd.Parameters.AddWithValue("@Code", StringHash(textBox3.Text));
+                    SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.g1_code WHERE code=@Code;", con);
+                    cmd.Parameters.AddWithValue("@Code", HashString(textBox3.Text));
 
                     con.Open();
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -118,16 +137,20 @@ namespace Login
 
                     if (count == 1)
                     {
-                        MessageBox.Show("Successful.");        //przejście do menu głównego
+                        this.Hide();
+                        MainMenu mainmenu = new MainMenu();
+                        mainmenu.ShowDialog();
+                        this.Close();
                     }
                     else
                     {
                         MessageBox.Show("Login failed. Check your code and try again.");
+                        return;
                     }
                 }
 
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 MessageBox.Show(ex.ToString());
             }
@@ -194,6 +217,11 @@ namespace Login
         }
 
         private void TextBoxPassword_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
         {
 
         }
