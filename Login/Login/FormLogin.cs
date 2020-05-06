@@ -66,7 +66,7 @@ namespace Login
 
                     SqlConnection con = new SqlConnection(connection);
 
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.g1_user WHERE login=@Login AND password=@password;", con);
+                    SqlCommand cmd = new SqlCommand("SELECT login, password FROM dbo.g1_user WHERE login=@Login AND password=@password;", con);
                     cmd.Parameters.AddWithValue("@Login", textBoxLogin.Text);
                     cmd.Parameters.AddWithValue("@password", HashString(textBoxPassword.Text));
 
@@ -124,7 +124,7 @@ namespace Login
 
                     SqlConnection con = new SqlConnection(connection);
 
-                    SqlCommand cmd = new SqlCommand("SELECT * FROM dbo.g1_code WHERE code=@Code;", con);
+                    SqlCommand cmd = new SqlCommand("SELECT code FROM dbo.g1_code WHERE code=@Code;", con);
                     cmd.Parameters.AddWithValue("@Code", HashString(textBox3.Text));
 
                     con.Open();
