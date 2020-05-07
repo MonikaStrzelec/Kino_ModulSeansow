@@ -121,10 +121,12 @@ namespace Modul_raportow
 
         public void Init()
         {
+            
             comboBox2.Enabled = false;
             dateTimePicker1.Enabled = false;
             dateTimePicker2.Enabled = false;
             comboBox1.SelectedIndex = 0;
+            comboBox2.Items.Clear();
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
