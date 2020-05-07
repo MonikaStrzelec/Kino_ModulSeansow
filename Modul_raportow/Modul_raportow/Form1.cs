@@ -44,7 +44,6 @@ namespace Modul_raportow
         {
             
             ReportGenerator.Raport_podsumowania_czasu_pracy_pracownikow();
-            dataGridView1.DataSource = SQLObject.ConnectToData();
 
             ExportToPdf();
         }
