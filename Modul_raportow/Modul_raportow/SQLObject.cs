@@ -12,44 +12,7 @@ namespace Modul_raportow
 {
     public sealed class SQLObject
     {
-
-        /* public static DataTable ConnectToData() {
-
-
-             using (SqlConnection con = new SqlConnection("Data Source=35.228.52.182;Initial Catalog=Kino;User ID=sqlserver;Password=Pa$$w0rd"))
-             {
-                 DataTable data = new DataTable();
-
-
-
-                 con.Open();
-                 Console.WriteLine("Open");
-
-                 SqlCommand command = new SqlCommand("SELECT * FROM dbo.Movie", con);
-
-                 command.CommandType = CommandType.Text;
-
-                 //adapter.SelectCommand = command;
-
-                 SqlDataAdapter adapter = new SqlDataAdapter(command);
-
-                 adapter.Fill(data);
-
-
-
-                 Console.WriteLine(data);
-
-                 con.Close();
-                 Console.WriteLine("Connection closed");
-                // foreach (DataRow row in data.Rows)
-              //  {
-                //     Console.WriteLine(row[1].ToString());
-                // }
-
-                 return data;
-             }
-         }*/
-
+        
 
 
 
@@ -71,13 +34,16 @@ namespace Modul_raportow
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
 
                 adapter.Fill(data);
-
+                
                 return data;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Nie udało się połączyć");
+                MessageBox.Show("Niemożliwe połączenie z bazą danych. Nastąpi wyłączenie aplikacji");
+
+                System.Windows.Forms.Application.Exit();
                 return null;
+
             }
 
         }

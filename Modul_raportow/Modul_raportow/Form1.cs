@@ -51,19 +51,19 @@ namespace Modul_raportow
             
             switch (n)
             {
-                case 1:
+                case 0:
                     ReportGenerator.generateAllMoviesReport();
                     comboBox2.Visible = false;
                     break;
 
-                case 2:
+                case 1:
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
                     comboBox2.Visible = false;
                     ReportGenerator.generateWorkTimeReport(dateFrom, dateTo);
                     break;
                 
-                case 3:
+                case 2:
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
                     id_pr = comboBox2.SelectedIndex + 1;
@@ -71,21 +71,21 @@ namespace Modul_raportow
                     ReportGenerator.generateIndividualWorkTime(dateFrom, dateTo, id_pr);
                     break;
 
-                case 4:
+                case 3:
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
                     comboBox2.Visible = false;
                     ReportGenerator.generateIncomeReport(dateFrom, dateTo);
                     break;
 
-                case 5:
+                case 4:
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
                     comboBox2.Visible = false;
                     ReportGenerator.generateSalariesReport(dateFrom, dateTo);
                     break;
 
-                case 6:
+                case 5:
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
                     id_pr = comboBox2.SelectedIndex + 1;
@@ -93,7 +93,7 @@ namespace Modul_raportow
                     ReportGenerator.generateIndividualSalary(dateFrom, dateTo, id_pr);
                     break;
                 
-                case 7:
+                case 6:
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
                     comboBox2.Visible = false;
