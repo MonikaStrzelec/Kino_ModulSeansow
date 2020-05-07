@@ -53,13 +53,13 @@ namespace Modul_raportow
             {
                 case 0:
                     ReportGenerator.GenerateAllMoviesReport();
-                    comboBox2.Visible = false;
+                    comboBox2.Enabled = false;
                     break;
 
                 case 1:
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
-                    comboBox2.Visible = false;
+                    comboBox2.Enabled = false;
                     ReportGenerator.GenerateWorkTimeReport(dateFrom, dateTo);
                     break;
                 
@@ -74,14 +74,14 @@ namespace Modul_raportow
                 case 3:
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
-                    comboBox2.Visible = false;
+                    comboBox2.Enabled = false;
                     ReportGenerator.GenerateIncomeReport(dateFrom, dateTo);
                     break;
 
                 case 4:
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
-                    comboBox2.Visible = false;
+                    comboBox2.Enabled = false;
                     ReportGenerator.GenerateSalariesReport(dateFrom, dateTo);
                     break;
 
@@ -96,7 +96,7 @@ namespace Modul_raportow
                 case 6:
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
-                    comboBox2.Visible = false;
+                    comboBox2.Enabled = false;
                     ReportGenerator.GenerateFoodSaleReport(dateFrom, dateTo);
                     break;
                 default:
@@ -104,6 +104,8 @@ namespace Modul_raportow
                     MessageBox.Show("Ej wybierz jakiś raport");
                     break;
             }
+
+            MessageBox.Show("Raport został stworzony");
 
             Init();
 
@@ -190,23 +192,8 @@ namespace Modul_raportow
             }
         }
 
-        public void ExportToPdf()
-        {
+        
 
-            var exportFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            var exportFile = System.IO.Path.Combine(exportFolder, "test.pdf");
-            
-
-            using (var writer = new PdfWriter(exportFile))
-            {
-                using (var pdf = new PdfDocument(writer))
-                {
-                    var doc = new Document(pdf);
-                    doc.Add(new Paragraph("Hello World"));
-                }
-            }
-
-
-        }
+        
     }
 }
