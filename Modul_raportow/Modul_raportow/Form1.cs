@@ -52,7 +52,7 @@ namespace Modul_raportow
             switch (n)
             {
                 case 0:
-                    ReportGenerator.generateAllMoviesReport();
+                    ReportGenerator.GenerateAllMoviesReport();
                     comboBox2.Visible = false;
                     break;
 
@@ -60,29 +60,29 @@ namespace Modul_raportow
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
                     comboBox2.Visible = false;
-                    ReportGenerator.generateWorkTimeReport(dateFrom, dateTo);
+                    ReportGenerator.GenerateWorkTimeReport(dateFrom, dateTo);
                     break;
                 
                 case 2:
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
-                    id_pr = comboBox2.SelectedIndex + 1;
+                    id_pr = long.Parse( comboBox2.GetItemText(comboBox2.SelectedItem));
 
-                    ReportGenerator.generateIndividualWorkTime(dateFrom, dateTo, id_pr);
+                    ReportGenerator.GenerateIndividualWorkTime(dateFrom, dateTo, id_pr);
                     break;
 
                 case 3:
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
                     comboBox2.Visible = false;
-                    ReportGenerator.generateIncomeReport(dateFrom, dateTo);
+                    ReportGenerator.GenerateIncomeReport(dateFrom, dateTo);
                     break;
 
                 case 4:
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
                     comboBox2.Visible = false;
-                    ReportGenerator.generateSalariesReport(dateFrom, dateTo);
+                    ReportGenerator.GenerateSalariesReport(dateFrom, dateTo);
                     break;
 
                 case 5:
@@ -90,14 +90,14 @@ namespace Modul_raportow
                     dateTo = dateTimePicker2.Value;
                     id_pr = comboBox2.SelectedIndex + 1;
 
-                    ReportGenerator.generateIndividualSalary(dateFrom, dateTo, id_pr);
+                    ReportGenerator.GenerateIndividualSalary(dateFrom, dateTo, id_pr);
                     break;
                 
                 case 6:
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
                     comboBox2.Visible = false;
-                    ReportGenerator.generateFoodSaleReport(dateFrom, dateTo);
+                    ReportGenerator.GenerateFoodSaleReport(dateFrom, dateTo);
                     break;
                 default:
                     comboBox1.SelectedIndex = 0;
@@ -153,7 +153,7 @@ namespace Modul_raportow
                     id = SQLObject.SendCommand("SELECT dbo.g1_user.id_user AS Identyfikator, dbo.g1_pearson.first_name + ' '+dbo.g1_pearson.last_name FROM dbo.g1_user INNER JOIN dbo.g1_pearson ON dbo.g1_pearson.id_pearson=dbo.g1_user.id_pearson");
                     foreach (DataRow row in id.Rows)
                     {
-                        comboBox2.Items.Add(row[0].ToString()+": "+row[1].ToString());
+                        comboBox2.Items.Add(row[0].ToString());
                     }
                     
                     break;

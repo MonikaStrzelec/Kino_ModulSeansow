@@ -15,7 +15,7 @@ namespace Modul_raportow
     {
         static string exportFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
-        public static Table toTable(DataTable data)
+        public static Table ToTable(DataTable data)
         {
             Table res = new Table(data.Columns.Count);
             res.SetFontSize(10);
@@ -30,7 +30,8 @@ namespace Modul_raportow
             }
             return res;
         }
-        public static void save(string filename, Table tbl)
+
+        public static void Save(string filename, Table tbl)
         {
             string exportFile = System.IO.Path.Combine(exportFolder, filename);
             using (var writer = new PdfWriter(exportFile))
