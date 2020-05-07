@@ -25,7 +25,7 @@ namespace Modul_raportow
         public Form1()
         {
             InitializeComponent();
-
+            Init();
             
             
         }
@@ -53,12 +53,13 @@ namespace Modul_raportow
             {
                 case 0:
                     ReportGenerator.generateAllMoviesReport();
+                    comboBox2.Visible = false;
                     break;
 
                 case 1:
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
-
+                    comboBox2.Visible = false;
                     ReportGenerator.generateWorkTimeReport(dateFrom, dateTo);
                     break;
 
@@ -73,14 +74,14 @@ namespace Modul_raportow
                 case 3:
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
-
+                    comboBox2.Visible = false;
                     ReportGenerator.generateIncomeReport(dateFrom, dateTo);
                     break;
 
                 case 4:
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
-
+                    comboBox2.Visible = false;
                     ReportGenerator.generateSalariesReport(dateFrom, dateTo);
                     break;
 
@@ -95,11 +96,15 @@ namespace Modul_raportow
                 case 6:
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
-
+                    comboBox2.Visible = false;
                     ReportGenerator.generateFoodSaleReport(dateFrom, dateTo);
+                    break;
+                default:
+                    MessageBox.Show("Ej wybierz jakiś raport");
                     break;
             }
 
+            Init();
 
         }
 
@@ -110,12 +115,69 @@ namespace Modul_raportow
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+            
         }
 
+        public void Init()
+        {
+            comboBox2.Enabled = false;
+            dateTimePicker1.Enabled = false;
+            dateTimePicker2.Enabled = false;
+            comboBox1.SelectedIndex = 1;
+        }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int n = comboBox1.SelectedIndex;
 
+            switch (n)
+            {
+                case 0:
+                    dateTimePicker1.Enabled = false;
+                    dateTimePicker2.Enabled = false;
+                    comboBox2.Enabled = false;
+                    break;
+
+                case 1:
+                    dateTimePicker1.Enabled = true;
+                    dateTimePicker2.Enabled = true;
+                    comboBox2.Enabled = false;
+                    
+                    break;
+
+                case 2:
+                    dateTimePicker1.Enabled = true;
+                    dateTimePicker2.Enabled = true;
+                    comboBox2.Enabled = true;
+                    break;
+
+                case 3:
+                    dateTimePicker1.Enabled = true;
+                    dateTimePicker2.Enabled = true;
+                    comboBox2.Enabled = false;
+                    
+                    break;
+
+                case 4:
+                    dateTimePicker1.Enabled = true;
+                    dateTimePicker2.Enabled = true;
+                    comboBox2.Enabled = false;
+                    
+                    break;
+
+                case 5:
+                    dateTimePicker1.Enabled = true;
+                    dateTimePicker2.Enabled = true;
+                    comboBox2.Enabled = true;
+                    break;
+
+                case 6:
+                    dateTimePicker1.Enabled = true;
+                    dateTimePicker2.Enabled = true;
+                    comboBox2.Enabled = false;
+                    
+                    break;
+                
+            }
         }
 
         public void ExportToPdf()
