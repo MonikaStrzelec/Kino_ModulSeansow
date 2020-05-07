@@ -146,9 +146,16 @@ namespace Modul_raportow
                     break;
 
                 case 2:
+                    DataTable id;
                     dateTimePicker1.Enabled = true;
                     dateTimePicker2.Enabled = true;
                     comboBox2.Enabled = true;
+                    id = SQLObject.SendCommand("SELECT dbo.g1_user.id_user AS Identyfikator, dbo.g1_pearson.first_name + ' '+dbo.g1_pearson.last_name FROM dbo.g1_user INNER JOIN dbo.g1_pearson ON dbo.g1_pearson.id_pearson=dbo.g1_user.id_pearson");
+                    foreach (DataRow row in id.Rows)
+                    {
+                        comboBox2.Items.Add(row[0].ToString()+": "+row[1].ToString());
+                    }
+                    
                     break;
 
                 case 3:

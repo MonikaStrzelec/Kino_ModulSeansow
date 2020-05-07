@@ -27,13 +27,14 @@ namespace Modul_raportow
             {
                 DataTable data = new DataTable();
                 con.Open();
-                MessageBox.Show("Połączono");
+                //MessageBox.Show("Połączono");
 
                 SqlCommand command = new SqlCommand(query, con);
 
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
 
                 adapter.Fill(data);
+                con.Close();
                 
                 return data;
             }
