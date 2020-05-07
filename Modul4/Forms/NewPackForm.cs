@@ -13,9 +13,12 @@ namespace Modul4
 {
     public partial class NewPackForm : Form
     {
+        decimal Price;
+        Product product;
         public NewPackForm()
         {
             InitializeComponent();
+            
         }
 
         private void NewPackForm_Load(object sender, EventArgs e)
@@ -30,19 +33,29 @@ namespace Modul4
         private void button2_Click(object sender, EventArgs e)
         {
             listBox2.Items.Add(listBox1.SelectedItem);
+            product = (Product)listBox1.SelectedItem;
+            Price += product.Price;
+            numericUpDown1.Value = Price;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Pack pack = new Pack();
-            int id = pack.add(textBox1.Text, numericUpDown1.Value);
-            foreach (Product product in listBox2.Items)
+            if (listBox2.Items.Count < 1 || String.IsNullOrWhiteSpace(textBox1.Text))
             {
-                PackPO packPO = new PackPO();
-                packPO.add(id, product);
+                MessageBox.Show("");
             }
-            MessageBox.Show("Dodano zestaw");
-            listBox2.Items.Clear();
+            else
+            {
+                Pack pack = new Pack();
+                int id = pack.add(textBox1.Text, numericUpDown1.Value);
+                foreach (Product product in listBox2.Items)
+                {
+                    PackPO packPO = new PackPO();
+                    packPO.add(id, product);
+                }
+                MessageBox.Show("");
+                listBox2.Items.Clear();
+            }
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -51,15 +64,20 @@ namespace Modul4
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-            listBox1.Items.Add(listBox2.SelectedItem);
+        {   
+            product = (Product)listBox2.SelectedItem;
+            numericUpDown1.Value -= product.Price;
             listBox2.Items.Remove(listBox2.SelectedItem);
-            
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

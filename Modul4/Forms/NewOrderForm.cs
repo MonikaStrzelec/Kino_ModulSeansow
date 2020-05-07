@@ -96,7 +96,7 @@ namespace Modul4
 
         private void SetGridView()
         {
-            Pack temp = listBox1.SelectedItem as Pack;
+            Pack temp = (Pack)listBox1.SelectedItem;
 
             using (var context = new projektkinoEntities1())
             {

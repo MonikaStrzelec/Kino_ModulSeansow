@@ -11,7 +11,7 @@ namespace Modul4
 {
     class Helpers
     {
-        public static int getIndex(DataGridView dataGridView)
+        public static int GetIndex(DataGridView dataGridView)
         {
             int rowindex = dataGridView.CurrentCell.RowIndex;
             int index = Int32.Parse(dataGridView.Rows[rowindex].Cells[0].Value.ToString());

@@ -19,6 +19,7 @@ namespace Modul4
         {
             InitializeComponent();
 
+
         }
 
         private void ManagementForm_Load(object sender, EventArgs e)
@@ -29,8 +30,16 @@ namespace Modul4
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Product.add(textBox1.Text, numericUpDown2.Value, (int)numericUpDown1.Value);
-            Refresh();
+            if (String.IsNullOrWhiteSpace(textBox1.Text))
+            {
+                MessageBox.Show("");
+            }
+            else
+            { 
+                Product.add(textBox1.Text, numericUpDown2.Value, (int)numericUpDown1.Value);
+                Refresh();
+            }
+                
 
         }
 
@@ -39,22 +48,18 @@ namespace Modul4
             projektkinoEntities1 projektkinoEntities1 = new projektkinoEntities1();
             dataGridView2.DataSource = projektkinoEntities1.Product.ToList<Product>();
             dataGridView1.DataSource = projektkinoEntities1.Pack.ToList<Pack>();
-            dataGridView3.DataSource = projektkinoEntities1.PackPO.ToList();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
-            int index = Helpers.getIndex(dataGridView2);
-            EditForm editForm = new EditForm(index);
+            EditForm editForm = new EditForm(Helpers.GetIndex(dataGridView2));
             editForm.ShowDialog();
             Refresh();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            int index = Helpers.getIndex(dataGridView2);
-            Product.Delete(index);
+            Product.Delete(Helpers.GetIndex(dataGridView2));
             Refresh();
         }
 
@@ -77,16 +82,14 @@ namespace Modul4
 
         private void button5_Click(object sender, EventArgs e)
         {
-            int index = Helpers.getIndex(dataGridView1);
-            EditPackForm editPackForm = new EditPackForm(index);
+            EditPackForm editPackForm = new EditPackForm(Helpers.GetIndex(dataGridView1));
             editPackForm.ShowDialog();
             Refresh();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            int index = Helpers.getIndex(dataGridView1);
-            Pack.Delete(index);
+            Pack.Delete(Helpers.GetIndex(dataGridView1));
             Refresh();
         }
     }
