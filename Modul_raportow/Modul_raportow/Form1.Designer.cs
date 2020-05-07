@@ -35,7 +35,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.toDate = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -121,12 +121,12 @@
             this.comboBox2.Size = new System.Drawing.Size(217, 24);
             this.comboBox2.TabIndex = 2;
             // 
-            // toDate
+            // dateTimePicker1
             // 
-            this.toDate.Location = new System.Drawing.Point(76, 229);
-            this.toDate.Name = "toDate";
-            this.toDate.Size = new System.Drawing.Size(208, 21);
-            this.toDate.TabIndex = 3;
+            this.dateTimePicker1.Location = new System.Drawing.Point(76, 229);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(208, 21);
+            this.dateTimePicker1.TabIndex = 3;
             // 
             // dateTimePicker2
             // 
@@ -161,7 +161,7 @@
             this.ClientSize = new System.Drawing.Size(586, 497);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.toDate);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label2);
@@ -190,7 +190,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.DateTimePicker toDate;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridView dataGridView1;

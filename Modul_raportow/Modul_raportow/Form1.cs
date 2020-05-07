@@ -42,10 +42,65 @@ namespace Modul_raportow
 
         private void generate_report_button_Click(object sender, EventArgs e)
         {
-            
-            ReportGenerator.Raport_podsumowania_czasu_pracy_pracownikow();
 
-            ExportToPdf();
+            DateTime dateFrom, dateTo;
+
+            int n = comboBox1.SelectedIndex;
+
+            long id_pr;
+            
+            switch (n)
+            {
+                case 0:
+                    ReportGenerator.generateAllMoviesReport();
+                    break;
+
+                case 1:
+                    dateFrom = dateTimePicker1.Value;
+                    dateTo = dateTimePicker2.Value;
+
+                    ReportGenerator.generateWorkTimeReport(dateFrom, dateTo);
+                    break;
+
+                case 2:
+                    dateFrom = dateTimePicker1.Value;
+                    dateTo = dateTimePicker2.Value;
+                    id_pr = comboBox2.SelectedIndex + 1;
+
+                    ReportGenerator.generateIndividualWorkTime(dateFrom, dateTo, id_pr);
+                    break;
+
+                case 3:
+                    dateFrom = dateTimePicker1.Value;
+                    dateTo = dateTimePicker2.Value;
+
+                    ReportGenerator.generateIncomeReport(dateFrom, dateTo);
+                    break;
+
+                case 4:
+                    dateFrom = dateTimePicker1.Value;
+                    dateTo = dateTimePicker2.Value;
+
+                    ReportGenerator.generateSalariesReport(dateFrom, dateTo);
+                    break;
+
+                case 5:
+                    dateFrom = dateTimePicker1.Value;
+                    dateTo = dateTimePicker2.Value;
+                    id_pr = comboBox2.SelectedIndex + 1;
+
+                    ReportGenerator.generateIndividualSalary(dateFrom, dateTo, id_pr);
+                    break;
+                
+                case 6:
+                    dateFrom = dateTimePicker1.Value;
+                    dateTo = dateTimePicker2.Value;
+
+                    ReportGenerator.generateFoodSaleReport(dateFrom, dateTo);
+                    break;
+            }
+
+
         }
 
         private void label5_Click(object sender, EventArgs e)
