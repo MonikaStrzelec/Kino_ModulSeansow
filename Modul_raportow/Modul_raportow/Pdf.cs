@@ -1,4 +1,6 @@
-﻿using iText.Layout.Element;
+﻿using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
 using iText.Layout.Properties;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,8 @@ namespace Modul_raportow
 {
     class Pdf
     {
+        static string exportFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
         public static Table toTable(DataTable data)
         {
             Table res = new Table(data.Columns.Count);
@@ -25,6 +29,20 @@ namespace Modul_raportow
 
             }
             return res;
+        }
+        public static void save(string filename, Table tbl)
+        {
+            string exportFile = System.IO.Path.Combine(exportFolder, filename);
+            using (var writer = new PdfWriter(exportFile))
+            {
+                using (var pdf = new PdfDocument(writer))
+                {
+                    var doc = new Document(pdf);
+                    doc.Add(tbl);
+                    doc.Close();
+                }
+            }
+            
         }
 
     }
