@@ -51,19 +51,19 @@ namespace Modul_raportow
             
             switch (n)
             {
-                case 0:
+                case 1:
                     ReportGenerator.generateAllMoviesReport();
                     comboBox2.Visible = false;
                     break;
 
-                case 1:
+                case 2:
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
                     comboBox2.Visible = false;
                     ReportGenerator.generateWorkTimeReport(dateFrom, dateTo);
                     break;
-
-                case 2:
+                
+                case 3:
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
                     id_pr = comboBox2.SelectedIndex + 1;
@@ -71,21 +71,21 @@ namespace Modul_raportow
                     ReportGenerator.generateIndividualWorkTime(dateFrom, dateTo, id_pr);
                     break;
 
-                case 3:
+                case 4:
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
                     comboBox2.Visible = false;
                     ReportGenerator.generateIncomeReport(dateFrom, dateTo);
                     break;
 
-                case 4:
+                case 5:
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
                     comboBox2.Visible = false;
                     ReportGenerator.generateSalariesReport(dateFrom, dateTo);
                     break;
 
-                case 5:
+                case 6:
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
                     id_pr = comboBox2.SelectedIndex + 1;
@@ -93,13 +93,14 @@ namespace Modul_raportow
                     ReportGenerator.generateIndividualSalary(dateFrom, dateTo, id_pr);
                     break;
                 
-                case 6:
+                case 7:
                     dateFrom = dateTimePicker1.Value;
                     dateTo = dateTimePicker2.Value;
                     comboBox2.Visible = false;
                     ReportGenerator.generateFoodSaleReport(dateFrom, dateTo);
                     break;
                 default:
+                    comboBox1.SelectedIndex = 0;
                     MessageBox.Show("Ej wybierz jakiś raport");
                     break;
             }
@@ -123,7 +124,7 @@ namespace Modul_raportow
             comboBox2.Enabled = false;
             dateTimePicker1.Enabled = false;
             dateTimePicker2.Enabled = false;
-            comboBox1.SelectedIndex = 1;
+            comboBox1.SelectedIndex = 0;
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
