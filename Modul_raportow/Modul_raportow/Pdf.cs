@@ -18,6 +18,12 @@ namespace Modul_raportow
         public static Table ToTable(DataTable data)
         {
             Table res = new Table(data.Columns.Count);
+            res.UseAllAvailableWidth();
+            res.SetFontSize(14);
+            foreach (DataColumn column in data.Columns)
+            {
+                res.AddHeaderCell(new Paragraph(column.ColumnName));
+            }
             res.SetFontSize(10);
             foreach (DataRow row in data.Rows)
             {
@@ -39,6 +45,7 @@ namespace Modul_raportow
                 using (var pdf = new PdfDocument(writer))
                 {
                     var doc = new Document(pdf);
+                    doc.Add(new Paragraph(filename));
                     doc.Add(tbl);
                     doc.Close();
                 }
