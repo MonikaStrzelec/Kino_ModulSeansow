@@ -38,16 +38,17 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
+            this.cancel_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // generate_report_button
             // 
             this.generate_report_button.Font = new System.Drawing.Font("Century Gothic", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.generate_report_button.Location = new System.Drawing.Point(34, 312);
+            this.generate_report_button.Location = new System.Drawing.Point(34, 275);
             this.generate_report_button.Name = "generate_report_button";
-            this.generate_report_button.Size = new System.Drawing.Size(515, 159);
+            this.generate_report_button.Size = new System.Drawing.Size(515, 137);
             this.generate_report_button.TabIndex = 0;
-            this.generate_report_button.Text = "GENERUJ RAPORT";
+            this.generate_report_button.Text = "&GENERUJ RAPORT";
             this.generate_report_button.UseVisualStyleBackColor = true;
             this.generate_report_button.Click += new System.EventHandler(this.generate_report_button_Click);
             // 
@@ -55,7 +56,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(121, 127);
+            this.label1.Location = new System.Drawing.Point(188, 127);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(73, 22);
             this.label1.TabIndex = 1;
@@ -65,7 +66,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(354, 127);
+            this.label2.Location = new System.Drawing.Point(401, 127);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(148, 22);
             this.label2.TabIndex = 1;
@@ -97,26 +98,18 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "1. Raport podsumowania filmów",
-            "2. Raport podsumowania czasu pracy pracowników",
-            "3. Raport podsumowania czasu pracy indywidualnego pracownika",
-            "4. Raport podsumowania przychodów kina",
-            "5. Raport pensji pracowników",
-            "6. Raport pensji indywidualnego pracownika",
-            "7. Raport zestawienia sprzedanego jedzenia"});
             this.comboBox1.Location = new System.Drawing.Point(34, 167);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(292, 24);
+            this.comboBox1.Size = new System.Drawing.Size(365, 24);
             this.comboBox1.TabIndex = 2;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // comboBox2
             // 
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(332, 167);
+            this.comboBox2.Location = new System.Drawing.Point(405, 167);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(217, 24);
+            this.comboBox2.Size = new System.Drawing.Size(144, 24);
             this.comboBox2.TabIndex = 2;
             // 
             // dateTimePicker1
@@ -144,11 +137,23 @@
             this.label5.Text = "Panel raportów";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
+            // cancel_button
+            // 
+            this.cancel_button.Font = new System.Drawing.Font("Century Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cancel_button.Location = new System.Drawing.Point(34, 418);
+            this.cancel_button.Name = "cancel_button";
+            this.cancel_button.Size = new System.Drawing.Size(515, 67);
+            this.cancel_button.TabIndex = 4;
+            this.cancel_button.Text = "&ANULUJ";
+            this.cancel_button.UseVisualStyleBackColor = true;
+            this.cancel_button.Click += new System.EventHandler(this.cancel_button_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(586, 497);
+            this.Controls.Add(this.cancel_button);
             this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.comboBox2);
@@ -163,6 +168,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.form1_closing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -181,6 +187,7 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button cancel_button;
     }
 }
 
