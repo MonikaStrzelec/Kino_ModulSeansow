@@ -163,13 +163,9 @@ namespace Modul_raportow
         private void form1_closing(object sender, FormClosingEventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Czy chcesz wyjść?", "Uwaga", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (dialogResult == DialogResult.Yes)
+            if (dialogResult == DialogResult.No)
             {
-                Application.Exit();
-            }
-            else if (dialogResult == DialogResult.No)
-            {
-                e.Cancel = true;
+              e.Cancel = true;
             }
         }
 
