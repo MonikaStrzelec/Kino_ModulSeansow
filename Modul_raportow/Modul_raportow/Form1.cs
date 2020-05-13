@@ -162,7 +162,7 @@ namespace Modul_raportow
 
         private void form1_closing(object sender, FormClosingEventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Czy chcesz wyjść?", "Uwaga", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            DialogResult dialogResult = MessageBox.Show("Czy chcesz wyjść?", "Ostrzeżenie", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (dialogResult == DialogResult.No)
             {
               e.Cancel = true;
@@ -171,12 +171,12 @@ namespace Modul_raportow
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            if (dateTimePicker1.Value > dateTimePicker2.Value) MessageBox.Show("Data początkowa nie może być większa od daty końcowej");
+            if (dateTimePicker1.Value > dateTimePicker2.Value) MessageBox.Show("Data początkowa nie może być większa od daty końcowej", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
         {
-            if (dateTimePicker1.Value > dateTimePicker2.Value) MessageBox.Show("Data początkowa nie może być większa od daty końcowej");
+            if (dateTimePicker1.Value > dateTimePicker2.Value) MessageBox.Show("Data początkowa nie może być większa od daty końcowej", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
