@@ -54,12 +54,10 @@ namespace Modul_raportow
             switch (n)
             {
                 case 1:
-                    comboBox2.Enabled = false;
                     ReportGenerator.GenerateAllMoviesReport();
                     break;
 
                 case 2:
-                    comboBox2.Enabled = false;
                     ReportGenerator.GenerateWorkTimeReport(dateFrom, dateTo);
                     break;
                 
@@ -69,12 +67,10 @@ namespace Modul_raportow
                     break;
 
                 case 4:
-                    comboBox2.Enabled = false;
                     ReportGenerator.GenerateIncomeReport(dateFrom, dateTo);
                     break;
 
                 case 5:
-                    comboBox2.Enabled = false;
                     ReportGenerator.GenerateSalariesReport(dateFrom, dateTo);
                     break;
 
@@ -84,7 +80,6 @@ namespace Modul_raportow
                     break;
                 
                 case 7:
-                    comboBox2.Enabled = false;
                     ReportGenerator.GenerateFoodSaleReport(dateFrom, dateTo);
                     break;
 
@@ -137,58 +132,19 @@ namespace Modul_raportow
         {
             int n = comboBox1.SelectedIndex;
 
-            switch (n)
+            if (n == 0 || n == 1)
             {
-                case 1:
-                    dateTimePicker1.Enabled = false;
-                    dateTimePicker2.Enabled = false;
-                    comboBox2.Enabled = false;
-                    break;
-
-                case 2:
-                    dateTimePicker1.Enabled = true;
-                    dateTimePicker2.Enabled = true;
-                    comboBox2.Enabled = false;
-                    
-                    break;
-
-                case 3:
-                    DataTable id;
-                    dateTimePicker1.Enabled = true;
-                    dateTimePicker2.Enabled = true;
-                    comboBox2.Enabled = true;
-                    
-                    
-                    break;
-
-                case 4:
-                    dateTimePicker1.Enabled = true;
-                    dateTimePicker2.Enabled = true;
-                    comboBox2.Enabled = false;
-                    
-                    break;
-
-                case 5:
-                    dateTimePicker1.Enabled = true;
-                    dateTimePicker2.Enabled = true;
-                    comboBox2.Enabled = false;
-                    
-                    break;
-
-                case 6:
-                    dateTimePicker1.Enabled = true;
-                    dateTimePicker2.Enabled = true;
-                    comboBox2.Enabled = true;
-                    break;
-
-                case 7:
-                    dateTimePicker1.Enabled = true;
-                    dateTimePicker2.Enabled = true;
-                    comboBox2.Enabled = false;
-                    
-                    break;
-                
+                dateTimePicker1.Enabled = false;
+                dateTimePicker2.Enabled = false;
             }
+            else
+            {
+                dateTimePicker1.Enabled = true;
+                dateTimePicker2.Enabled = true;
+            }
+
+            if (n == 3 || n == 6) comboBox2.Enabled = true;
+            else comboBox2.Enabled = false;
         }
 
         private void cancel_button_Click(object sender, EventArgs e)
