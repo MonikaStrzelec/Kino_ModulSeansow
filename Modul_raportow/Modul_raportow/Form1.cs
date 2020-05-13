@@ -26,8 +26,6 @@ namespace Modul_raportow
         {
             InitializeComponent();
             Init();
-            
-            
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -42,56 +40,61 @@ namespace Modul_raportow
 
         private void generate_report_button_Click(object sender, EventArgs e)
         {
-
-            DateTime dateFrom, dateTo;
-
-            int n = comboBox1.SelectedIndex;
-            long id_pr;
-
-            dateFrom = dateTimePicker1.Value;
-            dateTo = dateTimePicker2.Value;
-
-            switch (n)
+            try
             {
-                case 1:
-                    ReportGenerator.GenerateAllMoviesReport();
-                    break;
+                DateTime dateFrom, dateTo;
 
-                case 2:
-                    ReportGenerator.GenerateWorkTimeReport(dateFrom, dateTo);
-                    break;
-                
-                case 3:
-                    id_pr = long.Parse(comboBox2.GetItemText(comboBox2.SelectedItem));
-                    ReportGenerator.GenerateIndividualWorkTime(dateFrom, dateTo, id_pr);
-                    break;
+                int n = comboBox1.SelectedIndex;
+                long id_pr;
 
-                case 4:
-                    ReportGenerator.GenerateIncomeReport(dateFrom, dateTo);
-                    break;
+                dateFrom = dateTimePicker1.Value;
+                dateTo = dateTimePicker2.Value;
 
-                case 5:
-                    ReportGenerator.GenerateSalariesReport(dateFrom, dateTo);
-                    break;
+                switch (n)
+                {
+                    case 1:
+                        ReportGenerator.GenerateAllMoviesReport();
+                        break;
 
-                case 6:
-                    id_pr = long.Parse(comboBox2.GetItemText(comboBox2.SelectedItem));
-                    ReportGenerator.GenerateIndividualSalary(dateFrom, dateTo, id_pr);
-                    break;
-                
-                case 7:
-                    ReportGenerator.GenerateFoodSaleReport(dateFrom, dateTo);
-                    break;
+                    case 2:
+                        ReportGenerator.GenerateWorkTimeReport(dateFrom, dateTo);
+                        break;
 
-                default:
-                    comboBox1.SelectedIndex = 0;
-                    MessageBox.Show("Ej wybierz jakiś raport");
-                    break;
+                    case 3:
+                        id_pr = long.Parse(comboBox2.GetItemText(comboBox2.SelectedItem));
+                        ReportGenerator.GenerateIndividualWorkTime(dateFrom, dateTo, id_pr);
+                        break;
+
+                    case 4:
+                        ReportGenerator.GenerateIncomeReport(dateFrom, dateTo);
+                        break;
+
+                    case 5:
+                        ReportGenerator.GenerateSalariesReport(dateFrom, dateTo);
+                        break;
+
+                    case 6:
+                        id_pr = long.Parse(comboBox2.GetItemText(comboBox2.SelectedItem));
+                        ReportGenerator.GenerateIndividualSalary(dateFrom, dateTo, id_pr);
+                        break;
+
+                    case 7:
+                        ReportGenerator.GenerateFoodSaleReport(dateFrom, dateTo);
+                        break;
+
+                    default:
+                        comboBox1.SelectedIndex = 0;
+                        MessageBox.Show("Wybierz jakiś raport");
+                        break;
+                }
+
+                MessageBox.Show("Raport został stworzony");
             }
 
-            MessageBox.Show("Raport został stworzony");
-
-
+            catch (Exception ex)
+            {
+                MessageBox.Show("Wystąpił błąd związany z tworzeniem raportu.");
+            }
         }
 
         private void label5_Click(object sender, EventArgs e)
