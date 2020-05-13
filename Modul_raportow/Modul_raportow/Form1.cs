@@ -88,7 +88,7 @@ namespace Modul_raportow
                         break;
                 }
 
-                MessageBox.Show("Raport został stworzony");
+                if (comboBox1.SelectedIndex != 0) MessageBox.Show("Raport został stworzony");
             }
 
             catch (Exception ex)
@@ -171,6 +171,16 @@ namespace Modul_raportow
             {
                 e.Cancel = true;
             }
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            if (dateTimePicker1.Value > dateTimePicker2.Value) MessageBox.Show("Data początkowa nie może być większa od daty końcowej");
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            if (dateTimePicker1.Value > dateTimePicker2.Value) MessageBox.Show("Data początkowa nie może być większa od daty końcowej");
         }
     }
 }
