@@ -16,11 +16,12 @@ namespace Modul_raportow
     {
         static DataTable res;
         static string zapytanie = null;
+        //static DateTime czas = DateTime.Now;
 
         public static void GenerateAllMoviesReport()
         {
-            zapytanie = " SELECT  dbo.Movie.id, dbo.Movie.title, dbo.Movie.description, dbo.MovieState.name, dbo.MovieType.name, dbo.Movie.movietime  FROM dbo.Movie INNER JOIN dbo.MovieState ON  dbo.Movie.movieState=dbo.MovieState.id INNER JOIN dbo.MovieType ON dbo.Movie.movieType = dbo.MovieType.id";
-
+            zapytanie = "DECLARE @RC int EXECUTE @RC = [dbo].[raport_podsumowania_filmow]";
+            DateTime czas = DateTime.Now;
             res = SQLObject.SendCommand(zapytanie);
 
             Pdf.Save("RaportFilmów.pdf", Pdf.ToTable(res));
@@ -36,15 +37,14 @@ namespace Modul_raportow
         public static void GenerateIndividualSalary(DateTime dateFrom, DateTime dateTo, long userId) { }
         public static void GenerateIndividualWorkTime(DateTime dateFrom, DateTime dateTo, long userId)
         {
-            zapytanie = "SELECT CAST( dbo.Schedule.dateFrom AS DATE) AS \"Dzień Pracy\",CAST(dbo.Schedule.dateFrom AS Time(0)) AS \"Czas rozpoczęcia\",CAST(dbo.Schedule.dateTo AS Time(0)) AS \"Czas Zakończenia\", CAST(dbo.Schedule.dateTo - dbo.Schedule.dateFrom AS Time(0)) AS \"Czas pracy\" FROM dbo.Schedule WHERE dbo.Schedule.userId = "+userId+" AND CAST( dbo.Schedule.dateFrom AS DATE) BETWEEN '"+dateFrom.ToString("yyyy-MM-dd")+ "' AND '"+dateTo.ToString("yyyy-MM-dd")+"';";
+            zapytanie = "DECLARE @RC int DECLARE @id_pracownika bigint DECLARE @datefrom datetime DECLARE @dateto datetime EXECUTE @RC = [dbo].[raport_pensji_indywidualnego_pracownika] @id_pracownika ="+userId+", @datefrom="+dateFrom+", @dateto="+dateTo;
 
             res = SQLObject.SendCommand(zapytanie);
 
-            Pdf.Save("RaportCzasuPracownikaIndywidualnegoID-+"+userId+".pdf", Pdf.ToTable(res));
+            Pdf.Save("RaportCzasuPracownikaIndywidualnegoID__"+userId+"__"+DateTime.Now+".pdf", Pdf.ToTable(res));
         }
         public static void GenerateIncomeReport(DateTime dateFrom, DateTime dateTo) { }
         public static void GenerateFoodSaleReport(DateTime dateFrom, DateTime dateTo) { }
 
     }
 }
-//qweqwe
