@@ -19,12 +19,10 @@ namespace Modul_raportow
         {
             Table res = new Table(data.Columns.Count);
             res.UseAllAvailableWidth();
-            res.SetFontSize(14);
             foreach (DataColumn column in data.Columns)
             {
                 res.AddHeaderCell(new Paragraph(column.ColumnName));
             }
-            res.SetFontSize(10);
             foreach (DataRow row in data.Rows)
             {
                 for(int i = 0; i < data.Columns.Count; i++)
@@ -39,7 +37,8 @@ namespace Modul_raportow
 
         public static void Save(string name, Table tbl)
         {
-            string filename = name.Replace(" ","")+" "+DateTime.Today.ToShortDateString()+" .pdf";
+            string genTime = DateTime.Today.ToShortDateString();
+            string filename = name.Replace(" ","")+" "+genTime+" .pdf";
 
             string exportFile = System.IO.Path.Combine(exportFolder, filename);
             using (var writer = new PdfWriter(exportFile))
@@ -48,8 +47,8 @@ namespace Modul_raportow
                 {
                     Document doc = new Document(pdf);
                     Paragraph title = new Paragraph(name);
-                    title.SetVerticalAlignment(VerticalAlignment.MIDDLE);
                     title.SetFontSize(21);
+                    doc.Add(new Paragraph(genTime));
                     doc.Add(title);
                     doc.Add(tbl);
                     doc.Close();
