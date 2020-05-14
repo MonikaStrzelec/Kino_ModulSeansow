@@ -66,23 +66,26 @@ namespace Login
 
                     SqlConnection con = new SqlConnection(connection);
 
-                    SqlCommand cmd = new SqlCommand("SELECT login, password FROM dbo.g1_user WHERE login=@Login AND password=@password;", con);
+                    SqlCommand cmd = new SqlCommand("SELECT id_user, login, password FROM dbo.g1_user WHERE login=@Login AND password=@password;", con);
                     cmd.Parameters.AddWithValue("@Login", textBoxLogin.Text);
                     cmd.Parameters.AddWithValue("@password", HashString(textBoxPassword.Text));
 
-
                     con.Open();
+
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataSet ds = new DataSet();
                     da.Fill(ds);
-                    con.Close();
 
                     int count = ds.Tables[0].Rows.Count;
 
                     if (count == 1)
                     {
+                        int id = (int)cmd.ExecuteScalar();
+                        
+                       
+
                         this.Hide();
-                        MainMenu mainmenu = new MainMenu();
+                        MainMenu mainmenu = new MainMenu(id);
                         mainmenu.ShowDialog();
                         this.Close();
                     }
@@ -96,6 +99,7 @@ namespace Login
                         return;
                         
                     }
+                    con.Close();
 
                 }
 
@@ -124,21 +128,31 @@ namespace Login
 
                     SqlConnection con = new SqlConnection(connection);
 
-                    SqlCommand cmd = new SqlCommand("SELECT code FROM dbo.g1_code WHERE code=@Code;", con);
+                    SqlCommand cmd = new SqlCommand("SELECT id_user,code FROM dbo.g1_code WHERE code=@Code;", con);
                     cmd.Parameters.AddWithValue("@Code", HashString(textBox3.Text));
 
                     con.Open();
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     DataSet ds = new DataSet();
                     da.Fill(ds);
-                    con.Close();
 
+                    
                     int count = ds.Tables[0].Rows.Count;
 
                     if (count == 1)
                     {
+                        int id = 0;
+                        SqlDataReader reader;
+                        reader = cmd.ExecuteReader();
+                        while (reader.Read())
+                        {
+                             id = (int)reader.GetValue(0);
+                           
+                        }
+
+
                         this.Hide();
-                        MainMenu mainmenu = new MainMenu();
+                        MainMenu mainmenu = new MainMenu(id);
                         mainmenu.ShowDialog();
                         this.Close();
                     }
@@ -147,6 +161,7 @@ namespace Login
                         MessageBox.Show("Login failed. Check your code and try again.");
                         return;
                     }
+                    con.Close();
                 }
 
             }
