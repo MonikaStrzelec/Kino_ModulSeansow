@@ -88,7 +88,9 @@ namespace Modul_raportow
                         break;
                 }
 
+                                
                 if (comboBox1.SelectedIndex != 0) MessageBox.Show("Raport został stworzony");
+
             }
 
             catch (Exception ex)
@@ -109,7 +111,16 @@ namespace Modul_raportow
 
         public void Init()
         {
+
+            try
+            {
+                 
+
+            comboBox2.Enabled = false;
+            dateTimePicker1.Enabled = false;
+            dateTimePicker2.Enabled = false;
             comboBox1.Items.Clear();
+
             comboBox1.Items.Add("---- Wybierz raport ----");
             comboBox1.Items.Add("Raport podsumowania filmów");
             comboBox1.Items.Add("Raport podsumowania czasu pracy pracowników");
@@ -118,17 +129,32 @@ namespace Modul_raportow
             comboBox1.Items.Add("Raport pensji pracowników");
             comboBox1.Items.Add("Raport pensji indywidualnego pracownika");
             comboBox1.Items.Add("Raport zestawienia sprzedanego jedzenia");
-
-            comboBox2.Enabled = false;
-            dateTimePicker1.Enabled = false;
-            dateTimePicker2.Enabled = false;
+            
             comboBox1.SelectedIndex = 0;
             comboBox2.Items.Clear();
 
-            DataTable id = SQLObject.SendCommand("SELECT dbo.g1_user.id_user AS Identyfikator, dbo.g1_pearson.first_name + ' '+dbo.g1_pearson.last_name FROM dbo.g1_user INNER JOIN dbo.g1_pearson ON dbo.g1_pearson.id_pearson=dbo.g1_user.id_pearson");
-            foreach (DataRow row in id.Rows)
+            }
+            
+            catch (Exception ex)
             {
-                comboBox2.Items.Add(row[0].ToString());
+                MessageBox.Show("Wystąpił błąd w zainicjowaniem listy raportów");
+            }
+
+            try
+            {
+
+                DataTable id = SQLObject.SendCommand("SELECT dbo.g1_user.id_user AS Identyfikator, dbo.g1_pearson.first_name + ' '+dbo.g1_pearson.last_name FROM dbo.g1_user INNER JOIN dbo.g1_pearson ON dbo.g1_pearson.id_pearson=dbo.g1_user.id_pearson");
+                foreach (DataRow row in id.Rows)
+                {
+                    comboBox2.Items.Add(row[0].ToString());
+                }
+
+                comboBox2.SelectedIndex = 0;
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Wystąpił błąd w zainicjowaniem listy użytkowników");
             }
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
