@@ -21,13 +21,13 @@ namespace Modul_raportow
             res.UseAllAvailableWidth();
             foreach (DataColumn column in data.Columns)
             {
-                res.AddHeaderCell(new Paragraph(column.ColumnName));
+                res.AddHeaderCell(new Paragraph(column.ColumnName).SetFontSize(11).SetBold());
             }
             foreach (DataRow row in data.Rows)
             {
                 for(int i = 0; i < data.Columns.Count; i++)
                 {
-                    res.AddCell(new Paragraph(row[i].ToString()));
+                    res.AddCell(new Paragraph(row[i].ToString()).SetFontSize(10));
                 }
 
 
