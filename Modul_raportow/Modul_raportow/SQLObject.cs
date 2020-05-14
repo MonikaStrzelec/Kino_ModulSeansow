@@ -41,7 +41,7 @@ namespace Modul_raportow
             catch (Exception ex)
             {
                 MessageBox.Show("Niemożliwe połączenie z bazą danych. Nastąpi wyłączenie aplikacji");
-
+                Console.WriteLine(ex);
                 System.Windows.Forms.Application.Exit();
                 return null;
 

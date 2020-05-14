@@ -37,7 +37,8 @@ namespace Modul_raportow
         public static void GenerateIndividualSalary(DateTime dateFrom, DateTime dateTo, long userId) { }
         public static void GenerateIndividualWorkTime(DateTime dateFrom, DateTime dateTo, long userId)
         {
-            zapytanie = "DECLARE @RC int DECLARE @id_pracownika bigint DECLARE @datefrom datetime DECLARE @dateto datetime EXECUTE @RC = [dbo].[raport_pensji_indywidualnego_pracownika] @id_pracownika ="+userId+", @datefrom="+dateFrom+", @dateto="+dateTo;
+
+            zapytanie = "DECLARE @RC int DECLARE @id_pracownika bigint DECLARE @datefrom datetime DECLARE @dateto datetime EXECUTE @RC = [dbo].[raport_pensji_indywidualnego_pracownika] @id_pracownika ="+userId+", @datefrom='"+dateFrom.ToString("yyyy-MM-dd")+ "', @dateto='"+ dateTo.ToString("yyyy-MM-dd")+"'";
 
             res = SQLObject.SendCommand(zapytanie);
 
