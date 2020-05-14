@@ -29,11 +29,5 @@ namespace Kino.Properties
         public virtual Movie Movie1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Timetable> Timetables { get; set; }
-
-        public override string ToString()
-        {
-            return "FILM: " + Movie1.title + "   -  SALA: " + Hall1.name;
-        }
-
     }
 }

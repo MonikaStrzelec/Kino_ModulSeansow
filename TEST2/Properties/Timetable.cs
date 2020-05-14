@@ -19,6 +19,5 @@ namespace Kino.Properties
         public System.DateTime performanceDate { get; set; }
     
         public virtual Performance Performance1 { get; set; }
-
     }
 }
