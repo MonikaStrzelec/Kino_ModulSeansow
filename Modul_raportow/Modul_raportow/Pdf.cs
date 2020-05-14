@@ -37,15 +37,20 @@ namespace Modul_raportow
             return res;
         }
 
-        public static void Save(string filename, Table tbl)
+        public static void Save(string name, Table tbl)
         {
+            string filename = name.Replace(" ","")+" "+DateTime.Today.ToShortDateString()+" .pdf";
+
             string exportFile = System.IO.Path.Combine(exportFolder, filename);
             using (var writer = new PdfWriter(exportFile))
             {
                 using (var pdf = new PdfDocument(writer))
                 {
-                    var doc = new Document(pdf);
-                    doc.Add(new Paragraph(filename));
+                    Document doc = new Document(pdf);
+                    Paragraph title = new Paragraph(name);
+                    title.SetVerticalAlignment(VerticalAlignment.MIDDLE);
+                    title.SetFontSize(21);
+                    doc.Add(title);
                     doc.Add(tbl);
                     doc.Close();
                 }

@@ -23,7 +23,7 @@ namespace Modul_raportow
 
             res = SQLObject.SendCommand(zapytanie);
 
-            Pdf.Save("RaportFilmów.pdf", Pdf.ToTable(res));
+            Pdf.Save("Raport Filmów", Pdf.ToTable(res));
 
         }
         public static void GenerateSalariesReport(DateTime dateFrom, DateTime dateTo) { }
@@ -31,7 +31,7 @@ namespace Modul_raportow
         {
             zapytanie = "SELECT dbo.\"Schedule\".userId AS \"Identryfikator\",dbo.g1_pearson.first_name AS \"Imie\", dbo.g1_pearson.last_name AS \"Nazwisko\",CONVERT(TIME, DATEADD(s, SUM((DATEPART(hh, CAST(dbo.\"Schedule\".dateTo - dbo.\"Schedule\".dateFrom AS Time(0))) * 3600) + (DATEPART(mi, CAST(dbo.\"Schedule\".dateTo - dbo.\"Schedule\".dateFrom AS Time(0))) * 60) + DATEPART(ss, CAST(dbo.\"Schedule\".dateTo - dbo.\"Schedule\".dateFrom AS Time(0)))), 0)) AS \"Czas pracy\" FROM dbo.\"Schedule\" INNER JOIN dbo.g1_user ON dbo.g1_user.id_user = dbo.\"Schedule\".userId INNER JOIN dbo.g1_pearson ON dbo.g1_pearson.id_Pearson = dbo.g1_user.id_Pearson GROUP BY dbo.\"Schedule\".userId, dbo.g1_pearson.first_name, dbo.g1_pearson.last_name;";
             res = SQLObject.SendCommand(zapytanie);
-            Pdf.Save("RaportCzasuPracowników.pdf", Pdf.ToTable(res));
+            Pdf.Save("Raport Czasu Pracowników", Pdf.ToTable(res));
         }
         public static void GenerateIndividualSalary(DateTime dateFrom, DateTime dateTo, long userId) { }
         public static void GenerateIndividualWorkTime(DateTime dateFrom, DateTime dateTo, long userId)
@@ -40,7 +40,7 @@ namespace Modul_raportow
 
             res = SQLObject.SendCommand(zapytanie);
 
-            Pdf.Save("RaportCzasuPracownikaIndywidualnegoID-+"+userId+".pdf", Pdf.ToTable(res));
+            Pdf.Save("Raport Czasu Pracownika Indywidualnego ID= "+userId, Pdf.ToTable(res));
         }
         public static void GenerateIncomeReport(DateTime dateFrom, DateTime dateTo) { }
         public static void GenerateFoodSaleReport(DateTime dateFrom, DateTime dateTo) { }
