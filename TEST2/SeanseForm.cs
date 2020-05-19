@@ -22,9 +22,9 @@ namespace Kino
         SqlCommandBuilder scb;
         DataTable dt;
 
-        private List<Timetable> timetableFilterList = null;
+       private List<Timetable> timetableFilterList = null;
 
-        KinoEntities context = new KinoEntities();
+        KinoEntities context;
         public SeanseForm()
         {
             InitializeComponent();
@@ -35,10 +35,11 @@ namespace Kino
 
         }
 
+
         private void button2_Click(object sender, EventArgs e)
         {
 
-            if (monthCalendar1 == null && checkedListBox1.CheckedItems.Count == 0)
+            if (monthCalendar1 == null && checkedListBox1.CheckedItems.Count == 0) 
             {
                 return;
             }
@@ -48,7 +49,7 @@ namespace Kino
                 SelectionRange sr = new SelectionRange();
                 sr.Start = DateTime.Parse(this.textBox1.Text);
                 sr.End = DateTime.Parse(this.textBox2.Text);
-
+               
 
                 //this.monthCalendar1.SelectionRange = sr;
 
@@ -70,7 +71,7 @@ namespace Kino
 
 
 
-                if (checkedListBox1.CheckedItems.Count > 0)
+                if (checkedListBox1.CheckedItems.Count > 0) 
                 {
                     string dimParametersString = "";
 
@@ -82,12 +83,12 @@ namespace Kino
                     timetableFilterList = timetableFilterList.Where(timetable => dimParametersString.Contains(timetable.Performance1.Hall1.Dim.name)).ToList();
                 }
 
-                bindingSource2.DataSource = new BindingList<Timetable>(timetableFilterList);
-            }
+                  bindingSource2.DataSource = new BindingList<Timetable>( timetableFilterList);
+             }
 
             catch
             {
-                MessageBox.Show("Nie wybrałeś żadnego filtru!");
+               MessageBox.Show("Nie wybrałeś żadnego filtru!");
             }
 
 
@@ -101,15 +102,17 @@ namespace Kino
             this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             this.textBox1.Text = monthCalendar1.SelectionRange.Start.Date.ToShortDateString();
             this.textBox2.Text = monthCalendar1.SelectionRange.End.Date.ToShortDateString();
+
         }
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             checkedListBox1.CheckOnClick = true; //zmiana by zaznaczało przy jednym kliknięciu
+
         }
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+        {     
 
         }
 
@@ -127,23 +130,21 @@ namespace Kino
 
 
             try
-            {
+            { 
                 context = new KinoEntities(); //tworzenie obiekyu bazy danych
+
                 context.Timetables.Load(); //ładowanie tabeli
-
-
                 this.timetableFilterList = context.Timetables.Local.ToBindingList().Where(timetable => timetable.performanceDate >= DateTime.Now).ToList();
                 this.bindingSource1.DataSource = new BindingList<Timetable>(this.timetableFilterList);  //wiązanie formatki z tabelą
-
+            
                 //context.Movies.Load();
                 //this.timetableBindingSource1.DataSource = context.Movies.Local.ToBindingList();
             }
-            catch(Exception eror)
+            catch
             {
                 MessageBox.Show("Sprawdź połączenie z bazą danych!");
             }
         }
-
 
         private void doubleClickViewOnDataGridView1(object sender, EventArgs e)
         {
@@ -154,7 +155,6 @@ namespace Kino
         {
             moveToDetailsMovie(dataGridView2);
         }
-
         private void moveToDetailsMovie(DataGridView dataGridView)
         {
             int selectedRowCount = dataGridView.Rows.GetRowCount(DataGridViewElementStates.Selected);
@@ -184,15 +184,33 @@ namespace Kino
 
         }
 
-        //private void updateDatabase() 
-        //{
-        //    var result = context.Movies.SingleOrDefault(movie => movie.title.Length > 10);
 
-        //    if (result != null) 
-        //    {
-        //        result.title += "  update";
-        //        context.SaveChanges();
-        //    }
+
+
+        //private void wywolanieFormatkiZSeansem(object sender, DataGridViewCellFormattingEventArgs e)
+        //{
+
+        //    if (sb.ToString != null)  //??
+
+        //        if (e != null)
+        //        {
+        //            if (this.DataGridView.Columns[e.ColumnIndex].Name == "Release Date")
+        //            {
+        //                if (e.Value != null)
+        //                {
+        //                    try
+        //                    {
+        //                        e.Value = DateTime.Parse(e.Value.ToString()).ToLongDateString();
+        //                        e.FormattingApplied = true;
+        //                    }
+        //                    catch (FormatException)
+        //                    {
+        //                        MessageBox.Show("{0} is not a valid date.", e.Value.ToString());
+        //                    }
+        //                }
+        //            }
+        //        }
         //}
+
     }
 }
