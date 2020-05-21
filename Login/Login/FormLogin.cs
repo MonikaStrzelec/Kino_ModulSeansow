@@ -22,8 +22,8 @@ namespace Login
 
         string connection = "Data Source=35.228.52.182,1433;Network Library = DBMSSOCN; Initial Catalog =Kino;User ID = sqlserver; Password=Pa$$w0rd";
 
-        int attempts = 3;
-        DateTime lastLoginAttempt = DateTime.Now;
+        int attempts = 3;  
+        DateTime lastLoginAttempt = DateTime.Now;             
         private void Form1_Load(object sender, EventArgs e)
         {
             
