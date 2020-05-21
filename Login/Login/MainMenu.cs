@@ -20,6 +20,7 @@ namespace Login
 
             User logUser = new User();
             logUser.Id = idd;
+            
             try
             {
                 #region select_id_permission
@@ -49,7 +50,7 @@ namespace Login
                 {
                     string name_permission;
                     DataTable dt2 = new DataTable();
-                    dt2.Columns.Add("name_permission");
+                    dt2.Columns.Add("permission_name");
                     SqlConnection con2 = new SqlConnection(connection);
                     SqlCommand cmd2 = new SqlCommand("SELECT permission_name FROM dbo.g1_permission WHERE id_permission=@id_permission;", con);
                     cmd2.Parameters.AddWithValue("@id_permission", id);
@@ -60,11 +61,11 @@ namespace Login
 
                     foreach (DataRow row in dt2.Rows)
                     {
-                        name_permission = row["name_permission"].ToString();
-                        logUser.AddItemToPermissionList(name_permission);
+                        name_permission = row["permission_name"].ToString();
+                        logUser.AddItemToPermissionList(name_permission);                     
                         listBox2.Items.Add(logUser.PrintListOfPermission());
-
                     }
+                  
                 }
                 #endregion
             }
@@ -77,6 +78,7 @@ namespace Login
 
         
         List<string> idPermissionList = new List<string>();
+    
         string connection = "Data Source=35.228.52.182,1433;Network Library = DBMSSOCN; Initial Catalog =Kino;User ID = sqlserver; Password=Pa$$w0rd";
 
         private void Button1_Click(object sender, EventArgs e)

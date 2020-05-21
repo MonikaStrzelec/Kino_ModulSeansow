@@ -16,8 +16,9 @@ namespace Login
 
         
         public int Id { get => id; set => id = value; }
+       
 
-       public string AddItemToPermissionList(string permission)
+        public string AddItemToPermissionList(string permission)
         {
             PermissionList.Add(permission);
             return permission;
