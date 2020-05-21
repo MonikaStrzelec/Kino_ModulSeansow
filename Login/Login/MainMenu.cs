@@ -18,9 +18,9 @@ namespace Login
         {
             InitializeComponent();
 
-            User logUser = new User();
-            logUser.Id = idd;
             
+            logUser.Id = idd;
+
             try
             {
                 #region select_id_permission
@@ -33,41 +33,39 @@ namespace Login
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
                 dt.Load(dr);
-                
-                
-                foreach(DataRow row in dt.Rows)
+                con.Close();
+
+                foreach (DataRow row in dt.Rows)
                 {
                     id_permission = row["id_permission"].ToString();
                     idPermissionList.Add(id_permission);
                 }
 
-                foreach (var id in idPermissionList)
-                    listBox1.Items.Add(id);
+               
                 #endregion
 
                 #region select_string_permission
-                foreach (var id in idPermissionList)
+                foreach (string id in idPermissionList)
                 {
                     string name_permission;
                     DataTable dt2 = new DataTable();
                     dt2.Columns.Add("permission_name");
                     SqlConnection con2 = new SqlConnection(connection);
-                    SqlCommand cmd2 = new SqlCommand("SELECT permission_name FROM dbo.g1_permission WHERE id_permission=@id_permission;", con);
+                    SqlCommand cmd2 = new SqlCommand("SELECT permission_name FROM dbo.g1_permission WHERE id_permission=@id_permission;", con2);
                     cmd2.Parameters.AddWithValue("@id_permission", id);
                     con2.Open();
-                    SqlDataReader dr2 = cmd.ExecuteReader();
+                    SqlDataReader dr2 = cmd2.ExecuteReader();
                     dt2.Load(dr2);
 
 
                     foreach (DataRow row in dt2.Rows)
                     {
                         name_permission = row["permission_name"].ToString();
-                        logUser.AddItemToPermissionList(name_permission);                     
-                        listBox2.Items.Add(logUser.PrintListOfPermission());
+                        logUser.AddItemToPermissionList(name_permission);
+                        listBox2.Items.Add(name_permission);
                     }
-                  
+                    #endregion
                 }
-                #endregion
             }
             catch (SqlException ex)
             {
@@ -80,21 +78,27 @@ namespace Login
         List<string> idPermissionList = new List<string>();
     
         string connection = "Data Source=35.228.52.182,1433;Network Library = DBMSSOCN; Initial Catalog =Kino;User ID = sqlserver; Password=Pa$$w0rd";
-
+        User logUser = new User();
         private void Button1_Click(object sender, EventArgs e)
-        {
-            
-
+        { 
             this.Hide();
             Form1 formlogin = new Form1();
             formlogin.ShowDialog();
             this.Close();
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                MessageBox.Show(logUser.PrintListOfPermission());
+                listBox2.Items.Add(logUser.PrintListOfPermission());
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());            }
         }
+
+       
     }
 }

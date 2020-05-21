@@ -12,20 +12,17 @@ namespace Login
         private List<string> PermissionList = new List<string>();
 
         int id;
-      
-
-        
+     
         public int Id { get => id; set => id = value; }
-       
-
+      
         public string AddItemToPermissionList(string permission)
         {
             PermissionList.Add(permission);
-            return permission;
+            return null;
         }
         public string PrintListOfPermission()
         {
-            string x = "nic";
+            string x = "Błąd";
             if (PermissionList.Count != 0)
             {
                 foreach (string permission in PermissionList)
