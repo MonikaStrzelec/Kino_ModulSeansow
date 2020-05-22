@@ -46,6 +46,7 @@ namespace Modul_raportow
 
                 int n = comboBox1.SelectedIndex;
                 long id_pr;
+                string name;
 
                 dateFrom = dateTimePicker1.Value;
                 dateTo = dateTimePicker2.Value;
@@ -61,8 +62,9 @@ namespace Modul_raportow
                         break;
 
                     case 3:
-                        id_pr = long.Parse(comboBox2.GetItemText(comboBox2.SelectedItem));
-                        ReportGenerator.GenerateIndividualWorkTime(dateFrom, dateTo, id_pr);
+                        id_pr =(int)comboBox2.SelectedValue;
+                        name = comboBox2.Text;
+                        ReportGenerator.GenerateIndividualWorkTime(dateFrom, dateTo, id_pr, name);
                         break;
 
                     case 4:
@@ -74,7 +76,7 @@ namespace Modul_raportow
                         break;
 
                     case 6:
-                        id_pr = long.Parse(comboBox2.GetItemText(comboBox2.SelectedItem));
+                        id_pr = (int)comboBox2.SelectedValue;
                         ReportGenerator.GenerateIndividualSalary(dateFrom, dateTo, id_pr);
                         break;
 
@@ -143,11 +145,11 @@ namespace Modul_raportow
             try
             {
 
-                DataTable id = SQLObject.SendCommand("SELECT dbo.g1_user.id_user AS Identyfikator, dbo.g1_pearson.first_name + ' '+dbo.g1_pearson.last_name FROM dbo.g1_user INNER JOIN dbo.g1_pearson ON dbo.g1_pearson.id_pearson=dbo.g1_user.id_pearson");
-                foreach (DataRow row in id.Rows)
-                {
-                    comboBox2.Items.Add(row[0].ToString());
-                }
+                DataTable workers= SQLObject.SendCommand("SELECT dbo.g1_user.id_user AS id, dbo.g1_pearson.first_name + ' '+dbo.g1_pearson.last_name AS name FROM dbo.g1_user INNER JOIN dbo.g1_pearson ON dbo.g1_pearson.id_pearson=dbo.g1_user.id_pearson");
+                // comboBox2.Items.Add(row[0].ToString());
+                comboBox2.DisplayMember = workers.Columns[1].ColumnName;
+                    comboBox2.ValueMember = workers.Columns[0].ColumnName; ;
+                    comboBox2.DataSource = workers;
 
                 comboBox2.SelectedIndex = 0;
             }
