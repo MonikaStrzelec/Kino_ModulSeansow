@@ -34,14 +34,14 @@ namespace Modul_raportow
             Pdf.Save("Raport Czasu Pracowników", res);
         }
         public static void GenerateIndividualSalary(DateTime dateFrom, DateTime dateTo, long userId) { }
-        public static void GenerateIndividualWorkTime(DateTime dateFrom, DateTime dateTo, long userId)
+        public static void GenerateIndividualWorkTime(DateTime dateFrom, DateTime dateTo, long userId, string name)
         {
 
             zapytanie = "DECLARE @RC int DECLARE @id_pracownika bigint DECLARE @datefrom datetime DECLARE @dateto datetime EXECUTE @RC = [dbo].[raport_pensji_indywidualnego_pracownika] @id_pracownika ="+userId+", @datefrom='"+dateFrom.ToString("yyyy-MM-dd")+ "', @dateto='"+ dateTo.ToString("yyyy-MM-dd")+"'";
 
             res = SQLObject.SendCommand(zapytanie);
 
-            Pdf.Save("Raport Czasu Pracownika Indywidualnego ID= "+userId, res);
+            Pdf.Save("Raport Czasu Pracownika Indywidualnego -  "+name, res);
 
         }
         public static void GenerateIncomeReport(DateTime dateFrom, DateTime dateTo) { }
