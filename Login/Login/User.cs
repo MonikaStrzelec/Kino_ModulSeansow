@@ -9,26 +9,33 @@ namespace Login
 {
     class User
     {
-        private List<string> PermissionList = new List<string>();
-
+         private List<string> PermissionList = new List<string>();
+        
         int id;
      
         public int Id { get => id; set => id = value; }
-      
-        public string AddItemToPermissionList(string permission)
-        {
+        
+        public void AddItemToPermissionList(string permission)
+        { 
             PermissionList.Add(permission);
-            return null;
         }
+
+       
         public string PrintListOfPermission()
         {
-            string x = "Błąd";
+          
+
             if (PermissionList.Count != 0)
             {
+                StringBuilder sb = new StringBuilder();
+                sb.Append("Permissions of logged user: \r\n \r\n");
                 foreach (string permission in PermissionList)
-                    return permission;
+                    sb.AppendLine(permission);
+                return sb.ToString();
             }
+            string x = "Błąd, użytkownik nie posiada uprawnień.";
             return x;
+
 
         }
     }
