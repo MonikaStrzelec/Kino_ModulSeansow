@@ -99,6 +99,9 @@ namespace Login
                 MessageBox.Show(ex.ToString());            }
         }
 
-       
+        private void MainMenu_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

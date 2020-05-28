@@ -22,12 +22,13 @@ namespace Login
 
         string connection = "Data Source=35.228.52.182,1433;Network Library = DBMSSOCN; Initial Catalog =Kino;User ID = sqlserver; Password=Pa$$w0rd";
 
-        int attempts = 3;  
-        DateTime lastLoginAttempt = DateTime.Now;             
+        int attempts = 3;
+        int counter =600;
+        
         private void Form1_Load(object sender, EventArgs e)
         {
             
-            label2.Text = "Login attempts left: " + attempts.ToString();
+           
         }
 
         public string HashString(string str)
@@ -52,6 +53,7 @@ namespace Login
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
             #region DATABASE LOGIN CONNECTION
             try
             {
@@ -63,7 +65,7 @@ namespace Login
                 }
                 else
                 {
-
+                    
                     SqlConnection con = new SqlConnection(connection);
 
                     SqlCommand cmd = new SqlCommand("SELECT id_user, login, password FROM dbo.g1_user WHERE login=@Login AND password=@password;", con);
@@ -94,10 +96,31 @@ namespace Login
                         MessageBox.Show("Login failed. Check your login and password and try again");
 
                         attempts--;
-                        if(attempts==0)
+                        label2.Visible = true;
+                        textBoxLogin.Clear();
+                        textBoxPassword.Clear();
+                        textBox3.Clear();
+                        label2.Text = "Login attempts left: " + attempts;
+                  
+                        if (attempts==0)
+                        {
+                            MessageBox.Show("You have exceeded total number of attempt");
 
-                        return;
-                        
+                            label3.Visible = true;
+                            timer1 = new System.Windows.Forms.Timer();
+                            timer1.Interval = 1;
+                            timer1.Tick += new EventHandler(Timer1_Tick);
+                            timer1.Start();
+                           
+
+                            textBoxLogin.Enabled = false;
+                            textBoxPassword.Enabled = false;
+                            textBox3.Enabled = false;
+                            buttonLogin.Enabled = false;
+                            ButtonLogInWithCode.Enabled = false;
+                        }
+
+                       
                     }
                     con.Close();
 
@@ -142,7 +165,7 @@ namespace Login
                     if (count == 1)
                     {
                         int id = 0;
-                        SqlDataReader reader;
+                        SqlDataReader reader;          
                         reader = cmd.ExecuteReader();
                         while (reader.Read())
                         {
@@ -159,7 +182,30 @@ namespace Login
                     else
                     {
                         MessageBox.Show("Login failed. Check your code and try again.");
-                        return;
+                        attempts--;
+                        label2.Visible = true;
+                        textBoxLogin.Clear();
+                        textBoxPassword.Clear();
+                        textBox3.Clear();
+                        label2.Text = "Login attempts left: " + attempts;
+                        if (attempts == 0)
+                        {
+                            MessageBox.Show("You have exceeded total number of attempt");
+
+                            label3.Visible = true;
+                            timer1 = new System.Windows.Forms.Timer();
+                            timer1.Interval = 1;
+                            timer1.Tick += new EventHandler(Timer1_Tick);
+                            timer1.Start();
+
+                            textBoxLogin.Enabled = false;
+                            textBoxPassword.Enabled = false;
+                            textBox3.Enabled = false;
+                            buttonLogin.Enabled = false;
+                            ButtonLogInWithCode.Enabled = false;
+
+                        }
+                            
                     }
                     con.Close();
                 }
@@ -239,6 +285,26 @@ namespace Login
         private void button11_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Timer1_Tick(object sender, EventArgs e)
+        {
+            counter--;
+            label3.Text="Try again for: "+ counter / 60 + " : " + ((counter % 60) >= 10 ? (counter % 60).ToString() : "0" + (counter % 60));
+
+            if (counter == 0)
+            {
+                timer1.Stop();
+                counter = 600;
+                textBoxLogin.Enabled = true;
+                textBoxPassword.Enabled = true;
+                textBox3.Enabled = true;
+                buttonLogin.Enabled = true;
+                ButtonLogInWithCode.Enabled = true;
+                attempts = 3;
+                label2.Visible = false;
+                label3.Visible = false;
+            }
         }
     }
 }
