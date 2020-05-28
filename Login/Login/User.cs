@@ -9,7 +9,7 @@ namespace Login
 {
     class User
     {
-         private List<string> PermissionList = new List<string>();
+         private static List<string> PermissionList = new List<string>();
         
         int id;
      
@@ -35,8 +35,21 @@ namespace Login
             }
             string x = "Błąd, użytkownik nie posiada uprawnień.";
             return x;
-
-
         }
+
+        public static bool CheckPermission(string permissionName)
+        {
+            foreach (string permission in PermissionList)
+                if (permission.Equals(permissionName))
+                    return true;
+            return false;
+        }
+
+        public void ClearPermissionList()
+        {
+            PermissionList.Clear();
+        }
+        
+
     }
 }

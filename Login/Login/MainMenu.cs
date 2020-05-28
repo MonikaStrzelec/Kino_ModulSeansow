@@ -80,7 +80,7 @@ namespace Login
         User logUser = new User();
         private void Button1_Click(object sender, EventArgs e)
         {
-            
+            logUser.ClearPermissionList();
             this.Hide();
             Form1 formlogin = new Form1();
             formlogin.ShowDialog();
