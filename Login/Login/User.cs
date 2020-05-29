@@ -33,7 +33,7 @@ namespace Login
                     sb.AppendLine(permission);
                 return sb.ToString();
             }
-            string x = "Błąd, użytkownik nie posiada uprawnień.";
+            string x = "This user has no permissions yet.";
             return x;
         }
 
