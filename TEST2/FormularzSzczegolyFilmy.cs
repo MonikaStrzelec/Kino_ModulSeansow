@@ -31,8 +31,8 @@ namespace Kino
         {
             this.element = element;
             InitializeComponent();
-          
         }
+
 
         private void FormularzSzczegolyFilmy_Load(object sender, EventArgs e)
         {
@@ -40,7 +40,7 @@ namespace Kino
             this.dataGridView1.MultiSelect = false;
 
             try
-                {
+            {
                 dataGridView1.AutoGenerateColumns = true;
 
                 context = new KinoEntities(); //tworzenie obiekyu bazy danych
@@ -48,31 +48,43 @@ namespace Kino
 
                 TimetableDomain domain = new TimetableDomain(this.element);// warstwa domenowa przygotująca wynik
                 timetableDomainClassBindingSource.DataSource = new BindingList<TimetableDomain>() { domain };
-
-                }
-                catch
-                {
-                    MessageBox.Show("Sprawdź połączenie z bazą danych!");
-                } 
+            }
+            catch
+            {
+                 MessageBox.Show("Sprawdź połączenie z bazą danych!");
+            } 
         }
 
 
         private void button2_Click(object sender, EventArgs e)
         { //USUWANIE SEANSU
-            context.Timetables.Remove(element);
-            context.SaveChanges();
+
+            string info = "Czy na pewno chcesz usunąć seans?";
+            string caption = "UWAGA!";
+            MessageBoxButtons przycisk = MessageBoxButtons.YesNo;
+            DialogResult result;
+            result = MessageBox.Show(info, caption, przycisk);
+            if (result == DialogResult.Yes)
+            {
+                context.Timetables.Remove(element);
+                context.SaveChanges();
+                this.Close();
+            }
+            //??? Refresh();
         }
 
 
         private void button1_Click(object sender, EventArgs e)
         { //DODAWANIE SEANSU
+
             DodawanieSeansow nowySeans = new DodawanieSeansow(); //WYWOŁYWANIE FORMATKI
             nowySeans.Show();
         }
 
+
         private void button3_Click(object sender, EventArgs e)
-        {
-            //EDYCJA SEANSU
+        { //EDYCJA SEANSU
+
             int selectedRowCount = dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount > 0)
             {
@@ -82,29 +94,30 @@ namespace Kino
             }
         }
 
+
         private void sprawdSprzedarz(Timetable timetable)
-        {
-          
+        {  //WARUNEK edycji, usuwania
 
-            if (timetable.Performance1.idReservation.status == "aktywna")
-            {
-                MessageBox.Show("Przykro mi, jest zarezerwowany bilet na ten seans");
-            }
+         //   if (timetable.Performance1.idReservation.status == "aktywna")
+         //if(true)
+         //   {
+         //       MessageBox.Show("Przykro mi, jest zarezerwowany bilet na ten seans");
+         //   }
 
-            else if (Timetable.performanceDate + Performance.Movie.movieTime + Performance.adsDuration = DateTime.Now)
-            {
-                MessageBox.Show("nie ma mozliwości edycji/usunięcia filmu. Własnie trwa");
-            }
+         //   else if (Timetable.performanceDate + Performance.Movie.movieTime + Performance.adsDuration = DateTime.Now)
+         //   {
+         //       MessageBox.Show("nie ma mozliwości edycji/usunięcia filmu. Własnie trwa");
+         //   }
 
-            else if (Timetable.performanceDate + Performance.Movie.movieTime + Performance.adsDuration < DateTime.Now)
-            {
-                MessageBox.Show("nie ma mozliwości edycji filmu bo już się odbył);
-            }
+         //   else if (Timetable.performanceDate + Performance.Movie.movieTime + Performance.adsDuration < DateTime.Now)
+         //   {
+         //       MessageBox.Show("nie ma mozliwości edycji filmu bo już się odbył");
+         //   }
 
-            else (Timetable.performanceDate + Performance.Movie.movieTime + Performance.adsDuration > DateTime.Now)
-            {
-                //idź dalej
-            }
+         //   else (Timetable.performanceDate + Performance.Movie.movieTime + Performance.adsDuration > DateTime.Now)
+         //   {
+         //       //idź dalej
+         //   }
         }
     }
 }

@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Telerik.WinControls.UI.AppointmentMappingInfo appointmentMappingInfo2 = new Telerik.WinControls.UI.AppointmentMappingInfo();
-            Telerik.WinControls.UI.ResourceMappingInfo resourceMappingInfo2 = new Telerik.WinControls.UI.ResourceMappingInfo();
+            Telerik.WinControls.UI.AppointmentMappingInfo appointmentMappingInfo1 = new Telerik.WinControls.UI.AppointmentMappingInfo();
+            Telerik.WinControls.UI.ResourceMappingInfo resourceMappingInfo1 = new Telerik.WinControls.UI.ResourceMappingInfo();
             this.buttonAddPerformance = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.movieBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -49,6 +49,9 @@
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.domainSeansBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.domainSeansBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.movieBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hallBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.schedulerBindingDataSource1)).BeginInit();
@@ -56,6 +59,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.schedulerBindingDataSource1.ResourceProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.domainSeansBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.domainSeansBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonAddPerformance
@@ -80,8 +86,11 @@
             this.comboBox1.Size = new System.Drawing.Size(185, 24);
             this.comboBox1.TabIndex = 1;
             this.comboBox1.ValueMember = "id";
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.none);
+            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.none);
+            this.comboBox1.SelectedValueChanged += new System.EventHandler(this.none);
             this.comboBox1.Enter += new System.EventHandler(this.comboBox1_MouseEnter);
+            this.comboBox1.Leave += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             this.comboBox1.MouseEnter += new System.EventHandler(this.none);
             // 
             // movieBindingSource
@@ -104,18 +113,20 @@
             this.comboBox2.Size = new System.Drawing.Size(121, 24);
             this.comboBox2.TabIndex = 2;
             this.comboBox2.ValueMember = "id";
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.none);
+            this.comboBox2.SelectedValueChanged += new System.EventHandler(this.none);
+            this.comboBox2.Leave += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // schedulerBindingDataSource1
             // 
             // 
             // 
             // 
-            this.schedulerBindingDataSource1.EventProvider.Mapping = appointmentMappingInfo2;
+            this.schedulerBindingDataSource1.EventProvider.Mapping = appointmentMappingInfo1;
             // 
             // 
             // 
-            this.schedulerBindingDataSource1.ResourceProvider.Mapping = resourceMappingInfo2;
+            this.schedulerBindingDataSource1.ResourceProvider.Mapping = resourceMappingInfo1;
             // 
             // button1
             // 
@@ -220,11 +231,32 @@
             this.radioButton1.Text = "2D";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.DataSource = this.domainSeansBindingSource;
+            this.dataGridView1.Location = new System.Drawing.Point(486, 82);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(416, 396);
+            this.dataGridView1.TabIndex = 16;
+            // 
+            // domainSeansBindingSource1
+            // 
+            this.domainSeansBindingSource1.DataSource = typeof(Kino.Domena.DomainSeans);
+            // 
+            // domainSeansBindingSource
+            // 
+            this.domainSeansBindingSource.DataSource = typeof(Kino.Domena.DomainSeans);
+            // 
             // DodawanieSeansow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(458, 534);
+            this.ClientSize = new System.Drawing.Size(948, 534);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -247,6 +279,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.domainSeansBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.domainSeansBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -272,5 +307,8 @@
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.BindingSource domainSeansBindingSource;
+        private System.Windows.Forms.BindingSource domainSeansBindingSource1;
     }
 }

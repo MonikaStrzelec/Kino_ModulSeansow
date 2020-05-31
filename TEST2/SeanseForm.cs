@@ -36,7 +36,7 @@ namespace Kino
         }
 
         private void button2_Click(object sender, EventArgs e)
-        {
+        {   //FILTROWANIE seansów po DACIE i PARAMETRZE
 
             if (monthCalendar1 == null && checkedListBox1.CheckedItems.Count == 0)
             {
@@ -49,8 +49,6 @@ namespace Kino
                 sr.Start = DateTime.Parse(this.textBox1.Text);
                 sr.End = DateTime.Parse(this.textBox2.Text);
 
-
-                //this.monthCalendar1.SelectionRange = sr;
 
                 if (sr.Start != null)
                 {
@@ -94,7 +92,7 @@ namespace Kino
         }
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
-        {
+        {   //oprogramowanie KALENDARZA
             this.monthCalendar1.ScrollChange = 3; //jeden miesiąc na raz za pomoca strzałek
             this.monthCalendar1.CalendarDimensions = new System.Drawing.Size(3, 2);
             this.monthCalendar1.MaxSelectionCount = 150; //max 150 dni można wybrać
@@ -115,10 +113,9 @@ namespace Kino
 
 
         private void Form1_Load(object sender, EventArgs e)
-        {
+        {   //wpisanie parametrów i danych do DATAGREADVIEW
             string[] parametry = { "2D", "3D", "VR" };
             checkedListBox1.Items.AddRange(parametry);
-            //this.IsMdiContainer = true; //możliwość pracy wielookienkowej
 
             this.dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;  //liknięcie w dowolnym miejscu w wierszu automatycznie zaznacza cały wiersz
             this.dataGridView1.MultiSelect = false;
@@ -146,7 +143,7 @@ namespace Kino
 
 
         private void doubleClickViewOnDataGridView1(object sender, EventArgs e)
-        {
+        {   //oprogramowany doubleClic
             moveToDetailsMovie(dataGridView1);
         }
 
@@ -156,7 +153,7 @@ namespace Kino
         }
 
         private void moveToDetailsMovie(DataGridView dataGridView)
-        {
+        {   //pobranie danych klikniętych i wywołanie formatki
             int selectedRowCount = dataGridView.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount > 0)
             {
@@ -184,15 +181,5 @@ namespace Kino
 
         }
 
-        //private void updateDatabase() 
-        //{
-        //    var result = context.Movies.SingleOrDefault(movie => movie.title.Length > 10);
-
-        //    if (result != null) 
-        //    {
-        //        result.title += "  update";
-        //        context.SaveChanges();
-        //    }
-        //}
     }
 }

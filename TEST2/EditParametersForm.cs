@@ -37,19 +37,48 @@ namespace Kino
         {
             var result = context.Performances.SingleOrDefault(p => p.id == performance.id);
 
-            if (result != null) {
-
-                try {
-                    decimal sum = numericUpDown1.Value + numericUpDown2.Value;
-
-                    result.adsDuration = new TimeSpan((int )sum/60, (int)sum%60, 0 );
-
-                    context.SaveChanges();
-
-                } catch (Exception ex) {
-                    MessageBox.Show(ex.StackTrace);
+            if (result != null) 
+            {
+                if (numericUpDown1.Value > 60 && numericUpDown1.Value < 20)
+                {
+                    if (numericUpDown1.Value > 60)
+                    {
+                        MessageBox.Show("reklamy nie mogą trwać prócej niz 20 min");
+                    }
+                    else
+                    {
+                        MessageBox.Show("reklamy nie mogą trwać powyżej 60 min");
+                    }
                 }
-            
+
+                else if (numericUpDown2.Value > 180 && numericUpDown2.Value <= 5)
+                {
+                    if (numericUpDown2.Value > 180)
+                    {
+                        MessageBox.Show("sprzątanie nie może trwać więcej niż 2h!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("sprzątanie nie może być krótsze niż 5 min!");
+                    }
+                }
+
+                else
+                {
+                    try 
+                    {
+                        decimal sum = numericUpDown1.Value + numericUpDown2.Value;
+
+                        result.adsDuration = new TimeSpan((int )sum/60, (int)sum%60, 0 );
+
+                        context.SaveChanges();
+
+                    } 
+                    catch (Exception ex) 
+                    {
+                        MessageBox.Show(ex.StackTrace);
+                    }
+                }
             }
         }
     }
