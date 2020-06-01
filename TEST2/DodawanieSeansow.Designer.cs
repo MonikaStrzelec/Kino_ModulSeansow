@@ -50,8 +50,16 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.domainSeansBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.tytulDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dlugoscFilmu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.godzinaRozpoczeciaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.godzinaZakonczeniaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dlugoscReklamMinDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.domainSeansBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.domainHoursOfPauseBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.czasRozpoczeciaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.czasZakonczeniaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.movieBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hallBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.schedulerBindingDataSource1)).BeginInit();
@@ -60,8 +68,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.domainSeansBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.domainSeansBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.domainHoursOfPauseBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonAddPerformance
@@ -235,27 +244,106 @@
             // 
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.tytulDataGridViewTextBoxColumn,
+            this.dlugoscFilmu,
+            this.godzinaRozpoczeciaDataGridViewTextBoxColumn,
+            this.godzinaZakonczeniaDataGridViewTextBoxColumn,
+            this.dlugoscReklamMinDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.domainSeansBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(486, 82);
+            this.dataGridView1.Location = new System.Drawing.Point(489, 13);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(416, 396);
+            this.dataGridView1.Size = new System.Drawing.Size(754, 184);
             this.dataGridView1.TabIndex = 16;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // domainSeansBindingSource1
+            // tytulDataGridViewTextBoxColumn
             // 
-            this.domainSeansBindingSource1.DataSource = typeof(Kino.Domena.DomainSeans);
+            this.tytulDataGridViewTextBoxColumn.DataPropertyName = "tytul";
+            this.tytulDataGridViewTextBoxColumn.HeaderText = "tytul";
+            this.tytulDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.tytulDataGridViewTextBoxColumn.Name = "tytulDataGridViewTextBoxColumn";
+            this.tytulDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // dlugoscFilmu
+            // 
+            this.dlugoscFilmu.DataPropertyName = "dlugoscFilmu";
+            this.dlugoscFilmu.HeaderText = "dlugoscFilmu";
+            this.dlugoscFilmu.MinimumWidth = 6;
+            this.dlugoscFilmu.Name = "dlugoscFilmu";
+            this.dlugoscFilmu.Width = 125;
+            // 
+            // godzinaRozpoczeciaDataGridViewTextBoxColumn
+            // 
+            this.godzinaRozpoczeciaDataGridViewTextBoxColumn.DataPropertyName = "godzinaRozpoczecia";
+            this.godzinaRozpoczeciaDataGridViewTextBoxColumn.HeaderText = "godzinaRozpoczecia";
+            this.godzinaRozpoczeciaDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.godzinaRozpoczeciaDataGridViewTextBoxColumn.Name = "godzinaRozpoczeciaDataGridViewTextBoxColumn";
+            this.godzinaRozpoczeciaDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // godzinaZakonczeniaDataGridViewTextBoxColumn
+            // 
+            this.godzinaZakonczeniaDataGridViewTextBoxColumn.DataPropertyName = "godzinaZakonczenia";
+            this.godzinaZakonczeniaDataGridViewTextBoxColumn.HeaderText = "godzinaZakonczenia";
+            this.godzinaZakonczeniaDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.godzinaZakonczeniaDataGridViewTextBoxColumn.Name = "godzinaZakonczeniaDataGridViewTextBoxColumn";
+            this.godzinaZakonczeniaDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // dlugoscReklamMinDataGridViewTextBoxColumn
+            // 
+            this.dlugoscReklamMinDataGridViewTextBoxColumn.DataPropertyName = "dlugoscReklamMin";
+            this.dlugoscReklamMinDataGridViewTextBoxColumn.HeaderText = "dlugoscReklamMin";
+            this.dlugoscReklamMinDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.dlugoscReklamMinDataGridViewTextBoxColumn.Name = "dlugoscReklamMinDataGridViewTextBoxColumn";
+            this.dlugoscReklamMinDataGridViewTextBoxColumn.Width = 125;
             // 
             // domainSeansBindingSource
             // 
             this.domainSeansBindingSource.DataSource = typeof(Kino.Domena.DomainSeans);
             // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AutoGenerateColumns = false;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.czasRozpoczeciaDataGridViewTextBoxColumn,
+            this.czasZakonczeniaDataGridViewTextBoxColumn});
+            this.dataGridView2.DataSource = this.domainHoursOfPauseBindingSource;
+            this.dataGridView2.Location = new System.Drawing.Point(491, 276);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowHeadersWidth = 51;
+            this.dataGridView2.RowTemplate.Height = 24;
+            this.dataGridView2.Size = new System.Drawing.Size(751, 202);
+            this.dataGridView2.TabIndex = 17;
+            // 
+            // domainHoursOfPauseBindingSource
+            // 
+            this.domainHoursOfPauseBindingSource.DataSource = typeof(Kino.Domena.DomainHoursOfPause);
+            // 
+            // czasRozpoczeciaDataGridViewTextBoxColumn
+            // 
+            this.czasRozpoczeciaDataGridViewTextBoxColumn.DataPropertyName = "czasRozpoczecia";
+            this.czasRozpoczeciaDataGridViewTextBoxColumn.HeaderText = "czasRozpoczecia";
+            this.czasRozpoczeciaDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.czasRozpoczeciaDataGridViewTextBoxColumn.Name = "czasRozpoczeciaDataGridViewTextBoxColumn";
+            this.czasRozpoczeciaDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // czasZakonczeniaDataGridViewTextBoxColumn
+            // 
+            this.czasZakonczeniaDataGridViewTextBoxColumn.DataPropertyName = "czasZakonczenia";
+            this.czasZakonczeniaDataGridViewTextBoxColumn.HeaderText = "czasZakonczenia";
+            this.czasZakonczeniaDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.czasZakonczeniaDataGridViewTextBoxColumn.Name = "czasZakonczeniaDataGridViewTextBoxColumn";
+            this.czasZakonczeniaDataGridViewTextBoxColumn.Width = 125;
+            // 
             // DodawanieSeansow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(948, 534);
+            this.ClientSize = new System.Drawing.Size(1313, 534);
+            this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label4);
@@ -280,8 +368,9 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.domainSeansBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.domainSeansBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.domainHoursOfPauseBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -309,6 +398,14 @@
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.BindingSource domainSeansBindingSource;
-        private System.Windows.Forms.BindingSource domainSeansBindingSource1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tytulDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dlugoscFilmu;
+        private System.Windows.Forms.DataGridViewTextBoxColumn godzinaRozpoczeciaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn godzinaZakonczeniaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dlugoscReklamMinDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn czasRozpoczeciaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn czasZakonczeniaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource domainHoursOfPauseBindingSource;
     }
 }

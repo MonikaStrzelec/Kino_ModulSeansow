@@ -23,8 +23,9 @@ namespace Kino
         private int liczbaSeansow = 0;
         private int liczbaPerformansow = 0;
         private int ostatniIDperformance;
-        private int idWybranegoSeansu = 0;
-        private int idWybranejSali = 0;
+        private Movie idWybranegoSeansu = null;
+        private Hall idWybranejSali = null;
+
 
         private string dimParametersString = "";
 
@@ -47,17 +48,23 @@ namespace Kino
             int ostatniIDperformance = context.Performances.OrderBy(p => p.id).ToList().Last().id;
             int ostatniIdTimetable = context.Timetables.OrderBy(p => p.id).ToList().Last().id;
 
-            if (idWybranegoSeansu > 0 && idWybranejSali > 0)
+            if (idWybranegoSeansu != null && idWybranejSali != null )
             {
-                Performance performance = new Performance() { id = ++ostatniIDperformance, movie = idWybranegoSeansu, hall = idWybranejSali, adsDuration = TimeSpan.FromMinutes((double)numericUpDown1.Value) };
-                dodajPerformans(performance); //dodawanie seansu
-                context.SaveChanges(); //zapisujemy zmiany
+                Performance dodawanyPerformance = new Performance() { id = ++ostatniIDperformance, movie = idWybranegoSeansu.id, hall = idWybranejSali.id, adsDuration = TimeSpan.FromMinutes((double)numericUpDown1.Value) };
+                Timetable DodawanyTimetable = new Timetable() { id = ++ostatniIdTimetable, performance = ostatniIDperformance, performanceDate = dataICzasRozpoczecia, Performance1 = dodawanyPerformance };
+                if (czyMoznaDodacSeans(new TablicaWartosciOdDo(pobierzDzienIGodzine(),idWybranegoSeansu.movieTime.Add(TimeSpan.FromMinutes((double)numericUpDown1.Value)))))
+                {
+                    dodajPerformans(dodawanyPerformance); //dodawanie seansu
 
-                dodajSeans(new Timetable() { id = ++ostatniIdTimetable, performance = ostatniIDperformance, performanceDate = dataICzasRozpoczecia }); //dodawanie seansu do repertuaru
-                context.SaveChanges(); //zapisujemy zmiany       // context.SaveChanges(); //zapisujemy zmiany
 
-                MessageBox.Show("SUKCES");
-                this.Close();
+                    dodajSeans(DodawanyTimetable); //dodawanie seansu do repertuaru
+
+                    MessageBox.Show("SUKCES");
+                    this.Close();
+                }
+                else {
+                    MessageBox.Show("Wybierz inna Godzine ");
+                }
             }
             else
             {
@@ -88,12 +95,19 @@ namespace Kino
           List<Timetable> przefiltrowaneSeanse =   context.Timetables.Where(t => 
           t.Performance1.Hall1.Dim.name.Equals(parametr) &&
           DbFunctions.TruncateTime(t.performanceDate) == data.Date &&
-          t.Performance1.movie == idFilmu &&
+          
           t.Performance1.hall == idSali)
                 .ToList();
 
-            this.domainSeansBindingSource.DataSource = new BindingList<DomainSeans>( przefiltrowaneSeanse.ConvertAll(s => new DomainSeans(s)) ) ;
-          dodajListeSeansowDoTablicy(przefiltrowaneSeanse);
+            dodajListeSeansowDoTablicy(przefiltrowaneSeanse);
+
+            List<DomainSeans> bindingList =  przefiltrowaneSeanse.ConvertAll(s => new DomainSeans(s))  ;
+
+            MessageBox.Show("znaleziono filmow :" + bindingList.Count);
+            domainSeansBindingSource.DataSource = bindingList;
+
+            //bind datagridview to binding source
+            dataGridView1.DataSource = domainSeansBindingSource.DataSource;
         }
 
         private void dodajListeSeansowDoTablicy(List<Timetable> seanse) {
@@ -101,6 +115,10 @@ namespace Kino
             foreach (Timetable seans in seanse) {
                 dodajSeansDoTablicy(seans);
             }
+
+            List<DomainHoursOfPause> listaPrzerw = sprawdzPrzerwyWRepertuarzeDziennym().ConvertAll(przerwa => przerwa.toDomainClass());
+            domainHoursOfPauseBindingSource.DataSource = listaPrzerw;
+            dataGridView2.DataSource = domainHoursOfPauseBindingSource;
         
         }
 
@@ -129,6 +147,62 @@ namespace Kino
                 if (zajetoscTablica[i]) return false;
             }
             return true;
+        }
+
+        private List<TablicaWartosciOdDo> sprawdzPrzerwyWRepertuarzeDziennym() {
+
+            List<TablicaWartosciOdDo> listaPrzerw = new List<TablicaWartosciOdDo>();
+
+            bool poprzedniaWartosc =zajetoscTablica[0];
+
+            int indexPoczatkowy = -32;
+
+            int indexKoncowy = -32;
+
+            
+
+            for (int i = 0; i < zajetoscTablica.Length; i++) {
+
+                bool aktualnaWartosc = zajetoscTablica[i];
+
+                if (poprzedniaWartosc != aktualnaWartosc || i == zajetoscTablica.Length -1) {
+
+                    if (aktualnaWartosc) {
+                        indexKoncowy = i -1 ;
+                    }
+                    else{
+                        if (indexPoczatkowy < 0)
+                        {
+                            indexPoczatkowy = i;
+                        }
+                        else {
+                            indexKoncowy = i;
+                        }
+                    }
+
+                    poprzedniaWartosc = aktualnaWartosc;
+                    
+                }
+
+                if (i == 0) {
+
+                    if (!poprzedniaWartosc) {
+
+                        indexPoczatkowy = i;
+                    }
+                }
+
+                if (indexPoczatkowy >= 0 && indexKoncowy > 0) {
+
+                    listaPrzerw.Add(new TablicaWartosciOdDo() { IndexKoncowy = indexKoncowy, IndexPoczatkowy = indexPoczatkowy});
+                    indexKoncowy = -32;
+                    indexPoczatkowy = -32;
+                }
+
+            }
+
+            return listaPrzerw;
+        
         }
 
         private void DodawanieSeansow_Load(object sender, EventArgs e)
@@ -184,7 +258,7 @@ namespace Kino
             var item = comboBox1.SelectedItem;
             if (item != null)
             {
-                idWybranegoSeansu = ((Movie)(item)).id;
+                idWybranegoSeansu = ((Movie)(item));
             }
             filtrujFilmy();
         }
@@ -195,8 +269,8 @@ namespace Kino
             var item = comboBox2.SelectedItem;
             if (item != null)
             {
-                idWybranejSali = ((Hall)(item)).id;
-                pobierzWszystkieSeanseZFiltrami(dimParametersString,idWybranegoSeansu,idWybranejSali, monthCalendar1.SelectionRange.Start.Date);
+                idWybranejSali = ((Hall)(item));
+                pobierzWszystkieSeanseZFiltrami(dimParametersString,idWybranegoSeansu.id,idWybranejSali.id, monthCalendar1.SelectionRange.Start.Date);
             }
         }
 
@@ -367,9 +441,15 @@ namespace Kino
             }
         }
 
-    
+        private void domainSeansBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
 
+        }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 
  
