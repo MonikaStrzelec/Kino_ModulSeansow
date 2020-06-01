@@ -103,5 +103,11 @@ namespace Login
         {
 
         }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            FormPermissionAdd formPermission = new FormPermissionAdd();
+            formPermission.ShowDialog();
+        }
     }
 }
