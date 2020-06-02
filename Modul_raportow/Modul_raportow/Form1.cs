@@ -97,7 +97,7 @@ namespace Modul_raportow
 
             catch (Exception ex)
             {
-                MessageBox.Show("Wystąpił błąd związany z tworzeniem raportu.");
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -199,12 +199,12 @@ namespace Modul_raportow
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            if (dateTimePicker1.Value > dateTimePicker2.Value) MessageBox.Show("Data początkowa nie może być większa od daty końcowej", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //if (dateTimePicker1.Value > dateTimePicker2.Value) MessageBox.Show("Data początkowa nie może być większa od daty końcowej", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
         {
-            if (dateTimePicker1.Value > dateTimePicker2.Value) MessageBox.Show("Data początkowa nie może być większa od daty końcowej", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
+          //  if (dateTimePicker1.Value > dateTimePicker2.Value) MessageBox.Show("Data początkowa nie może być większa od daty końcowej", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

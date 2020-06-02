@@ -38,7 +38,7 @@ namespace Modul_raportow
                 
                 return data;
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 MessageBox.Show("Niemożliwe połączenie z bazą danych. Nastąpi wyłączenie aplikacji");
                 Console.WriteLine(ex);

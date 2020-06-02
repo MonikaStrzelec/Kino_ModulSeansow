@@ -12,7 +12,7 @@ using iText.Kernel.Geom;
 
 namespace Modul_raportow
 {
-    class ReportGenerator
+     public class ReportGenerator
     {
         static DataTable res;
         static string zapytanie = null;
@@ -27,9 +27,12 @@ namespace Modul_raportow
 
         }
         public static void GenerateSalariesReport(DateTime dateFrom, DateTime dateTo) { }
-        public static void GenerateWorkTimeReport(DateTime dateFrom, DateTime dateTo)
+        public static void GenerateWorkTimeReport(DateTime? dateFrom, DateTime? dateTo)
         {
+            Validation.ValidateDates(dateFrom, dateTo);
+
             zapytanie = "SELECT dbo.\"Schedule\".userId AS \"Identryfikator\",dbo.g1_pearson.first_name AS \"Imie\", dbo.g1_pearson.last_name AS \"Nazwisko\",CONVERT(TIME, DATEADD(s, SUM((DATEPART(hh, CAST(dbo.\"Schedule\".dateTo - dbo.\"Schedule\".dateFrom AS Time(0))) * 3600) + (DATEPART(mi, CAST(dbo.\"Schedule\".dateTo - dbo.\"Schedule\".dateFrom AS Time(0))) * 60) + DATEPART(ss, CAST(dbo.\"Schedule\".dateTo - dbo.\"Schedule\".dateFrom AS Time(0)))), 0)) AS \"Czas pracy\" FROM dbo.\"Schedule\" INNER JOIN dbo.g1_user ON dbo.g1_user.id_user = dbo.\"Schedule\".userId INNER JOIN dbo.g1_pearson ON dbo.g1_pearson.id_Pearson = dbo.g1_user.id_Pearson GROUP BY dbo.\"Schedule\".userId, dbo.g1_pearson.first_name, dbo.g1_pearson.last_name;";
+            
             res = SQLObject.SendCommand(zapytanie);
             Pdf.Save("Raport Czasu Pracowników", res);
         }
