@@ -20,7 +20,7 @@ namespace PersonnelMenagement.Menagers
                 builder.DataSource = "tcp:kinosql.database.windows.net,1433";   // update me
                 builder.UserID = "student";              // update me
                 builder.Password = "Pa$$w0rd";      // update me
-                builder.InitialCatalog = "PersonnelMenagement";
+                builder.InitialCatalog = "Kino";
 
 
 
@@ -59,7 +59,7 @@ namespace PersonnelMenagement.Menagers
                 builder.DataSource = "tcp:kinosql.database.windows.net,1433";   // update me
                 builder.UserID = "student";              // update me
                 builder.Password = "Pa$$w0rd";      // update me
-                builder.InitialCatalog = "PersonnelMenagement";
+                builder.InitialCatalog = "Kino";
 
 
 
@@ -97,7 +97,7 @@ namespace PersonnelMenagement.Menagers
                 builder.DataSource = "tcp:kinosql.database.windows.net,1433";   // update me
                 builder.UserID = "student";              // update me
                 builder.Password = "Pa$$w0rd";      // update me
-                builder.InitialCatalog = "PersonnelMenagement";
+                builder.InitialCatalog = "Kino";
 
 
 
@@ -124,7 +124,40 @@ namespace PersonnelMenagement.Menagers
 
         }
 
-        
+        public void selectTask()
+        {
+            try
+            {
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                builder.DataSource = "tcp:kinosql.database.windows.net,1433";   // update me
+                builder.UserID = "student";              // update me
+                builder.Password = "Pa$$w0rd";      // update me
+                builder.InitialCatalog = "Kino";
+
+
+
+                // Connect to SQL
+                using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
+                {
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+
+                    // Delete demo
+                    sb.Append("SELECT * FROM Task");
+                    string sql = sb.ToString();
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+
+                        int rowsAffected = command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+        }
 
 
 

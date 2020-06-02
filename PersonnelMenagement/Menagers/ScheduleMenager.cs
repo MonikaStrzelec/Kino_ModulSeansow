@@ -20,7 +20,7 @@ namespace PersonnelMenagement.Menagers
             builder.DataSource = "tcp:kinosql.database.windows.net,1433";   // update me
             builder.UserID = "student";              // update me
             builder.Password = "Pa$$w0rd";      // update me
-            builder.InitialCatalog = "PersonnelMenagement";
+            builder.InitialCatalog = "Kino";
 
 
             using (SqlConnection connection = new SqlConnection(builder.ConnectionString))
@@ -59,7 +59,7 @@ namespace PersonnelMenagement.Menagers
                 builder.DataSource = "tcp:kinosql.database.windows.net,1433";   // update me
                 builder.UserID = "student";              // update me
                 builder.Password = "Pa$$w0rd";      // update me
-                builder.InitialCatalog = "PersonnelMenagement";
+                builder.InitialCatalog = "Kino";
 
 
 
@@ -98,7 +98,7 @@ namespace PersonnelMenagement.Menagers
                 builder.DataSource = "tcp:kinosql.database.windows.net,1433";   // update me
                 builder.UserID = "student";              // update me
                 builder.Password = "Pa$$w0rd";      // update me
-                builder.InitialCatalog = "PersonnelMenagement";
+                builder.InitialCatalog = "Kino";
 
 
 
@@ -141,7 +141,7 @@ namespace PersonnelMenagement.Menagers
                 builder.DataSource = "tcp:kinosql.database.windows.net,1433";   // update me
                 builder.UserID = "student";              // update me
                 builder.Password = "Pa$$w0rd";      // update me
-                builder.InitialCatalog = "PersonnelMenagement";
+                builder.InitialCatalog = "Kino";
 
 
 

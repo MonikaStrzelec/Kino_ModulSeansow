@@ -14,7 +14,7 @@ namespace PersonnelMenagement.Models
         public string login;
         public string passwordHash;
         public string codeHash;
-        public decimal baseSalar;
+        public decimal baseSalary;
         public decimal hourlyRate;
         List<Permissions> permissions;
     }

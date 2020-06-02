@@ -21,7 +21,7 @@ namespace PersonnelMenagement.Menagers
                 builder.DataSource = "tcp:kinosql.database.windows.net,1433";   // update me
                 builder.UserID = "student";              // update me
                 builder.Password = "Pa$$w0rd";      // update me
-                builder.InitialCatalog = "PersonnelMenagement";
+                builder.InitialCatalog = "Kino";
 
 
 
@@ -32,8 +32,8 @@ namespace PersonnelMenagement.Menagers
                     StringBuilder sb = new StringBuilder();
 
                     // INSERT demo
-                    sb.Append("INSERT User (firstName, lastName, login, passwordHash, codeHash, baseSalar, hourlyRate) ");
-                    sb.Append("VALUES (@firstName, @lastName, @login, @passwordHash, @codeHash, @baseSalar, @hourlyRate);");
+                    sb.Append("INSERT [User] (firstName, lastName, login, passwordHash, codeHash, baseSalary, hourlyRate) ");
+                    sb.Append("VALUES (@firstName, @lastName, @login, @passwordHash, @codeHash, @baseSalary, @hourlyRate);");
                     string sql = sb.ToString();
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
@@ -42,7 +42,7 @@ namespace PersonnelMenagement.Menagers
                         command.Parameters.AddWithValue("@login", user.login);
                         command.Parameters.AddWithValue("@passwordHash", user.passwordHash);
                         command.Parameters.AddWithValue("@codeHash", user.codeHash);
-                        command.Parameters.AddWithValue("@baseSalar", user.baseSalar);
+                        command.Parameters.AddWithValue("@baseSalary", user.baseSalary);
                         command.Parameters.AddWithValue("@hourlyRate", user.hourlyRate);
                         int rowsAffected = command.ExecuteNonQuery();
                     }
@@ -63,7 +63,7 @@ namespace PersonnelMenagement.Menagers
                 builder.DataSource = "tcp:kinosql.database.windows.net,1433";   // update me
                 builder.UserID = "student";              // update me
                 builder.Password = "Pa$$w0rd";      // update me
-                builder.InitialCatalog = "PersonnelMenagement";
+                builder.InitialCatalog = "Kino";
 
 
 
@@ -84,7 +84,7 @@ namespace PersonnelMenagement.Menagers
                         command.Parameters.AddWithValue("@login", user.login);
                         command.Parameters.AddWithValue("@passwordHash", user.passwordHash);
                         command.Parameters.AddWithValue("@codeHash", user.codeHash);
-                        command.Parameters.AddWithValue("@baseSalar", user.baseSalar);
+                        command.Parameters.AddWithValue("@baseSalary", user.baseSalary);
                         command.Parameters.AddWithValue("@hourlyRate", user.hourlyRate);
                         int rowsAffected = command.ExecuteNonQuery();
                     }
@@ -105,7 +105,7 @@ namespace PersonnelMenagement.Menagers
                 builder.DataSource = "tcp:kinosql.database.windows.net,1433";   // update me
                 builder.UserID = "student";              // update me
                 builder.Password = "Pa$$w0rd";      // update me
-                builder.InitialCatalog = "PersonnelMenagement";
+                builder.InitialCatalog = "Kino";
 
 
 
