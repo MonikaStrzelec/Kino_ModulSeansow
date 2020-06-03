@@ -12,10 +12,19 @@ namespace Modul_raportow
         {  
             if (date1 == null || date2 == null) throw new Exception("Musisz podać daty");
 
-            if (DateTime.Compare((DateTime)date1, (DateTime)date2) > 1) throw new Exception("Data pierwsza nie może być wieksza");
+            if (DateTime.Compare((DateTime)date1.Value.Date, (DateTime)date2.Value.Date) > 0) throw new Exception("Data pierwsza nie może być wieksza");
+
+    
         }
-        public static void ValidateDatesInd(DateTime? date1, DateTime? date2)
+        public static void ValidateDatesInd(DateTime? date1, DateTime? date2, long userId, string name)
         {
+            ValidateDates(date1, date2);
+
+            if (userId < 0) throw new Exception("Podany numer jest mniejszy od zera");
+
+            if (name.Length == 0) throw new Exception("Nie podano Nazwiska");
+
+            if (name.Length >= 46 ) throw new Exception("Zbyt długi parametr");
 
         }
     }
