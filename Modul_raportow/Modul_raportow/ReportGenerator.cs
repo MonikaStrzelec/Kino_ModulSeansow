@@ -57,7 +57,7 @@ namespace Modul_raportow
 
             res = SQLObject.SendCommand(zapytanie);
 
-            Pdf.Save("Raport Zestawienia sprzedanego jedzenia", res);
+            Pdf.Save("Raport zestawienia sprzedanego jedzenia", res);
 
         }
     }
