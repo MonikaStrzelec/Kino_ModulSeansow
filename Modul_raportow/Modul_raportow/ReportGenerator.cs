@@ -53,7 +53,17 @@ namespace Modul_raportow
 
         }
         public static void GenerateIncomeReport(DateTime dateFrom, DateTime dateTo) { }
-        public static void GenerateFoodSaleReport(DateTime dateFrom, DateTime dateTo) { }
+        public static void GenerateFoodSaleReport(DateTime dateFrom, DateTime dateTo)
+        {
 
+            Validation.ValidateDates(dateFrom, dateTo);
+
+            zapytanie = "DECLARE @RC int DECLARE @data1 datetime DECLARE @data2 datetime EXECUTE @RC = [dbo].[raport_sprzedanego_jedzenia] @datefrom='" + dateFrom.ToString("yyyy-MM-dd") + "', @dateto='" + dateTo.ToString("yyyy-MM-dd") + "';";
+
+            res = SQLObject.SendCommand(zapytanie);
+
+            Pdf.Save("Raport zestawienia sprzedanego jedzenia", res);
+
+        }
     }
 }
