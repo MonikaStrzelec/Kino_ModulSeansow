@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Modul_raportow
@@ -24,7 +25,10 @@ namespace Modul_raportow
 
             if (name.Length == 0) throw new Exception("Nie podano Nazwiska");
 
-            if (name.Length >= 46 ) throw new Exception("Zbyt długi parametr");
+            if (name.Length >= 46) throw new Exception("Zbyt długi parametr");
+
+            Regex r = new Regex("[^A-Za-z0-9]$");
+            if (r.IsMatch(name)) throw new Exception("Możesz stosować tylko znaki od A-Z oraz 0-9 ");
 
         }
     }

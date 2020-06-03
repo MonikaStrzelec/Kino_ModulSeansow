@@ -63,7 +63,8 @@ namespace Modul_raportow
 
                     case 6:
                         id_pr = (int)comboBox2.SelectedValue;
-                        ReportGenerator.GenerateIndividualSalary(dateFrom, dateTo, id_pr);
+                        name = comboBox2.Text;
+                        ReportGenerator.GenerateIndividualSalary(dateFrom, dateTo, id_pr, name);
                         break;
 
                     case 7:

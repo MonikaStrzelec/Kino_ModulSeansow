@@ -21,7 +21,7 @@ namespace Modul_raportow_testy
             }
             catch (Exception e)
             {
-                Console.Write(e);
+                Console.Write(e.Message);
             }
         }
 
@@ -74,7 +74,7 @@ namespace Modul_raportow_testy
             }
             catch (Exception e) when (!(e is AssertFailedException))
             {
-                Console.Write(e);
+                Console.Write(e.Message);
             }
         }
 
@@ -93,7 +93,7 @@ namespace Modul_raportow_testy
             }
             catch (Exception e) when (!(e is AssertFailedException))
             {
-                Console.Write(e);
+                Console.Write(e.Message);
             }
 
 
@@ -114,7 +114,7 @@ namespace Modul_raportow_testy
             }
             catch (Exception e) when (!(e is AssertFailedException))
             {
-                Console.Write(e);
+                Console.Write(e.Message);
             }
 
 
@@ -135,7 +135,7 @@ namespace Modul_raportow_testy
             }
             catch (Exception e) when (!(e is AssertFailedException))
             {
-                Console.Write(e);
+                Console.Write(e.Message);
             }
 
         }
@@ -156,7 +156,29 @@ namespace Modul_raportow_testy
             catch (Exception e) when (!(e is AssertFailedException))
             {
                 Assert.Fail();
-                Console.Write(e);
+                Console.Write(e.Message);
+            }
+
+        }
+
+
+        [TestMethod]
+        public void TestValidateDatesIndInvalidChar()
+        {
+            DateTime? date1 = new DateTime(2020, 06, 3);
+            DateTime? date2 = new DateTime(2020, 06, 5);
+            long nr = 3;
+            string imie = "Anna_Nowak&";
+
+            try
+            {
+                Modul_raportow.Validation.ValidateDatesInd(date1, date2, nr, imie);
+                Assert.Fail();
+            }
+            catch (Exception e) when (!(e is AssertFailedException))
+            {
+                
+                Console.Write(e.Message);
             }
 
         }
