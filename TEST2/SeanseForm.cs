@@ -160,6 +160,7 @@ namespace Kino
 
                 Timetable selectedElement = timetableFilterList[dataGridView.SelectedRows[0].Index];
                 FormularzSzczegolyFilmy formularzSeanse = new FormularzSzczegolyFilmy(selectedElement);
+                formularzSeanse.Parent = this;
                 formularzSeanse.Show();
 
                 //jak to sb.ToString() wpisać do form2?  a gdyby pobrać tylko id z tego seansu? i po id wyświetlanie?

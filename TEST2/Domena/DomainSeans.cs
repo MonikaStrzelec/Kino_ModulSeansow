@@ -11,13 +11,15 @@ namespace Kino.Domena
     class DomainSeans 
     {
 
-        private string tytul;
+        public string tytul { get; set; }
 
-        private DateTime godzinaRozpoczecia;
+        public DateTime godzinaRozpoczecia { get; set; }
 
-        private TimeSpan godzinaZakonczenia;
+        public DateTime godzinaZakonczenia { get; set; }
 
-        private int dlugoscReklamMin;
+        public int dlugoscReklamMin { get; set; }
+
+        public TimeSpan dlugoscFilmu { get; set; }
 
 
         public DomainSeans(Timetable p)
@@ -25,7 +27,8 @@ namespace Kino.Domena
 
             this.tytul = p.Performance1.Movie1.title;
             this.godzinaRozpoczecia = p.performanceDate;
-            this.godzinaZakonczenia = p.Performance1.Movie1.movieTime.Add(TimeSpan.FromMinutes((double)p.Performance1.adsDuration.Minutes));
+            this.godzinaZakonczenia = godzinaRozpoczecia.Add(p.Performance1.Movie1.movieTime).Add(p.Performance1.adsDuration);
+            this.dlugoscFilmu = p.Performance1.Movie1.movieTime;
             this.dlugoscReklamMin = p.Performance1.adsDuration.Minutes;
 
         }

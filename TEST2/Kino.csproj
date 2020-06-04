@@ -70,6 +70,7 @@
       <DependentUpon>DodawanieSeansow.cs</DependentUpon>
     </Compile>
     <Compile Include="Domena\DomainFilm.cs" />
+    <Compile Include="Domena\DomainHoursOfPause.cs" />
     <Compile Include="Domena\DomainSeans.cs" />
     <Compile Include="Domena\TimetableDomain.cs" />
     <Compile Include="EditForm.cs">
@@ -199,6 +200,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>KinoEntityDataModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="Properties\DataSources\Kino.Domena.DomainHoursOfPause.datasource" />
     <None Include="Properties\DataSources\Kino.Domena.DomainSeans.datasource" />
     <None Include="Properties\DataSources\Kino.Properties.Dim.datasource" />
     <None Include="Properties\DataSources\Kino.Properties.DimsMovie.datasource" />

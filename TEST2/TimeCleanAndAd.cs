@@ -15,50 +15,45 @@ namespace Kino
         public int TimeAd1 { get => TimeAd; set => TimeAd = value; }
         public int TimeClean1 { get => TimeClean; set => TimeClean = value; }
 
+        Movie movie = null;
+
+
+        public TimeCleanAndAd(Movie film) 
+        {
+            this.movie = film;
+        }
+
     public int timeClean()
         {
-            //if (Movie.time < 120)
-            //{
-            //    int a = 20;
-            //}
-            //else if (Movie.time <180)
-            //{
-            //    int a = 30;
-            //}
-
-            //else
-            //{
-            //    int a = 40;
-            //}
-
-            // return a;
-            return 0;
+            if (movie.movieTime.TotalMinutes < 120)
+            {
+                return 20;
+            }
+            else if (movie.movieTime.TotalMinutes < 180)
+            {
+                return 30;
+            }
+            else
+            {
+                return 40;
+            }
         }
     
         public int timeAd()
         {
-
-            //if (Movie.time < 120)
-            //{
-            //    int b = 20;
-            //}
-
-            //else
-            //{
-            //    int b = 30;
-            //}
-
-            //return b;
-            return 0;
+            if (movie.movieTime.TotalMinutes < 120)
+            {
+                return 20;
+            }
+            else
+            {
+                return 30;
+            }
         }
-
 
         public int sumTimeParameters ()
         {
-            // return a + b;
-            return 0;
+            return timeAd() + timeClean();
         }
-    }
-
-    
+    } 
 }

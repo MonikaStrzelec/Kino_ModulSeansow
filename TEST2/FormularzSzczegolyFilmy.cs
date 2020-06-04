@@ -33,6 +33,8 @@ namespace Kino
             InitializeComponent();
         }
 
+        
+
 
         private void FormularzSzczegolyFilmy_Load(object sender, EventArgs e)
         {
@@ -78,6 +80,7 @@ namespace Kino
         { //DODAWANIE SEANSU
 
             DodawanieSeansow nowySeans = new DodawanieSeansow(); //WYWOŁYWANIE FORMATKI
+            nowySeans.Parent = this;
             nowySeans.Show();
         }
 
@@ -88,9 +91,10 @@ namespace Kino
             int selectedRowCount = dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount > 0)
             {
-                Timetable selectedElement = timetableFilterList[dataGridView1.SelectedRows[0].Index];
-                EditForm formularzEdit = new EditForm(selectedElement);
-                formularzEdit.Show();
+                //Timetable selectedElement = timetableFilterList[dataGridView1.SelectedRows[0].Index];
+                DodawanieSeansow dodawanieSeansow = new DodawanieSeansow(element);
+                dodawanieSeansow.Parent = this;
+                dodawanieSeansow.Show();
             }
         }
 

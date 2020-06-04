@@ -1,4 +1,5 @@
-﻿using Kino.Properties;
+﻿using Kino.Domena;
+using Kino.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,12 @@ namespace Kino
             this.indexKoncowy = obliczIndex(czasKoncowy.Hours * 60 + czasKoncowy.Minutes) - 1;
 
         }
+
+        public TablicaWartosciOdDo() { }
+
+        public DomainHoursOfPause toDomainClass() {
+            return new DomainHoursOfPause(indexPoczatkowy, indexKoncowy);
+                }
 
         private int obliczIndex(int minuty) {
 
