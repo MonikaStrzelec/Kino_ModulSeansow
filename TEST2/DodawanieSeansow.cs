@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
@@ -35,24 +36,98 @@ namespace Kino
 
         private List<DomainSeans> seanse = new List<DomainSeans>();
 
+        Timetable edytowaneTimetable = null;
 
         public DodawanieSeansow()
         {
             InitializeComponent();
+            button2.Enabled = false;
         }
 
+        public DodawanieSeansow(Timetable timetableDoEdycji)
+        {
+            this.edytowaneTimetable = timetableDoEdycji;
+            InitializeComponent();
+            uzupelnianieEdycjiDanymi();
+            buttonAddPerformance.Enabled = false;
+            
+        }
+
+        private void uzupelnianieEdycjiDanymi ()
+        {
+            Hall sala = this.edytowaneTimetable.Performance1.Hall1;
+            Movie film = this.edytowaneTimetable.Performance1.Movie1;
+            DateTime terminSeansu = this.edytowaneTimetable.performanceDate;
+
+            KinoEntities context = new KinoEntities();
+            idWybranegoSeansu = film;
+            idWybranejSali = sala;
+            this.dimParametersString = sala.Dim.name;
+
+            filtrujFilmyiSaleZeWzgleduNaParametrFilmu();
+
+            zaznaczanieNaFormatkachDanych(film, sala, terminSeansu);
+
+        }
+
+        private void zaznaczanieNaFormatkachDanych(Movie film, Hall sala, DateTime data) {
+            //odpowiedzialny za wybor filmu
+            comboBox1.SelectedValue = film;
+            //odpowiedzialny za wybor sali
+            comboBox2.SelectedValue = sala;
+
+            switch (this.dimParametersString) {
+                case "2D":
+                    radioButton1.Checked = true;
+                    break;
+                case "3D":
+                    radioButton2.Checked = true;
+                    break;
+                case "VR":
+                    radioButton3.Checked = true;
+                    break;
+            }
+
+            monthCalendar1.SelectionStart = new DateTime(data.Year, data.Month, data.Day);
+            dateTimePicker1.Value = data;
+
+
+
+        
+        }
+
+        private int getIdDlaPerformansu(int ostatniIDperformance) {
+            if (this.edytowaneTimetable == null) {
+                return ++ostatniIDperformance;
+            }
+            return this.edytowaneTimetable.performance;
+        }
+
+        private int getIdDlaTimetable(int ostatniIdTimetable) { 
+          if (this.edytowaneTimetable == null) {
+                return ++ostatniIdTimetable;
+            }
+            return this.edytowaneTimetable.performance;
+        
+        }
+        
         private void button1_Click(object sender, EventArgs e)
         {  //DODAWANIA seansu
+            zapiszWydarzenie();
+        }
 
+        private void zapiszWydarzenie()
+        {
             DateTime dataICzasRozpoczecia = pobierzDzienIGodzine();
             int ostatniIDperformance = context.Performances.OrderBy(p => p.id).ToList().Last().id;
             int ostatniIdTimetable = context.Timetables.OrderBy(p => p.id).ToList().Last().id;
 
-            if (idWybranegoSeansu != null && idWybranejSali != null )
+            if (idWybranegoSeansu != null && idWybranejSali != null)
             {
-                Performance dodawanyPerformance = new Performance() { id = ++ostatniIDperformance, movie = idWybranegoSeansu.id, hall = idWybranejSali.id, adsDuration = TimeSpan.FromMinutes((double)numericUpDown1.Value) };
-                Timetable DodawanyTimetable = new Timetable() { id = ++ostatniIdTimetable, performance = ostatniIDperformance, performanceDate = dataICzasRozpoczecia, Performance1 = dodawanyPerformance };
-                if (czyMoznaDodacSeans(new TablicaWartosciOdDo(pobierzDzienIGodzine(),idWybranegoSeansu.movieTime.Add(TimeSpan.FromMinutes((double)numericUpDown1.Value)))))
+                Performance dodawanyPerformance = new Performance() { id = getIdDlaPerformansu(ostatniIDperformance), movie = idWybranegoSeansu.id, hall = idWybranejSali.id, adsDuration = TimeSpan.FromMinutes((double)numericUpDown1.Value) };
+                Timetable DodawanyTimetable = new Timetable() { id = getIdDlaTimetable(ostatniIdTimetable), performance = ostatniIDperformance, performanceDate = dataICzasRozpoczecia, Performance1 = dodawanyPerformance };
+
+                if (czyMoznaDodacSeans(new TablicaWartosciOdDo(pobierzDzienIGodzine(), idWybranegoSeansu.movieTime.Add(TimeSpan.FromMinutes((double)numericUpDown1.Value)))))
                 {
                     dodajPerformans(dodawanyPerformance); //dodawanie seansu
 
@@ -62,7 +137,8 @@ namespace Kino
                     MessageBox.Show("SUKCES");
                     this.Close();
                 }
-                else {
+                else
+                {
                     MessageBox.Show("Wybierz inna Godzine ");
                 }
             }
@@ -73,12 +149,12 @@ namespace Kino
                     MessageBox.Show("Nie wybrałeś daty seansu");
                 }
 
-                else if (comboBox1.SelectedIndex == -1)
+                else if (idWybranegoSeansu.id < -1)
                 {
                     MessageBox.Show("Nie wybrałeś tytułu filmu!");
                 }
 
-                else if (comboBox2.SelectedIndex == -1)
+                else if (idWybranejSali.id < -1)
                 {
                     MessageBox.Show("Nie wybrałeś sali");
                 }
@@ -259,7 +335,10 @@ namespace Kino
             if (item != null)
             {
                 idWybranegoSeansu = ((Movie)(item));
+
+
             }
+            else { }
             filtrujFilmy();
         }
 
@@ -287,6 +366,14 @@ namespace Kino
             }
         }
 
+        private void uaktualnijPerformans()
+        {
+
+            zapiszWydarzenie();
+
+
+        }
+
 
         void dodajSeans(Timetable timetable)
         {
@@ -300,10 +387,19 @@ namespace Kino
                     {
                         context.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT [dbo].[Timetable] ON");
 
-                        context.Timetables.Add(timetable);
-                        context.Timetables.Attach(timetable);
-                        //  context.Timetables.Local.Add(timetable);
-                        context.Entry(timetable).State = EntityState.Added;
+                        if (edytowaneTimetable == null)
+                        {
+                            context.Timetables.Add(timetable);
+                            context.Timetables.Attach(timetable);
+                            //  context.Timetables.Local.Add(timetable);
+                            context.Entry(timetable).State = EntityState.Added;
+                        }
+                        else {
+                            context.Timetables.AddOrUpdate(timetable);
+                            //  context.Performances.Local.Add(p);
+                            context.Timetables.Attach(timetable);
+                            context.Entry(timetable).State = EntityState.Modified;
+                        }
 
                         if (context.SaveChanges() > 0)
                         {
@@ -331,12 +427,20 @@ namespace Kino
                     using (var transaction = context.Database.BeginTransaction())
                     {
                         context.Database.ExecuteSqlCommand(@"SET IDENTITY_INSERT [dbo].[Performance] ON");
-                        context.Performances.Add(p);
-                        //  context.Performances.Local.Add(p);
-                        context.Performances.Attach(p);
-                        context.Entry(p).State = EntityState.Added;
+                        if (edytowaneTimetable == null)
+                        {
+                            context.Performances.Add(p);
+                            //  context.Performances.Local.Add(p);
+                            context.Performances.Attach(p);
+                            context.Entry(p).State = EntityState.Added;
 
-
+                        }
+                        else { 
+                            context.Performances.AddOrUpdate(p);
+                            //  context.Performances.Local.Add(p);
+                            context.Performances.Attach(p);
+                            context.Entry(p).State = EntityState.Modified;
+                        }
                         //context.Entry(p).State = EntityState.Added;
 
                         MessageBox.Show("Stan bazy danych przed \n " + context.Entry(p).State.ToString());
@@ -369,7 +473,15 @@ namespace Kino
         private void button1_Click_1(object sender, EventArgs e)
         {   //ZAMKNIĘCIE formularza bez dodania seansu
 
-            string info = "Nie dodałeś seansu, na pewno chcesz zamknąć?";
+            string info;
+            if (edytowaneTimetable == null)
+            {
+                info = "Nie dodałeś seansu, na pewno chcesz zamknąć?";
+            }
+            else {
+                info = "Nie edytowałeś seansu, na pewno chcesz zamknąć ?";
+            }
+
             string caption = "UWAGA!";
             MessageBoxButtons przycisk = MessageBoxButtons.YesNo;
             DialogResult result;
@@ -392,53 +504,47 @@ namespace Kino
         {
             if (radioButton1.Checked == true)
             { //2D Movies.Dim
-                 dimParametersString = "2D";
-
-                this.tytulyFilmow = context.DimsMovies.Local
-                    .Where(dimMovie => dimMovie.Dim1.name.Equals(dimParametersString))
-                    .Select(dim => dim.Movie1)
-                    .Where(movies => movies.movieState == 2 || movies.movieState == 3).ToList();
-                this.movieBindingSource.DataSource = new BindingList<Movie>(this.tytulyFilmow);  //wiązanie formatki z tabelą
-
-
-                this.nazwySal = context.Halls.Local.Where(hall => hall.Dim.name.Equals(dimParametersString)).ToList();
-                this.hallBindingSource.DataSource = new BindingList<Hall>(this.nazwySal);
+                dimParametersString = "2D";
             }
 
             else if (radioButton2.Checked == true)
             { //3D Movies.Dim
-                 dimParametersString = "3D";
-
-                this.tytulyFilmow = context.DimsMovies
-                    .Where(dims => dims.Dim1.name.Equals(dimParametersString))
-                    .Select(dim => dim.Movie1)
-                    .Where(movies => movies.movieState == 2 || movies.movieState == 3).ToList();
-                this.movieBindingSource.DataSource = new BindingList<Movie>(this.tytulyFilmow);  //wiązanie formatki z tabelą
-
-
-                this.nazwySal = context.Halls.Local.Where(hall => hall.Dim.name.Equals(dimParametersString)).ToList();
-                this.hallBindingSource.DataSource = new BindingList<Hall>(this.nazwySal);
+                dimParametersString = "3D";
             }
 
             else if (radioButton3.Checked == true)
             { //VR Movies.Dim
-                 dimParametersString = "VR";
-
-                this.tytulyFilmow = context.DimsMovies
-                    .Where(dims => dims.Dim1.name.Equals(dimParametersString))
-                    .Select(dim => dim.Movie1)
-                    .Where(movies => movies.movieState == 2 || movies.movieState == 3).ToList();
-                this.movieBindingSource.DataSource = new BindingList<Movie>(this.tytulyFilmow);  //wiązanie formatki z tabelą
+                dimParametersString = "VR";
+            }
 
 
-                this.nazwySal = context.Halls.Local.Where(hall => hall.Dim.name.Equals(dimParametersString)).ToList();
-                this.hallBindingSource.DataSource = new BindingList<Hall>(this.nazwySal);
+
+            if (!dimParametersString.Equals("")) {
+                filtrujFilmyiSaleZeWzgleduNaParametrFilmu();
             }
 
             else
             {
                 MessageBox.Show("Zaznacz parametr filmu! Bez niego nie utworzysz seansu!");
             }
+        }
+
+        private void filtrujFilmyiSaleZeWzgleduNaParametrFilmu()
+        {
+            KinoEntities context = new KinoEntities();
+
+            context.DimsMovies.Load();
+            context.Halls.Load();
+
+            this.tytulyFilmow = context.DimsMovies.Local
+                .Where(dimMovie => dimMovie.Dim1.name.Equals(this.dimParametersString))
+                .Select(dim => dim.Movie1)
+                .Where(movies => movies.movieState == 2 || movies.movieState == 3).ToList();
+            this.movieBindingSource.DataSource = new BindingList<Movie>(this.tytulyFilmow);  //wiązanie formatki z tabelą
+
+
+            this.nazwySal = context.Halls.Local.Where(hall => hall.Dim.name.Equals(this.dimParametersString)).ToList();
+            this.hallBindingSource.DataSource = new BindingList<Hall>(this.nazwySal);
         }
 
         private void domainSeansBindingSource_CurrentChanged(object sender, EventArgs e)
@@ -449,6 +555,11 @@ namespace Kino
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            uaktualnijPerformans();
         }
     }
 
