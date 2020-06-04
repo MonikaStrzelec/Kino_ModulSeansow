@@ -106,8 +106,19 @@ namespace Login
 
         private void button8_Click(object sender, EventArgs e)
         {
-            FormPermissionAdd formPermission = new FormPermissionAdd();
-            formPermission.ShowDialog();
+            bool check = User.CheckPermission("testpermission");
+            if (check == false)
+            {
+                button8.Enabled = false;
+                MessageBox.Show("You have no permission to enter this module");
+            }
+            else
+            {
+                FormPermissionAdd formPermission = new FormPermissionAdd();
+                formPermission.ShowDialog();
+            }
         }
+
+        
     }
 }

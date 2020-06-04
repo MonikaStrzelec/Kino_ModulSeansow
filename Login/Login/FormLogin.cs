@@ -104,7 +104,7 @@ namespace Login
                   
                         if (attempts==0)
                         {
-                            MessageBox.Show("You have exceeded total number of attempt");
+                            MessageBox.Show("You have exceeded total number of attempts");
 
                             label3.Visible = true;
                             timer1 = new System.Windows.Forms.Timer();
@@ -190,7 +190,7 @@ namespace Login
                         label2.Text = "Login attempts left: " + attempts;
                         if (attempts == 0)
                         {
-                            MessageBox.Show("You have exceeded total number of attempt");
+                            MessageBox.Show("You have exceeded total number of attempts");
 
                             label3.Visible = true;
                             timer1 = new System.Windows.Forms.Timer();
@@ -290,7 +290,7 @@ namespace Login
         private void Timer1_Tick(object sender, EventArgs e)
         {
             counter--;
-            label3.Text="Try again for: "+ counter / 60 + " : " + ((counter % 60) >= 10 ? (counter % 60).ToString() : "0" + (counter % 60));
+            label3.Text="Try again after: "+ counter / 60 + " : " + ((counter % 60) >= 10 ? (counter % 60).ToString() : "0" + (counter % 60));
 
             if (counter == 0)
             {
