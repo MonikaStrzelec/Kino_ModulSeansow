@@ -15,39 +15,53 @@ namespace Modul_raportow
      public class ReportGenerator
     {
         static DataTable res;
-        static string zapytanie = null;
+        static string query = null;
         //static DateTime czas = DateTime.Now;
 
         public static void GenerateAllMoviesReport()
         {
-            zapytanie = "DECLARE @RC int EXECUTE @RC = [dbo].[raport_podsumowania_filmow]";
-            res = SQLObject.SendCommand(zapytanie);
+            query = "DECLARE @RC int EXECUTE @RC = [dbo].[raport_podsumowania_filmow]";
+            res = SQLObject.SendCommand(query);
 
             Pdf.Save("Raport Filmów", res);
 
         }
-        public static void GenerateSalariesReport(DateTime dateFrom, DateTime dateTo) { }
-        public static void GenerateWorkTimeReport(DateTime? dateFrom, DateTime? dateTo)
+        public static void GenerateSalariesReport(DateTime dateFrom, DateTime dateTo) {
+
+            Validation.ValidateDates(dateFrom, dateTo);
+
+            query = "DECLARE @RC int DECLARE @datefrom datetime DECLARE @dateto datetime EXECUTE @RC = [dbo].[raport_pensji_pracownikow] @dateFrom='" + dateFrom.ToString("yyyy-MM-dd") + "', @dateTo='" + dateTo.ToString("yyyy-MM-dd") + "'";
+            res = SQLObject.SendCommand(query);
+            Pdf.Save("Raport Pensji Pracowników", res);
+
+        }
+        public static void GenerateWorkTimeReport(DateTime dateFrom, DateTime dateTo)
         {
             Validation.ValidateDates(dateFrom, dateTo);
 
-            zapytanie = "SELECT dbo.\"Schedule\".userId AS \"Identryfikator\",dbo.g1_pearson.first_name AS \"Imie\", dbo.g1_pearson.last_name AS \"Nazwisko\",CONVERT(TIME, DATEADD(s, SUM((DATEPART(hh, CAST(dbo.\"Schedule\".dateTo - dbo.\"Schedule\".dateFrom AS Time(0))) * 3600) + (DATEPART(mi, CAST(dbo.\"Schedule\".dateTo - dbo.\"Schedule\".dateFrom AS Time(0))) * 60) + DATEPART(ss, CAST(dbo.\"Schedule\".dateTo - dbo.\"Schedule\".dateFrom AS Time(0)))), 0)) AS \"Czas pracy\" FROM dbo.\"Schedule\" INNER JOIN dbo.g1_user ON dbo.g1_user.id_user = dbo.\"Schedule\".userId INNER JOIN dbo.g1_pearson ON dbo.g1_pearson.id_Pearson = dbo.g1_user.id_Pearson GROUP BY dbo.\"Schedule\".userId, dbo.g1_pearson.first_name, dbo.g1_pearson.last_name;";
-            
-            res = SQLObject.SendCommand(zapytanie);
-            Pdf.Save("Raport Czasu Pracowników", res);
+            query = "DECLARE @RC int DECLARE @dateFrom datetime DECLARE @dateTo datetime EXECUTE @RC = [dbo].[raport_podsumowania_czasu_pracy_pracownikow] @dateFrom='" + dateFrom.ToString("yyyy-MM-dd") + "', @dateTo='" + dateTo.ToString("yyyy-MM-dd") + "'";
+
+            res = SQLObject.SendCommand(query);
+            Pdf.Save("Raport Czasu Pracy Pracowników", res);
         }
         public static void GenerateIndividualSalary(DateTime dateFrom, DateTime dateTo, long userId, string name)
         {
+            Validation.ValidateDatesInd(dateFrom, dateTo, userId, name);
 
+            query = "DECLARE @RC int DECLARE @id_pracownika bigint DECLARE @datefrom datetime DECLARE @dateto datetime EXECUTE @RC = [dbo].[raport_pensji_indywidualnego_pracownika] @id_pracownika='"+userId+"' ,@dateFrom='" + dateFrom.ToString("yyyy-MM-dd") + "', @dateTo='" + dateTo.ToString("yyyy-MM-dd") + "'";
+
+            res = SQLObject.SendCommand(query);
+
+            Pdf.Save("Raport indywidualnego czasu pracy pracownika", res);
         }
 
         public static void GenerateIndividualWorkTime(DateTime dateFrom, DateTime dateTo, long userId, string name)
         {
             Validation.ValidateDatesInd(dateFrom, dateTo, userId, name);
 
-            zapytanie = "DECLARE @RC int DECLARE @id_pracownika bigint DECLARE @datefrom datetime DECLARE @dateto datetime EXECUTE @RC = [dbo].[raport_pensji_indywidualnego_pracownika] @id_pracownika ="+userId+", @datefrom='"+dateFrom.ToString("yyyy-MM-dd")+ "', @dateto='"+ dateTo.ToString("yyyy-MM-dd")+"'";
+            query = "DECLARE @RC int DECLARE @userid bigint DECLARE @dateFrom datetime DECLARE @dateTo datetime EXECUTE @RC = [dbo].[raport_podsumowania_czasu_pracy_indywidualngo_pracownika] @userid =" + userId+", @datefrom='"+dateFrom.ToString("yyyy-MM-dd")+ "', @dateto='"+ dateTo.ToString("yyyy-MM-dd")+"'";
 
-            res = SQLObject.SendCommand(zapytanie);
+            res = SQLObject.SendCommand(query);
 
             Pdf.Save("Raport Czasu Pracownika Indywidualnego -  "+name, res);
 
@@ -58,9 +72,9 @@ namespace Modul_raportow
 
             Validation.ValidateDates(dateFrom, dateTo);
 
-            zapytanie = "DECLARE @RC int DECLARE @data1 datetime DECLARE @data2 datetime EXECUTE @RC = [dbo].[raport_sprzedanego_jedzenia] @datefrom='" + dateFrom.ToString("yyyy-MM-dd") + "', @dateto='" + dateTo.ToString("yyyy-MM-dd") + "';";
+            query = "DECLARE @RC int DECLARE @data1 datetime DECLARE @data2 datetime EXECUTE @RC = [dbo].[raport_sprzedanego_jedzenia] @datefrom='" + dateFrom.ToString("yyyy-MM-dd") + "', @dateto='" + dateTo.ToString("yyyy-MM-dd") + "';";
 
-            res = SQLObject.SendCommand(zapytanie);
+            res = SQLObject.SendCommand(query);
 
             Pdf.Save("Raport zestawienia sprzedanego jedzenia", res);
 
