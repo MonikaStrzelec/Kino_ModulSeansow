@@ -15,12 +15,13 @@ namespace Modul_raportow
 {
     class Pdf
     {
-        static readonly PdfFont helvetica = PdfFontFactory.CreateFont(StandardFonts.HELVETICA, "CP1250");
+        private static PdfFont helvetica = null;
 
         static string exportFolder = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
         public static Table ToTable(DataTable data)
         {
+            resetFont();
             Table res = new Table(data.Columns.Count);
             res.UseAllAvailableWidth();
             foreach (DataColumn column in data.Columns)
@@ -38,49 +39,63 @@ namespace Modul_raportow
             }
             return res;
         }
-
+        
         public static void Save(string name, DataTable data)
         {
+            resetFont();
             string genTime = DateTime.Today.ToShortDateString();
             string filename = name.Replace(" ","")+" "+genTime+" .pdf";
-            
 
-            string exportFile = System.IO.Path.Combine(exportFolder, filename);
-            using (var writer = new PdfWriter(exportFile))
+            try
             {
-                using (var pdf = new PdfDocument(writer))
-                {
-                    Document doc = new Document(pdf);
-                    Paragraph title = new Paragraph(name).SetFont(helvetica);
-                    title.SetFontSize(21);
-                    doc.Add(new Paragraph(genTime).SetFont(helvetica));
-                    doc.Add(title);
-                    doc.Add(ToTable(data));
-                    //NumberPages(pdf, doc);
-                    doc.Close();
-                    pdf.Close();
-                }
+                string exportFile = System.IO.Path.Combine(exportFolder, filename);
+
+                PdfWriter writer = new PdfWriter(exportFile);
+                PdfDocument pdf = new PdfDocument(writer);
+                Document doc = new Document(pdf);
+                Paragraph title = new Paragraph(name).SetFont(helvetica);
+                title.SetFontSize(21);
+                doc.Add(new Paragraph(genTime).SetFont(helvetica));
+                doc.Add(title);
+                doc.Add(ToTable(data));
+                doc.Close();
+                pdf.Close();
+                writer.Close();
+
+                    
+                
+            }
+            catch (Exception e)
+            {
+                Console.Write(e);
+                throw;
             }
             
         }
-        private static void NumberPages(PdfDocument pdfDoc, Document doc)
+
+        private static void resetFont() // funkcja tworzy nową czcionke ponieważ pdffont przypisuje się do dokumentu pdf co uniemożliwia użycia jej w innym pdf'ie
         {
-            int numberOfPages = pdfDoc.GetNumberOfPages();
-            for (int i = 1; i <= numberOfPages; i++)
-            {
-
-                // Write aligned text to the specified by parameters point
-               try
-                {
-                    doc.ShowTextAligned(new Paragraph(String.Format("page %s of %s", i, numberOfPages)),
-                        559, 806, i, TextAlignment.RIGHT, VerticalAlignment.TOP, 0);
-                }
-                catch(Exception e)
-                {
-                    Console.WriteLine(e);
-                }
-            }
+            helvetica = PdfFontFactory.CreateFont(StandardFonts.HELVETICA, "CP1250"); 
         }
+
+        //private static void NumberPages(PdfDocument pdfDoc, Document doc)
+        //{
+        //    int numberOfPages = pdfDoc.GetNumberOfPages();
+        //    for (int i = 1; i <= numberOfPages; i++)
+        //    {
+
+        //        // Write aligned text to the specified by parameters point
+        //       try
+        //        {
+        //            doc.ShowTextAligned(new Paragraph(String.Format("page %s of %s", i, numberOfPages)),
+        //                559, 806, i, TextAlignment.RIGHT, VerticalAlignment.TOP, 0);
+        //        }
+        //        catch(Exception e)
+        //        {
+        //            Console.WriteLine(e);
+        //        }
+        //    }
+        //}
     }
    
 }
