@@ -66,7 +66,17 @@ namespace Modul_raportow
             Pdf.Save("Raport Czasu Pracownika Indywidualnego -  "+name, res);
 
         }
-        public static void GenerateIncomeReport(DateTime dateFrom, DateTime dateTo) { }
+        public static void GenerateIncomeReport(DateTime dateFrom, DateTime dateTo)
+        {
+            Validation.ValidateDates(dateFrom, dateTo);
+
+            query = "DECLARE @RC int DECLARE @dateFrom datetime DECLARE @dateTo datetime EXECUTE @RC = [dbo].[raport_przychodow_kina] @datefrom='" + dateFrom.ToString("yyyy-MM-dd") + "', @dateto='" + dateTo.ToString("yyyy-MM-dd") + "'";
+
+            res = SQLObject.SendCommand(query);
+
+            Pdf.Save("Raport przychodów kina", res);
+
+        }
         public static void GenerateFoodSaleReport(DateTime dateFrom, DateTime dateTo)
         {
 
