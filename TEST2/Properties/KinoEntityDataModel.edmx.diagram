@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="265b143412294d1a853c8c35900c0b43" Name="Diagram1">
+        <EntityTypeShape EntityType="KinoModel.Dim" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KinoModel.DimsMovie" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KinoModel.Hall" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KinoModel.Movie" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KinoModel.MovieState" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KinoModel.MovieType" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KinoModel.Pack" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KinoModel.PackPO" Width="1.5" PointX="10" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KinoModel.Performance" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KinoModel.Person" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KinoModel.PersonType" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KinoModel.Product" Width="1.5" PointX="7.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KinoModel.Sale" Width="1.5" PointX="7.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KinoModel.SalePO" Width="1.5" PointX="10" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KinoModel.sysdiagram" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KinoModel.Timetable" Width="1.5" PointX="7.5" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KinoModel.MoviePerson" Width="1.5" PointX="5.5" PointY="7.625" IsExpanded="true" />
+        <AssociationConnector Association="KinoModel.fk_dimmovie" ManuallyRouted="false" />
+        <AssociationConnector Association="KinoModel.FK_Hall_Dim" ManuallyRouted="false" />
+        <AssociationConnector Association="KinoModel.fk_moviedim" ManuallyRouted="false" />
+        <AssociationConnector Association="KinoModel.FK_Performance_Hall" ManuallyRouted="false" />
+        <AssociationConnector Association="KinoModel.fk_movie" ManuallyRouted="false" />
+        <AssociationConnector Association="KinoModel.fk_moviestate" ManuallyRouted="false" />
+        <AssociationConnector Association="KinoModel.fk_movietype" ManuallyRouted="false" />
+        <AssociationConnector Association="KinoModel.FK_Performance_Movie" ManuallyRouted="false" />
+        <AssociationConnector Association="KinoModel.FK__PackPO__PackID__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="KinoModel.FK__SalePO__PackID__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="KinoModel.FK__PackPO__ProductI__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="KinoModel.FK_Timetable_Performance" ManuallyRouted="false" />
+        <AssociationConnector Association="KinoModel.fk_person" ManuallyRouted="false" />
+        <AssociationConnector Association="KinoModel.fk_persontype" ManuallyRouted="false" />
+        <AssociationConnector Association="KinoModel.FK__SalePO__SaleID__534D60F1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
