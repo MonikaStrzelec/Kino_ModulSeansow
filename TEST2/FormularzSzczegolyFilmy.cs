@@ -1,4 +1,5 @@
-﻿using Kino.Properties;
+﻿using Kino.Domena;
+using Kino.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,60 +22,106 @@ namespace Kino
         SqlDataAdapter sda;
         SqlCommandBuilder scb;
         DataTable dt;
+        private List<Timetable> timetableFilterList = null;
 
         KinoEntities context;
         private Timetable element;
 
         public FormularzSzczegolyFilmy(Timetable element)
         {
-            InitializeComponent();
             this.element = element;
+            InitializeComponent();
         }
+
+        
+
 
         private void FormularzSzczegolyFilmy_Load(object sender, EventArgs e)
         {
-                try
-                {
+            this.dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;  //liknięcie w dowolnym miejscu w wierszu automatycznie zaznacza cały wiersz
+            this.dataGridView1.MultiSelect = false;
+
+            try
+            {
                 dataGridView1.AutoGenerateColumns = true;
 
                 context = new KinoEntities(); //tworzenie obiekyu bazy danych
-                    context.Timetables.Load(); //ładowanie tabeli
+                context.Timetables.Load(); //ładowanie tabeli
 
-                TimetableDomainClass domain = new TimetableDomainClass(this.element);// warstwa domenowa 
-
-                timetableDomainClassBindingSource.DataSource = new BindingList<TimetableDomainClass>() { domain };
-
+                TimetableDomain domain = new TimetableDomain(this.element);// warstwa domenowa przygotująca wynik
+                timetableDomainClassBindingSource.DataSource = new BindingList<TimetableDomain>() { domain };
             }
-                catch
-                {
-                    MessageBox.Show("Sprawdź połączenie z bazą danych!");
-                }
-            
+            catch
+            {
+                 MessageBox.Show("Sprawdź połączenie z bazą danych!");
+            } 
         }
-    }
 
-    class TimetableDomainClass {
-        public string title { get; set; }
-        public string description { get; set; }
-        public string movieType { get; set; }
 
-        public DateTime dataTime { get; set; }
-        public string hallName { get; set; }
-        public string hallType { get; set; }
+        private void button2_Click(object sender, EventArgs e)
+        { //USUWANIE SEANSU
 
-        public TimeSpan movieTime { get; set; }
-
-        public TimetableDomainClass(Timetable t) {
-            this.title = t.Performance1.Movie1.title;
-            this.description = t.Performance1.Movie1.description;
-            this.movieType = t.Performance1.Movie1.MovieType1.name;
-            this.dataTime = t.performanceDate;
-            this.hallName = t.Performance1.Hall1.name;
-            this.hallType = t.Performance1.Hall1.Dim.name;
-            this.movieTime = t.Performance1.Movie1.movieTime;
-
+            string info = "Czy na pewno chcesz usunąć seans?";
+            string caption = "UWAGA!";
+            MessageBoxButtons przycisk = MessageBoxButtons.YesNo;
+            DialogResult result;
+            result = MessageBox.Show(info, caption, przycisk);
+            if (result == DialogResult.Yes)
+            {
+                context.Timetables.Remove(element);
+                context.SaveChanges();
+                this.Close();
+            }
+            //??? Refresh();
         }
-        
 
+
+        private void button1_Click(object sender, EventArgs e)
+        { //DODAWANIE SEANSU
+
+            DodawanieSeansow nowySeans = new DodawanieSeansow(); //WYWOŁYWANIE FORMATKI
+            nowySeans.Parent = this;
+            nowySeans.Show();
+        }
+
+
+        private void button3_Click(object sender, EventArgs e)
+        { //EDYCJA SEANSU
+
+            int selectedRowCount = dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount > 0)
+            {
+                //Timetable selectedElement = timetableFilterList[dataGridView1.SelectedRows[0].Index];
+                DodawanieSeansow dodawanieSeansow = new DodawanieSeansow(element);
+                dodawanieSeansow.Parent = this;
+                dodawanieSeansow.Show();
+            }
+        }
+
+
+        private void sprawdSprzedarz(Timetable timetable)
+        {  //WARUNEK edycji, usuwania
+
+         //   if (timetable.Performance1.idReservation.status == "aktywna")
+         //if(true)
+         //   {
+         //       MessageBox.Show("Przykro mi, jest zarezerwowany bilet na ten seans");
+         //   }
+
+         //   else if (Timetable.performanceDate + Performance.Movie.movieTime + Performance.adsDuration = DateTime.Now)
+         //   {
+         //       MessageBox.Show("nie ma mozliwości edycji/usunięcia filmu. Własnie trwa");
+         //   }
+
+         //   else if (Timetable.performanceDate + Performance.Movie.movieTime + Performance.adsDuration < DateTime.Now)
+         //   {
+         //       MessageBox.Show("nie ma mozliwości edycji filmu bo już się odbył");
+         //   }
+
+         //   else (Timetable.performanceDate + Performance.Movie.movieTime + Performance.adsDuration > DateTime.Now)
+         //   {
+         //       //idź dalej
+         //   }
+        }
     }
 }
