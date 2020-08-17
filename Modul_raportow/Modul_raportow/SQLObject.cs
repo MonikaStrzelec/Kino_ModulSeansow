@@ -27,7 +27,6 @@ namespace Modul_raportow
             {
                 DataTable data = new DataTable();
                 con.Open();
-                //MessageBox.Show(con.State.ToString());
                 SqlCommand command = new SqlCommand(query, con);
 
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
