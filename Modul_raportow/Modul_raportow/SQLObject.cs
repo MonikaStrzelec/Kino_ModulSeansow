@@ -18,7 +18,7 @@ namespace Modul_raportow
 
 
         static SqlConnection con = new SqlConnection("Data Source=35.228.52.182;Initial Catalog=Kino;User ID=sqlserver;Password=Pa$$w0rd");
-
+       
         public static DataTable SendCommand(string query)
         {
 
@@ -27,8 +27,7 @@ namespace Modul_raportow
             {
                 DataTable data = new DataTable();
                 con.Open();
-                //MessageBox.Show("Połączono");
-
+                //MessageBox.Show(con.State.ToString());
                 SqlCommand command = new SqlCommand(query, con);
 
                 SqlDataAdapter adapter = new SqlDataAdapter(command);
