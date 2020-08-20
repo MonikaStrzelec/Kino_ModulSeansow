@@ -37,6 +37,32 @@
         <AssociationConnector Association="KinoModel.fk_person" ManuallyRouted="false" />
         <AssociationConnector Association="KinoModel.fk_persontype" ManuallyRouted="false" />
         <AssociationConnector Association="KinoModel.FK__SalePO__SaleID__534D60F1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="KinoModel.g1_code" Width="1.5" PointX="12.375" PointY="0.75" />
+        <EntityTypeShape EntityType="KinoModel.g1_pearson" Width="1.5" PointX="3.25" PointY="16.625" />
+        <EntityTypeShape EntityType="KinoModel.g1_permission" Width="1.5" PointX="5.5" PointY="16" />
+        <EntityTypeShape EntityType="KinoModel.g1_permission_list" Width="1.5" PointX="7.75" PointY="15.625" />
+        <EntityTypeShape EntityType="KinoModel.g1_position" Width="1.5" PointX="3.25" PointY="19.25" />
+        <EntityTypeShape EntityType="KinoModel.g1_user" Width="1.5" PointX="5.5" PointY="11.25" />
+        <EntityTypeShape EntityType="KinoModel.Reservation" Width="1.5" PointX="9.75" PointY="23.75" />
+        <EntityTypeShape EntityType="KinoModel.Schedule" Width="1.5" PointX="10.75" PointY="11.5" />
+        <EntityTypeShape EntityType="KinoModel.ScheduleStatu" Width="1.5" PointX="8.5" PointY="21.25" />
+        <EntityTypeShape EntityType="KinoModel.Seat" Width="1.5" PointX="12.75" PointY="4.75" />
+        <EntityTypeShape EntityType="KinoModel.Task" Width="1.5" PointX="8.5" PointY="18.75" />
+        <EntityTypeShape EntityType="KinoModel.Ticket" Width="1.5" PointX="15" PointY="14.375" />
+        <AssociationConnector Association="KinoModel.FK_g1_user_g1_pearson" />
+        <AssociationConnector Association="KinoModel.FK_g1_permission_list_g1_permission" />
+        <AssociationConnector Association="KinoModel.FK_g1_permission_list_g1_permission_list" />
+        <AssociationConnector Association="KinoModel.FK_g1_permission_list_g1_user" />
+        <AssociationConnector Association="KinoModel.FK_g1_user_g1_position" />
+        <AssociationConnector Association="KinoModel.FK__Schedule__userId__4F12BBB9" />
+        <AssociationConnector Association="KinoModel.FK_UserID" />
+        <AssociationConnector Association="KinoModel.FK_Seat_Hall" />
+        <AssociationConnector Association="KinoModel.FK_Reservation_Timetable" />
+        <AssociationConnector Association="KinoModel.FK_Ticket_Reservation" />
+        <AssociationConnector Association="KinoModel.FK__Schedule__status__50FB042B" />
+        <AssociationConnector Association="KinoModel.FK__Schedule__taskId__5006DFF2" />
+        <AssociationConnector Association="KinoModel.FK_Seat_Timetable" />
+        <AssociationConnector Association="KinoModel.FK_Ticket_Seat" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

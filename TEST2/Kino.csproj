@@ -91,6 +91,24 @@
     <Compile Include="Properties\DimsMovie.cs">
       <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Properties\g1_code.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\g1_pearson.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\g1_permission.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\g1_permission_list.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\g1_position.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\g1_user.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Hall.cs">
       <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
     </Compile>
@@ -139,13 +157,31 @@
     <Compile Include="Properties\Product.cs">
       <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Reservation.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Sale.cs">
       <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\SalePO.cs">
       <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Schedule.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\ScheduleStatu.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Seat.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\sysdiagram.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Task.cs">
+      <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Ticket.cs">
       <DependentUpon>KinoEntityDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\Timetable.cs">

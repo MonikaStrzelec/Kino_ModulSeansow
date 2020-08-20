@@ -18,14 +18,18 @@ namespace Kino.Properties
         public Hall()
         {
             this.Performances = new HashSet<Performance>();
+            this.Seats = new HashSet<Seat>();
         }
     
         public int id { get; set; }
         public string name { get; set; }
         public int parameter { get; set; }
+        public int seatsAmount { get; set; }
     
         public virtual Dim Dim { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Performance> Performances { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Seat> Seats { get; set; }
     }
 }

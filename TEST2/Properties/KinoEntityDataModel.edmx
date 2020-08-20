@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="KinoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="KinoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Dim">
           <Key>
             <PropertyRef Name="id" />
@@ -20,6 +20,57 @@
           <Property Name="movie" Type="int" Nullable="false" />
           <Property Name="dim" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="g1_code">
+          <Key>
+            <PropertyRef Name="id_code" />
+          </Key>
+          <Property Name="id_code" Type="int" Nullable="false" />
+          <Property Name="id_user" Type="int" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="code_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="g1_pearson">
+          <Key>
+            <PropertyRef Name="id_pearson" />
+          </Key>
+          <Property Name="id_pearson" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="g1_permission">
+          <Key>
+            <PropertyRef Name="id_permission" />
+          </Key>
+          <Property Name="id_permission" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="permission_name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="g1_permission_list">
+          <Key>
+            <PropertyRef Name="id_permission_list" />
+          </Key>
+          <Property Name="id_permission_list" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_user" Type="int" Nullable="false" />
+          <Property Name="id_permission" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="g1_position">
+          <Key>
+            <PropertyRef Name="id_position" />
+          </Key>
+          <Property Name="id_position" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_position" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="salary" Type="int" />
+        </EntityType>
+        <EntityType Name="g1_user">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_pearson" Type="int" />
+          <Property Name="id_position" Type="int" />
+          <Property Name="login" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="e_mail" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Hall">
           <Key>
             <PropertyRef Name="id" />
@@ -27,6 +78,7 @@
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="name" Type="nchar" MaxLength="15" Nullable="false" />
           <Property Name="parameter" Type="int" Nullable="false" />
+          <Property Name="seatsAmount" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Movie">
           <Key>
@@ -89,7 +141,7 @@ warning 6002: The table/view 'Kino.dbo.MoviePerson' does not have a primary key 
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="movie" Type="int" Nullable="false" />
           <Property Name="hall" Type="int" Nullable="false" />
           <Property Name="adsDuration" Type="time" Precision="7" Nullable="false" />
@@ -119,6 +171,17 @@ warning 6002: The table/view 'Kino.dbo.MoviePerson' does not have a primary key 
           <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Amount" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="firstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idTimetable" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Sale">
           <Key>
             <PropertyRef Name="IDSale" />
@@ -137,6 +200,35 @@ warning 6002: The table/view 'Kino.dbo.MoviePerson' does not have a primary key 
           <Property Name="PackID" Type="int" />
           <Property Name="Price" Type="money" Nullable="false" />
         </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" />
+          <Property Name="taskId" Type="int" />
+          <Property Name="dateFrom" Type="datetime" />
+          <Property Name="dateTo" Type="datetime" />
+          <Property Name="statusId" Type="int" />
+        </EntityType>
+        <EntityType Name="ScheduleStatus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Seat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="row" Type="int" Nullable="false" />
+          <Property Name="number" Type="int" Nullable="false" />
+          <Property Name="status" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="id_Hall" Type="int" Nullable="false" />
+          <Property Name="id_Timetable" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -147,11 +239,29 @@ warning 6002: The table/view 'Kino.dbo.MoviePerson' does not have a primary key 
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <EntityType Name="Timetable">
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="30" />
+          <Property Name="description" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Ticket">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="id_Reservation" Type="int" Nullable="false" />
+          <Property Name="id_Seat" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Timetable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="performance" Type="int" Nullable="false" />
           <Property Name="performanceDate" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
@@ -203,6 +313,42 @@ warning 6002: The table/view 'Kino.dbo.MoviePerson' does not have a primary key 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Schedule__status__50FB042B">
+          <End Role="ScheduleStatus" Type="Self.ScheduleStatus" Multiplicity="0..1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScheduleStatus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Schedule__taskId__5006DFF2">
+          <End Role="Task" Type="Self.Task" Multiplicity="0..1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="taskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Schedule__userId__4F12BBB9">
+          <End Role="g1_user" Type="Self.g1_user" Multiplicity="0..1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="g1_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_dimmovie">
           <End Role="Dim" Type="Self.Dim" Multiplicity="1" />
           <End Role="DimsMovie" Type="Self.DimsMovie" Multiplicity="*" />
@@ -212,6 +358,66 @@ warning 6002: The table/view 'Kino.dbo.MoviePerson' does not have a primary key 
             </Principal>
             <Dependent Role="DimsMovie">
               <PropertyRef Name="dim" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_g1_permission_list_g1_permission">
+          <End Role="g1_permission" Type="Self.g1_permission" Multiplicity="1" />
+          <End Role="g1_permission_list" Type="Self.g1_permission_list" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="g1_permission">
+              <PropertyRef Name="id_permission" />
+            </Principal>
+            <Dependent Role="g1_permission_list">
+              <PropertyRef Name="id_permission" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_g1_permission_list_g1_permission_list">
+          <End Role="g1_permission_list" Type="Self.g1_permission_list" Multiplicity="1" />
+          <End Role="g1_permission_list1" Type="Self.g1_permission_list" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="g1_permission_list">
+              <PropertyRef Name="id_permission_list" />
+            </Principal>
+            <Dependent Role="g1_permission_list1">
+              <PropertyRef Name="id_permission_list" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_g1_permission_list_g1_user">
+          <End Role="g1_user" Type="Self.g1_user" Multiplicity="1" />
+          <End Role="g1_permission_list" Type="Self.g1_permission_list" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="g1_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="g1_permission_list">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_g1_user_g1_pearson">
+          <End Role="g1_pearson" Type="Self.g1_pearson" Multiplicity="0..1" />
+          <End Role="g1_user" Type="Self.g1_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="g1_pearson">
+              <PropertyRef Name="id_pearson" />
+            </Principal>
+            <Dependent Role="g1_user">
+              <PropertyRef Name="id_pearson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_g1_user_g1_position">
+          <End Role="g1_position" Type="Self.g1_position" Multiplicity="0..1" />
+          <End Role="g1_user" Type="Self.g1_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="g1_position">
+              <PropertyRef Name="id_position" />
+            </Principal>
+            <Dependent Role="g1_user">
+              <PropertyRef Name="id_position" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -323,6 +529,66 @@ warning 6002: The table/view 'Kino.dbo.MoviePerson' does not have a primary key 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Reservation_Timetable">
+          <End Role="Timetable" Type="Self.Timetable" Multiplicity="1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Timetable">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="idTimetable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Seat_Hall">
+          <End Role="Hall" Type="Self.Hall" Multiplicity="1" />
+          <End Role="Seat" Type="Self.Seat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hall">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Seat">
+              <PropertyRef Name="id_Hall" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Seat_Timetable">
+          <End Role="Timetable" Type="Self.Timetable" Multiplicity="1" />
+          <End Role="Seat" Type="Self.Seat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Timetable">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Seat">
+              <PropertyRef Name="id_Timetable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Reservation">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="id_Reservation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Seat">
+          <End Role="Seat" Type="Self.Seat" Multiplicity="1" />
+          <End Role="Ticket" Type="Self.Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seat">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="id_Seat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Timetable_Performance">
           <End Role="Performance" Type="Self.Performance" Multiplicity="1" />
           <End Role="Timetable" Type="Self.Timetable" Multiplicity="*" />
@@ -335,9 +601,27 @@ warning 6002: The table/view 'Kino.dbo.MoviePerson' does not have a primary key 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserID">
+          <End Role="g1_user" Type="Self.g1_user" Multiplicity="1" />
+          <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="g1_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="KinoModelStoreContainer">
           <EntitySet Name="Dim" EntityType="Self.Dim" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DimsMovie" EntityType="Self.DimsMovie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="g1_code" EntityType="Self.g1_code" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="g1_pearson" EntityType="Self.g1_pearson" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="g1_permission" EntityType="Self.g1_permission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="g1_permission_list" EntityType="Self.g1_permission_list" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="g1_position" EntityType="Self.g1_position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="g1_user" EntityType="Self.g1_user" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Hall" EntityType="Self.Hall" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Movie" EntityType="Self.Movie" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MovieState" EntityType="Self.MovieState" Schema="dbo" store:Type="Tables" />
@@ -348,9 +632,15 @@ warning 6002: The table/view 'Kino.dbo.MoviePerson' does not have a primary key 
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PersonType" EntityType="Self.PersonType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Sale" EntityType="Self.Sale" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SalePO" EntityType="Self.SalePO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScheduleStatus" EntityType="Self.ScheduleStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seat" EntityType="Self.Seat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Timetable" EntityType="Self.Timetable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MoviePerson" EntityType="Self.MoviePerson" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -376,9 +666,41 @@ warning 6002: The table/view 'Kino.dbo.MoviePerson' does not have a primary key 
             <End Role="Sale" EntitySet="Sale" />
             <End Role="SalePO" EntitySet="SalePO" />
           </AssociationSet>
+          <AssociationSet Name="FK__Schedule__status__50FB042B" Association="Self.FK__Schedule__status__50FB042B">
+            <End Role="ScheduleStatus" EntitySet="ScheduleStatus" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Schedule__taskId__5006DFF2" Association="Self.FK__Schedule__taskId__5006DFF2">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Schedule__userId__4F12BBB9" Association="Self.FK__Schedule__userId__4F12BBB9">
+            <End Role="g1_user" EntitySet="g1_user" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
           <AssociationSet Name="fk_dimmovie" Association="Self.fk_dimmovie">
             <End Role="Dim" EntitySet="Dim" />
             <End Role="DimsMovie" EntitySet="DimsMovie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_g1_permission_list_g1_permission" Association="Self.FK_g1_permission_list_g1_permission">
+            <End Role="g1_permission" EntitySet="g1_permission" />
+            <End Role="g1_permission_list" EntitySet="g1_permission_list" />
+          </AssociationSet>
+          <AssociationSet Name="FK_g1_permission_list_g1_permission_list" Association="Self.FK_g1_permission_list_g1_permission_list">
+            <End Role="g1_permission_list" EntitySet="g1_permission_list" />
+            <End Role="g1_permission_list1" EntitySet="g1_permission_list" />
+          </AssociationSet>
+          <AssociationSet Name="FK_g1_permission_list_g1_user" Association="Self.FK_g1_permission_list_g1_user">
+            <End Role="g1_user" EntitySet="g1_user" />
+            <End Role="g1_permission_list" EntitySet="g1_permission_list" />
+          </AssociationSet>
+          <AssociationSet Name="FK_g1_user_g1_pearson" Association="Self.FK_g1_user_g1_pearson">
+            <End Role="g1_pearson" EntitySet="g1_pearson" />
+            <End Role="g1_user" EntitySet="g1_user" />
+          </AssociationSet>
+          <AssociationSet Name="FK_g1_user_g1_position" Association="Self.FK_g1_user_g1_position">
+            <End Role="g1_position" EntitySet="g1_position" />
+            <End Role="g1_user" EntitySet="g1_user" />
           </AssociationSet>
           <AssociationSet Name="FK_Hall_Dim" Association="Self.FK_Hall_Dim">
             <End Role="Dim" EntitySet="Dim" />
@@ -416,13 +738,36 @@ warning 6002: The table/view 'Kino.dbo.MoviePerson' does not have a primary key 
             <End Role="PersonType" EntitySet="PersonType" />
             <End Role="MoviePerson" EntitySet="MoviePerson" />
           </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Timetable" Association="Self.FK_Reservation_Timetable">
+            <End Role="Timetable" EntitySet="Timetable" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Seat_Hall" Association="Self.FK_Seat_Hall">
+            <End Role="Hall" EntitySet="Hall" />
+            <End Role="Seat" EntitySet="Seat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Seat_Timetable" Association="Self.FK_Seat_Timetable">
+            <End Role="Timetable" EntitySet="Timetable" />
+            <End Role="Seat" EntitySet="Seat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Reservation" Association="Self.FK_Ticket_Reservation">
+            <End Role="Reservation" EntitySet="Reservation" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Seat" Association="Self.FK_Ticket_Seat">
+            <End Role="Seat" EntitySet="Seat" />
+            <End Role="Ticket" EntitySet="Ticket" />
+          </AssociationSet>
           <AssociationSet Name="FK_Timetable_Performance" Association="Self.FK_Timetable_Performance">
             <End Role="Performance" EntitySet="Performance" />
             <End Role="Timetable" EntitySet="Timetable" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserID" Association="Self.FK_UserID">
+            <End Role="g1_user" EntitySet="g1_user" />
+            <End Role="Sale" EntitySet="Sale" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="KinoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -454,6 +799,8 @@ warning 6002: The table/view 'Kino.dbo.MoviePerson' does not have a primary key 
           <Property Name="parameter" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Dim" Relationship="Self.FK_Hall_Dim" FromRole="Hall" ToRole="Dim" />
           <NavigationProperty Name="Performances" Relationship="Self.FK_Performance_Hall" FromRole="Hall" ToRole="Performance" />
+          <Property Name="seatsAmount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Seats" Relationship="KinoModel.FK_Seat_Hall" FromRole="Hall" ToRole="Seat" />
         </EntityType>
         <EntityType Name="Movie">
           <Key>
@@ -558,6 +905,7 @@ warning 6002: The table/view 'Kino.dbo.MoviePerson' does not have a primary key 
           <Property Name="SaleDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <NavigationProperty Name="SalePOes" Relationship="Self.FK__SalePO__SaleID__534D60F1" FromRole="Sale" ToRole="SalePO" />
+          <NavigationProperty Name="g1_user" Relationship="KinoModel.FK_UserID" FromRole="Sale" ToRole="g1_user" />
         </EntityType>
         <EntityType Name="SalePO">
           <Key>
@@ -588,6 +936,8 @@ warning 6002: The table/view 'Kino.dbo.MoviePerson' does not have a primary key 
           <Property Name="performance" Type="Int32" Nullable="false" />
           <Property Name="performanceDate" Type="DateTime" Nullable="false" Precision="7" />
           <NavigationProperty Name="Performance1" Relationship="Self.FK_Timetable_Performance" FromRole="Timetable" ToRole="Performance" />
+          <NavigationProperty Name="Reservations" Relationship="KinoModel.FK_Reservation_Timetable" FromRole="Timetable" ToRole="Reservation" />
+          <NavigationProperty Name="Seats" Relationship="KinoModel.FK_Seat_Timetable" FromRole="Timetable" ToRole="Seat" />
         </EntityType>
         <EntityType Name="MoviePerson">
           <Key>
@@ -862,7 +1212,376 @@ warning 6002: The table/view 'Kino.dbo.MoviePerson' does not have a primary key 
             <End Role="Sale" EntitySet="Sales" />
             <End Role="SalePO" EntitySet="SalePOes" />
           </AssociationSet>
+          <EntitySet Name="g1_code" EntityType="KinoModel.g1_code" />
+          <EntitySet Name="g1_pearson" EntityType="KinoModel.g1_pearson" />
+          <EntitySet Name="g1_permission" EntityType="KinoModel.g1_permission" />
+          <EntitySet Name="g1_permission_list" EntityType="KinoModel.g1_permission_list" />
+          <EntitySet Name="g1_position" EntityType="KinoModel.g1_position" />
+          <EntitySet Name="g1_user" EntityType="KinoModel.g1_user" />
+          <EntitySet Name="Reservations" EntityType="KinoModel.Reservation" />
+          <EntitySet Name="Schedules" EntityType="KinoModel.Schedule" />
+          <EntitySet Name="ScheduleStatus" EntityType="KinoModel.ScheduleStatu" />
+          <EntitySet Name="Seats" EntityType="KinoModel.Seat" />
+          <EntitySet Name="Tasks" EntityType="KinoModel.Task" />
+          <EntitySet Name="Tickets" EntityType="KinoModel.Ticket" />
+          <AssociationSet Name="FK_g1_user_g1_pearson" Association="KinoModel.FK_g1_user_g1_pearson">
+            <End Role="g1_pearson" EntitySet="g1_pearson" />
+            <End Role="g1_user" EntitySet="g1_user" />
+          </AssociationSet>
+          <AssociationSet Name="FK_g1_permission_list_g1_permission" Association="KinoModel.FK_g1_permission_list_g1_permission">
+            <End Role="g1_permission" EntitySet="g1_permission" />
+            <End Role="g1_permission_list" EntitySet="g1_permission_list" />
+          </AssociationSet>
+          <AssociationSet Name="FK_g1_permission_list_g1_permission_list" Association="KinoModel.FK_g1_permission_list_g1_permission_list">
+            <End Role="g1_permission_list" EntitySet="g1_permission_list" />
+            <End Role="g1_permission_list1" EntitySet="g1_permission_list" />
+          </AssociationSet>
+          <AssociationSet Name="FK_g1_permission_list_g1_user" Association="KinoModel.FK_g1_permission_list_g1_user">
+            <End Role="g1_user" EntitySet="g1_user" />
+            <End Role="g1_permission_list" EntitySet="g1_permission_list" />
+          </AssociationSet>
+          <AssociationSet Name="FK_g1_user_g1_position" Association="KinoModel.FK_g1_user_g1_position">
+            <End Role="g1_position" EntitySet="g1_position" />
+            <End Role="g1_user" EntitySet="g1_user" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Schedule__userId__4F12BBB9" Association="KinoModel.FK__Schedule__userId__4F12BBB9">
+            <End Role="g1_user" EntitySet="g1_user" />
+            <End Role="Schedule" EntitySet="Schedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserID" Association="KinoModel.FK_UserID">
+            <End Role="g1_user" EntitySet="g1_user" />
+            <End Role="Sale" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Seat_Hall" Association="KinoModel.FK_Seat_Hall">
+            <End Role="Hall" EntitySet="Halls" />
+            <End Role="Seat" EntitySet="Seats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Timetable" Association="KinoModel.FK_Reservation_Timetable">
+            <End Role="Timetable" EntitySet="Timetables" />
+            <End Role="Reservation" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Reservation" Association="KinoModel.FK_Ticket_Reservation">
+            <End Role="Reservation" EntitySet="Reservations" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Schedule__status__50FB042B" Association="KinoModel.FK__Schedule__status__50FB042B">
+            <End Role="ScheduleStatu" EntitySet="ScheduleStatus" />
+            <End Role="Schedule" EntitySet="Schedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Schedule__taskId__5006DFF2" Association="KinoModel.FK__Schedule__taskId__5006DFF2">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="Schedule" EntitySet="Schedules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Seat_Timetable" Association="KinoModel.FK_Seat_Timetable">
+            <End Role="Timetable" EntitySet="Timetables" />
+            <End Role="Seat" EntitySet="Seats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ticket_Seat" Association="KinoModel.FK_Ticket_Seat">
+            <End Role="Seat" EntitySet="Seats" />
+            <End Role="Ticket" EntitySet="Tickets" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="g1_code">
+          <Key>
+            <PropertyRef Name="id_code" />
+          </Key>
+          <Property Name="id_code" Type="Int32" Nullable="false" />
+          <Property Name="id_user" Type="Int32" Nullable="false" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="code_date" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="g1_pearson">
+          <Key>
+            <PropertyRef Name="id_pearson" />
+          </Key>
+          <Property Name="id_pearson" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="g1_user" Relationship="KinoModel.FK_g1_user_g1_pearson" FromRole="g1_pearson" ToRole="g1_user" />
+        </EntityType>
+        <EntityType Name="g1_permission">
+          <Key>
+            <PropertyRef Name="id_permission" />
+          </Key>
+          <Property Name="id_permission" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="permission_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="g1_permission_list" Relationship="KinoModel.FK_g1_permission_list_g1_permission" FromRole="g1_permission" ToRole="g1_permission_list" />
+        </EntityType>
+        <EntityType Name="g1_permission_list">
+          <Key>
+            <PropertyRef Name="id_permission_list" />
+          </Key>
+          <Property Name="id_permission_list" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_user" Type="Int32" Nullable="false" />
+          <Property Name="id_permission" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="g1_permission" Relationship="KinoModel.FK_g1_permission_list_g1_permission" FromRole="g1_permission_list" ToRole="g1_permission" />
+          <NavigationProperty Name="g1_permission_list1" Relationship="KinoModel.FK_g1_permission_list_g1_permission_list" FromRole="g1_permission_list" ToRole="g1_permission_list1" />
+          <NavigationProperty Name="g1_permission_list2" Relationship="KinoModel.FK_g1_permission_list_g1_permission_list" FromRole="g1_permission_list1" ToRole="g1_permission_list" />
+          <NavigationProperty Name="g1_user" Relationship="KinoModel.FK_g1_permission_list_g1_user" FromRole="g1_permission_list" ToRole="g1_user" />
+        </EntityType>
+        <EntityType Name="g1_position">
+          <Key>
+            <PropertyRef Name="id_position" />
+          </Key>
+          <Property Name="id_position" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_position" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="salary" Type="Int32" />
+          <NavigationProperty Name="g1_user" Relationship="KinoModel.FK_g1_user_g1_position" FromRole="g1_position" ToRole="g1_user" />
+        </EntityType>
+        <EntityType Name="g1_user">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_pearson" Type="Int32" />
+          <Property Name="id_position" Type="Int32" />
+          <Property Name="login" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="e_mail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="g1_pearson" Relationship="KinoModel.FK_g1_user_g1_pearson" FromRole="g1_user" ToRole="g1_pearson" />
+          <NavigationProperty Name="g1_permission_list" Relationship="KinoModel.FK_g1_permission_list_g1_user" FromRole="g1_user" ToRole="g1_permission_list" />
+          <NavigationProperty Name="g1_position" Relationship="KinoModel.FK_g1_user_g1_position" FromRole="g1_user" ToRole="g1_position" />
+          <NavigationProperty Name="Schedules" Relationship="KinoModel.FK__Schedule__userId__4F12BBB9" FromRole="g1_user" ToRole="Schedule" />
+          <NavigationProperty Name="Sales" Relationship="KinoModel.FK_UserID" FromRole="g1_user" ToRole="Sale" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="firstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idTimetable" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Timetable" Relationship="KinoModel.FK_Reservation_Timetable" FromRole="Reservation" ToRole="Timetable" />
+          <NavigationProperty Name="Tickets" Relationship="KinoModel.FK_Ticket_Reservation" FromRole="Reservation" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="taskId" Type="Int32" />
+          <Property Name="dateFrom" Type="DateTime" Precision="3" />
+          <Property Name="dateTo" Type="DateTime" Precision="3" />
+          <Property Name="statusId" Type="Int32" />
+          <NavigationProperty Name="g1_user" Relationship="KinoModel.FK__Schedule__userId__4F12BBB9" FromRole="Schedule" ToRole="g1_user" />
+          <NavigationProperty Name="ScheduleStatu" Relationship="KinoModel.FK__Schedule__status__50FB042B" FromRole="Schedule" ToRole="ScheduleStatu" />
+          <NavigationProperty Name="Task" Relationship="KinoModel.FK__Schedule__taskId__5006DFF2" FromRole="Schedule" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="ScheduleStatu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Schedules" Relationship="KinoModel.FK__Schedule__status__50FB042B" FromRole="ScheduleStatu" ToRole="Schedule" />
+        </EntityType>
+        <EntityType Name="Seat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="row" Type="Int32" Nullable="false" />
+          <Property Name="number" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="id_Hall" Type="Int32" Nullable="false" />
+          <Property Name="id_Timetable" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Hall" Relationship="KinoModel.FK_Seat_Hall" FromRole="Seat" ToRole="Hall" />
+          <NavigationProperty Name="Timetable" Relationship="KinoModel.FK_Seat_Timetable" FromRole="Seat" ToRole="Timetable" />
+          <NavigationProperty Name="Tickets" Relationship="KinoModel.FK_Ticket_Seat" FromRole="Seat" ToRole="Ticket" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Schedules" Relationship="KinoModel.FK__Schedule__taskId__5006DFF2" FromRole="Task" ToRole="Schedule" />
+        </EntityType>
+        <EntityType Name="Ticket">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="id_Reservation" Type="Int32" Nullable="false" />
+          <Property Name="id_Seat" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Reservation" Relationship="KinoModel.FK_Ticket_Reservation" FromRole="Ticket" ToRole="Reservation" />
+          <NavigationProperty Name="Seat" Relationship="KinoModel.FK_Ticket_Seat" FromRole="Ticket" ToRole="Seat" />
+        </EntityType>
+        <Association Name="FK_g1_user_g1_pearson">
+          <End Type="KinoModel.g1_pearson" Role="g1_pearson" Multiplicity="0..1" />
+          <End Type="KinoModel.g1_user" Role="g1_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="g1_pearson">
+              <PropertyRef Name="id_pearson" />
+            </Principal>
+            <Dependent Role="g1_user">
+              <PropertyRef Name="id_pearson" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_g1_permission_list_g1_permission">
+          <End Type="KinoModel.g1_permission" Role="g1_permission" Multiplicity="1" />
+          <End Type="KinoModel.g1_permission_list" Role="g1_permission_list" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="g1_permission">
+              <PropertyRef Name="id_permission" />
+            </Principal>
+            <Dependent Role="g1_permission_list">
+              <PropertyRef Name="id_permission" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_g1_permission_list_g1_permission_list">
+          <End Type="KinoModel.g1_permission_list" Role="g1_permission_list" Multiplicity="1" />
+          <End Type="KinoModel.g1_permission_list" Role="g1_permission_list1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="g1_permission_list">
+              <PropertyRef Name="id_permission_list" />
+            </Principal>
+            <Dependent Role="g1_permission_list1">
+              <PropertyRef Name="id_permission_list" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_g1_permission_list_g1_user">
+          <End Type="KinoModel.g1_user" Role="g1_user" Multiplicity="1" />
+          <End Type="KinoModel.g1_permission_list" Role="g1_permission_list" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="g1_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="g1_permission_list">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_g1_user_g1_position">
+          <End Type="KinoModel.g1_position" Role="g1_position" Multiplicity="0..1" />
+          <End Type="KinoModel.g1_user" Role="g1_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="g1_position">
+              <PropertyRef Name="id_position" />
+            </Principal>
+            <Dependent Role="g1_user">
+              <PropertyRef Name="id_position" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Schedule__userId__4F12BBB9">
+          <End Type="KinoModel.g1_user" Role="g1_user" Multiplicity="0..1" />
+          <End Type="KinoModel.Schedule" Role="Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="g1_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserID">
+          <End Type="KinoModel.g1_user" Role="g1_user" Multiplicity="1" />
+          <End Type="KinoModel.Sale" Role="Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="g1_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Seat_Hall">
+          <End Type="KinoModel.Hall" Role="Hall" Multiplicity="1" />
+          <End Type="KinoModel.Seat" Role="Seat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hall">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Seat">
+              <PropertyRef Name="id_Hall" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Timetable">
+          <End Type="KinoModel.Timetable" Role="Timetable" Multiplicity="1" />
+          <End Type="KinoModel.Reservation" Role="Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Timetable">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="idTimetable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Reservation">
+          <End Type="KinoModel.Reservation" Role="Reservation" Multiplicity="1" />
+          <End Type="KinoModel.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="id_Reservation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Schedule__status__50FB042B">
+          <End Type="KinoModel.ScheduleStatu" Role="ScheduleStatu" Multiplicity="0..1" />
+          <End Type="KinoModel.Schedule" Role="Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScheduleStatu">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Schedule__taskId__5006DFF2">
+          <End Type="KinoModel.Task" Role="Task" Multiplicity="0..1" />
+          <End Type="KinoModel.Schedule" Role="Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="taskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Seat_Timetable">
+          <End Type="KinoModel.Timetable" Role="Timetable" Multiplicity="1" />
+          <End Type="KinoModel.Seat" Role="Seat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Timetable">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Seat">
+              <PropertyRef Name="id_Timetable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ticket_Seat">
+          <End Type="KinoModel.Seat" Role="Seat" Multiplicity="1" />
+          <End Type="KinoModel.Ticket" Role="Ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seat">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Ticket">
+              <PropertyRef Name="id_Seat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -889,6 +1608,7 @@ warning 6002: The table/view 'Kino.dbo.MoviePerson' does not have a primary key 
           <EntitySetMapping Name="Halls">
             <EntityTypeMapping TypeName="KinoModel.Hall">
               <MappingFragment StoreEntitySet="Hall">
+                <ScalarProperty Name="seatsAmount" ColumnName="seatsAmount" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="parameter" ColumnName="parameter" />
@@ -1028,6 +1748,127 @@ warning 6002: The table/view 'Kino.dbo.MoviePerson' does not have a primary key 
                 <ScalarProperty Name="movie" ColumnName="movie" />
                 <ScalarProperty Name="person" ColumnName="person" />
                 <ScalarProperty Name="personType" ColumnName="personType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="g1_code">
+            <EntityTypeMapping TypeName="KinoModel.g1_code">
+              <MappingFragment StoreEntitySet="g1_code">
+                <ScalarProperty Name="code_date" ColumnName="code_date" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_code" ColumnName="id_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="g1_pearson">
+            <EntityTypeMapping TypeName="KinoModel.g1_pearson">
+              <MappingFragment StoreEntitySet="g1_pearson">
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="id_pearson" ColumnName="id_pearson" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="g1_permission">
+            <EntityTypeMapping TypeName="KinoModel.g1_permission">
+              <MappingFragment StoreEntitySet="g1_permission">
+                <ScalarProperty Name="permission_name" ColumnName="permission_name" />
+                <ScalarProperty Name="id_permission" ColumnName="id_permission" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="g1_permission_list">
+            <EntityTypeMapping TypeName="KinoModel.g1_permission_list">
+              <MappingFragment StoreEntitySet="g1_permission_list">
+                <ScalarProperty Name="id_permission" ColumnName="id_permission" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id_permission_list" ColumnName="id_permission_list" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="g1_position">
+            <EntityTypeMapping TypeName="KinoModel.g1_position">
+              <MappingFragment StoreEntitySet="g1_position">
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="name_position" ColumnName="name_position" />
+                <ScalarProperty Name="id_position" ColumnName="id_position" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="g1_user">
+            <EntityTypeMapping TypeName="KinoModel.g1_user">
+              <MappingFragment StoreEntitySet="g1_user">
+                <ScalarProperty Name="e_mail" ColumnName="e_mail" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="id_position" ColumnName="id_position" />
+                <ScalarProperty Name="id_pearson" ColumnName="id_pearson" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservations">
+            <EntityTypeMapping TypeName="KinoModel.Reservation">
+              <MappingFragment StoreEntitySet="Reservation">
+                <ScalarProperty Name="idTimetable" ColumnName="idTimetable" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedules">
+            <EntityTypeMapping TypeName="KinoModel.Schedule">
+              <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="dateTo" ColumnName="dateTo" />
+                <ScalarProperty Name="dateFrom" ColumnName="dateFrom" />
+                <ScalarProperty Name="taskId" ColumnName="taskId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScheduleStatus">
+            <EntityTypeMapping TypeName="KinoModel.ScheduleStatu">
+              <MappingFragment StoreEntitySet="ScheduleStatus">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seats">
+            <EntityTypeMapping TypeName="KinoModel.Seat">
+              <MappingFragment StoreEntitySet="Seat">
+                <ScalarProperty Name="id_Timetable" ColumnName="id_Timetable" />
+                <ScalarProperty Name="id_Hall" ColumnName="id_Hall" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="row" ColumnName="row" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="KinoModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tickets">
+            <EntityTypeMapping TypeName="KinoModel.Ticket">
+              <MappingFragment StoreEntitySet="Ticket">
+                <ScalarProperty Name="id_Seat" ColumnName="id_Seat" />
+                <ScalarProperty Name="id_Reservation" ColumnName="id_Reservation" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -23,17 +23,15 @@ namespace Kino
         SqlCommandBuilder scb;
         DataTable dt;
         private List<Timetable> timetableFilterList = null;
-
         KinoEntities context;
         private Timetable element;
+
 
         public FormularzSzczegolyFilmy(Timetable element)
         {
             this.element = element;
             InitializeComponent();
         }
-
-        
 
 
         private void FormularzSzczegolyFilmy_Load(object sender, EventArgs e)
@@ -53,13 +51,14 @@ namespace Kino
             }
             catch
             {
-                 MessageBox.Show("Sprawdź połączenie z bazą danych!");
-            } 
+                MessageBox.Show("Sprawdź połączenie z bazą danych!");
+            }
         }
 
 
         private void button2_Click(object sender, EventArgs e)
         { //USUWANIE SEANSU
+            sprawdSprzedarz(element);
 
             string info = "Czy na pewno chcesz usunąć seans?";
             string caption = "UWAGA!";
@@ -68,60 +67,88 @@ namespace Kino
             result = MessageBox.Show(info, caption, przycisk);
             if (result == DialogResult.Yes)
             {
-                context.Timetables.Remove(element);
-                context.SaveChanges();
-                this.Close();
+                using (var context = new KinoEntities())
+                {
+                    context.Configuration.AutoDetectChangesEnabled = true;
+                    using (var transaction = context.Database.BeginTransaction())
+                    {
+                        context.Timetables.Remove(element);
+                        context.Entry(element).State = EntityState.Deleted;
+                        context.SaveChanges();
+                        transaction.Commit();
+                        this.Close();
+                    }
+                }
             }
-            //??? Refresh();
         }
 
 
         private void button1_Click(object sender, EventArgs e)
-        { //DODAWANIE SEANSU
-
+        { //DODAWANIE SEANSU- wywolanie formatki
             DodawanieSeansow nowySeans = new DodawanieSeansow(); //WYWOŁYWANIE FORMATKI
-            nowySeans.Parent = this;
             nowySeans.Show();
         }
 
 
         private void button3_Click(object sender, EventArgs e)
-        { //EDYCJA SEANSU
-
+        { //EDYCJA SEANSU- wywolanie formatki
+            sprawdSprzedarz(element);
             int selectedRowCount = dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
+
             if (selectedRowCount > 0)
             {
                 //Timetable selectedElement = timetableFilterList[dataGridView1.SelectedRows[0].Index];
                 DodawanieSeansow dodawanieSeansow = new DodawanieSeansow(element);
-                dodawanieSeansow.Parent = this;
                 dodawanieSeansow.Show();
             }
         }
 
 
-        private void sprawdSprzedarz(Timetable timetable)
+        private bool czyMoznaUsunacLubEdytowac(Timetable t)
+        {
+            bool status = true;
+            return status;
+        }
+
+
+        private bool sprawdSprzedarz(Timetable timetable)
         {  //WARUNEK edycji, usuwania
 
-         //   if (timetable.Performance1.idReservation.status == "aktywna")
-         //if(true)
-         //   {
-         //       MessageBox.Show("Przykro mi, jest zarezerwowany bilet na ten seans");
-         //   }
+            bool status = true; ;
+            context.Reservations.Load();
+            List<Reservation> allReservations = context.Reservations.Where(r => r.idTimetable == timetable.id).ToList();
+            if (allReservations.Count > 0)
+            {
+                foreach (Reservation r in allReservations)
+                {
+                    if (r.status == "aktywna" || r.status == "oplacona")
+                    {
+                        MessageBox.Show("Przykro mi, jest zarezerwowany bilet na ten seans. Nie możesz go usunąć/edytować.");
+                        status = false;
+                    }
+                }
+            }
+            return status;
+            //   if (timetable.Performance1.idReservation.status == "aktywna")
+            //if(true)
+            //   {
+            //       
+            //   }
 
-         //   else if (Timetable.performanceDate + Performance.Movie.movieTime + Performance.adsDuration = DateTime.Now)
-         //   {
-         //       MessageBox.Show("nie ma mozliwości edycji/usunięcia filmu. Własnie trwa");
-         //   }
+            //   else if (Timetable.performanceDate + Performance.Movie.movieTime + Performance.adsDuration = DateTime.Now)
+            //   {
+            //       MessageBox.Show("nie ma mozliwości edycji/usunięcia filmu. Własnie trwa");
+            //   }
 
-         //   else if (Timetable.performanceDate + Performance.Movie.movieTime + Performance.adsDuration < DateTime.Now)
-         //   {
-         //       MessageBox.Show("nie ma mozliwości edycji filmu bo już się odbył");
-         //   }
+            //   else if (Timetable.performanceDate + Performance.Movie.movieTime + Performance.adsDuration < DateTime.Now)
+            //   {
+            //       MessageBox.Show("nie ma mozliwości edycji filmu bo już się odbył");
+            //   }
 
-         //   else (Timetable.performanceDate + Performance.Movie.movieTime + Performance.adsDuration > DateTime.Now)
-         //   {
-         //       //idź dalej
-         //   }
+            //   else (Timetable.performanceDate + Performance.Movie.movieTime + Performance.adsDuration > DateTime.Now)
+            //   {
+            //       //idź dalej
+            //   }
         }
     }
 }

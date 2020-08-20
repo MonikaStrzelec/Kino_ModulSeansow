@@ -12,23 +12,18 @@ namespace Kino.Properties
     using System;
     using System.Collections.Generic;
     
-    public partial class Timetable
+    public partial class g1_permission
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Timetable()
+        public g1_permission()
         {
-            this.Reservations = new HashSet<Reservation>();
-            this.Seats = new HashSet<Seat>();
+            this.g1_permission_list = new HashSet<g1_permission_list>();
         }
     
-        public int id { get; set; }
-        public int performance { get; set; }
-        public System.DateTime performanceDate { get; set; }
+        public int id_permission { get; set; }
+        public string permission_name { get; set; }
     
-        public virtual Performance Performance1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Reservation> Reservations { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Seat> Seats { get; set; }
+        public virtual ICollection<g1_permission_list> g1_permission_list { get; set; }
     }
 }

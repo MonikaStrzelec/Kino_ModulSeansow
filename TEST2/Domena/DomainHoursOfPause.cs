@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 namespace Kino.Domena
 {
-
-    
     class DomainHoursOfPause
     {
        public TimeSpan czasRozpoczecia { get; set; }

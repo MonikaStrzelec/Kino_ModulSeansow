@@ -12,6 +12,7 @@ namespace Kino.Domena
         string nameMovie, nameHall, parametr;
         DateTime dateShow;
 
+
         public DomainFilm(int id, string nameMovie, string nameHall, string parametr, DateTime dateShow)
         {
             this.id = id;
@@ -20,7 +21,5 @@ namespace Kino.Domena
             this.parametr = parametr;
             this.dateShow = dateShow;
         }
-
-     
     }
 }

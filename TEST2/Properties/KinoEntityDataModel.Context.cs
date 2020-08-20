@@ -42,5 +42,17 @@ namespace Kino.Properties
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Timetable> Timetables { get; set; }
         public virtual DbSet<MoviePerson> MoviePersons { get; set; }
+        public virtual DbSet<g1_code> g1_code { get; set; }
+        public virtual DbSet<g1_pearson> g1_pearson { get; set; }
+        public virtual DbSet<g1_permission> g1_permission { get; set; }
+        public virtual DbSet<g1_permission_list> g1_permission_list { get; set; }
+        public virtual DbSet<g1_position> g1_position { get; set; }
+        public virtual DbSet<g1_user> g1_user { get; set; }
+        public virtual DbSet<Reservation> Reservations { get; set; }
+        public virtual DbSet<Schedule> Schedules { get; set; }
+        public virtual DbSet<ScheduleStatu> ScheduleStatus { get; set; }
+        public virtual DbSet<Seat> Seats { get; set; }
+        public virtual DbSet<Task> Tasks { get; set; }
+        public virtual DbSet<Ticket> Tickets { get; set; }
     }
 }

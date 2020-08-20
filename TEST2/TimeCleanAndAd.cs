@@ -7,14 +7,19 @@ using System.Threading.Tasks;
 
 namespace Kino
 {
-    class TimeCleanAndAd
+    public class TimeCleanAndAd
     {
+        private const int TWENTY_MINUTES = 20;
+        private const int THIRTY_MINUTES = 30;
+        private const int FOURTY_MINUTES = 40;
+        private const int TWO_HOURS_MINUTES = 120;
+        private const int ONE_AND_HALF_HOUR_MINUTES = 180;
+
         private int TimeAd; //podawane w minutach
         private int TimeClean; //podawane w minutach
 
         public int TimeAd1 { get => TimeAd; set => TimeAd = value; }
         public int TimeClean1 { get => TimeClean; set => TimeClean = value; }
-
         Movie movie = null;
 
 
@@ -23,33 +28,40 @@ namespace Kino
             this.movie = film;
         }
 
+        public TimeCleanAndAd(int czasSprzatania, int czasReklam) {
+            this.TimeAd = czasReklam;
+            this.TimeClean = czasSprzatania;
+        }
+
+
     public int timeClean()
         {
-            if (movie.movieTime.TotalMinutes < 120)
+            double totalMinutes = movie.movieTime.TotalMinutes;
+
+            if (totalMinutes < TWO_HOURS_MINUTES)
             {
-                return 20;
+                return TWENTY_MINUTES;
             }
-            else if (movie.movieTime.TotalMinutes < 180)
+            else if (totalMinutes < ONE_AND_HALF_HOUR_MINUTES)
             {
-                return 30;
+                return THIRTY_MINUTES;
             }
             else
             {
-                return 40;
+                return FOURTY_MINUTES;
             }
         }
     
+
         public int timeAd()
         {
-            if (movie.movieTime.TotalMinutes < 120)
+            if (movie != null)
             {
-                return 20;
+                return movie.movieTime.TotalMinutes < TWO_HOURS_MINUTES ? TWENTY_MINUTES : THIRTY_MINUTES;
             }
-            else
-            {
-                return 30;
-            }
+            return (TimeAd + TimeClean) < TWO_HOURS_MINUTES ? TWENTY_MINUTES : THIRTY_MINUTES;
         }
+
 
         public int sumTimeParameters ()
         {

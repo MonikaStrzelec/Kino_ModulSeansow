@@ -13,11 +13,13 @@ namespace Kino
 {
     public partial class EditParametersForm : Form
     {
-        private Performance performance;
+        
         private KinoEntities context;
-        public EditParametersForm(Performance performance)
+        private ExtraTimeCallback callback;
+        public EditParametersForm( ExtraTimeCallback callback)
         {
-            this.performance = performance ;
+            
+            this.callback = callback;
             context = new KinoEntities();
 
             InitializeComponent();
@@ -35,10 +37,7 @@ namespace Kino
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var result = context.Performances.SingleOrDefault(p => p.id == performance.id);
-
-            if (result != null) 
-            {
+         
                 if (numericUpDown1.Value > 60 && numericUpDown1.Value < 20)
                 {
                     if (numericUpDown1.Value > 60)
@@ -69,17 +68,22 @@ namespace Kino
                     {
                         decimal sum = numericUpDown1.Value + numericUpDown2.Value;
 
-                        result.adsDuration = new TimeSpan((int )sum/60, (int)sum%60, 0 );
 
-                        context.SaveChanges();
+                        
+                        callback.uaktualnijCzas( new TimeCleanAndAd((int)numericUpDown2.Value, (int)numericUpDown1.Value));
 
                     } 
                     catch (Exception ex) 
                     {
                         MessageBox.Show(ex.StackTrace);
                     }
-                }
+                
             }
+            
         }
+    }
+
+    public interface ExtraTimeCallback{
+       void uaktualnijCzas(TimeCleanAndAd timeClean);
     }
 }

@@ -24,13 +24,11 @@ namespace Kino.Domena
 
         public DomainSeans(Timetable p)
         {
-
             this.tytul = p.Performance1.Movie1.title;
             this.godzinaRozpoczecia = p.performanceDate;
             this.godzinaZakonczenia = godzinaRozpoczecia.Add(p.Performance1.Movie1.movieTime).Add(p.Performance1.adsDuration);
             this.dlugoscFilmu = p.Performance1.Movie1.movieTime;
             this.dlugoscReklamMin = p.Performance1.adsDuration.Minutes;
-
         }
 
     }

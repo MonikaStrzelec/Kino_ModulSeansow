@@ -9,8 +9,6 @@ namespace Kino.Domena
 {
     class TimetableDomain
     {
-
-
         public string title { get; set; }
         public string description { get; set; }
         public string movieType { get; set; }
@@ -18,6 +16,7 @@ namespace Kino.Domena
         public string hallName { get; set; }
         public string hallType { get; set; }
         public TimeSpan movieTime { get; set; }
+
 
         public TimetableDomain(Timetable t)
         {
@@ -30,5 +29,4 @@ namespace Kino.Domena
             this.movieTime = t.Performance1.Movie1.movieTime;
         }
     }
-
 }

@@ -27,5 +27,6 @@ namespace Kino.Properties
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SalePO> SalePOes { get; set; }
+        public virtual g1_user g1_user { get; set; }
     }
 }
