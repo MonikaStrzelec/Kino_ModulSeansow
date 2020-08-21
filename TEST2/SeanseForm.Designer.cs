@@ -30,9 +30,17 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Performance1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.performanceDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.performanceDateDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -46,21 +54,13 @@
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Performance1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.performanceDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.performanceDateDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -81,6 +81,42 @@
             this.dataGridView1.Size = new System.Drawing.Size(462, 736);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.DoubleClick += new System.EventHandler(this.doubleClickViewOnDataGridView1);
+            // 
+            // Performance1
+            // 
+            this.Performance1.DataPropertyName = "Performance1";
+            this.Performance1.HeaderText = "Performance1";
+            this.Performance1.MinimumWidth = 6;
+            this.Performance1.Name = "Performance1";
+            this.Performance1.Width = 370;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "id";
+            this.dataGridViewTextBoxColumn6.HeaderText = "id";
+            this.dataGridViewTextBoxColumn6.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "performance";
+            this.dataGridViewTextBoxColumn7.HeaderText = "performance";
+            this.dataGridViewTextBoxColumn7.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.Width = 125;
+            // 
+            // performanceDateDataGridViewTextBoxColumn
+            // 
+            this.performanceDateDataGridViewTextBoxColumn.DataPropertyName = "performanceDate";
+            this.performanceDateDataGridViewTextBoxColumn.HeaderText = "performanceDate";
+            this.performanceDateDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.performanceDateDataGridViewTextBoxColumn.Name = "performanceDateDataGridViewTextBoxColumn";
+            this.performanceDateDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = typeof(Kino.Properties.Timetable);
             // 
             // panel1
             // 
@@ -107,6 +143,7 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filter screenings";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // dataGridView2
             // 
@@ -123,6 +160,26 @@
             this.dataGridView2.Size = new System.Drawing.Size(702, 124);
             this.dataGridView2.TabIndex = 2;
             this.dataGridView2.DoubleClick += new System.EventHandler(this.doubleClickViewOnDataGridView2);
+            // 
+            // performanceDateDataGridViewTextBoxColumn1
+            // 
+            this.performanceDateDataGridViewTextBoxColumn1.DataPropertyName = "performanceDate";
+            this.performanceDateDataGridViewTextBoxColumn1.HeaderText = "performanceDate";
+            this.performanceDateDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.performanceDateDataGridViewTextBoxColumn1.Name = "performanceDateDataGridViewTextBoxColumn1";
+            this.performanceDateDataGridViewTextBoxColumn1.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "Performance1";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Performance1";
+            this.dataGridViewTextBoxColumn5.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.Width = 390;
+            // 
+            // bindingSource2
+            // 
+            this.bindingSource2.DataSource = typeof(Kino.Properties.Timetable);
             // 
             // label3
             // 
@@ -222,62 +279,6 @@
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.Width = 280;
             // 
-            // Performance1
-            // 
-            this.Performance1.DataPropertyName = "Performance1";
-            this.Performance1.HeaderText = "Performance1";
-            this.Performance1.MinimumWidth = 6;
-            this.Performance1.Name = "Performance1";
-            this.Performance1.Width = 370;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "id";
-            this.dataGridViewTextBoxColumn6.HeaderText = "id";
-            this.dataGridViewTextBoxColumn6.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.Width = 125;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "performance";
-            this.dataGridViewTextBoxColumn7.HeaderText = "performance";
-            this.dataGridViewTextBoxColumn7.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.Width = 125;
-            // 
-            // performanceDateDataGridViewTextBoxColumn
-            // 
-            this.performanceDateDataGridViewTextBoxColumn.DataPropertyName = "performanceDate";
-            this.performanceDateDataGridViewTextBoxColumn.HeaderText = "performanceDate";
-            this.performanceDateDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.performanceDateDataGridViewTextBoxColumn.Name = "performanceDateDataGridViewTextBoxColumn";
-            this.performanceDateDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = typeof(Kino.Properties.Timetable);
-            // 
-            // performanceDateDataGridViewTextBoxColumn1
-            // 
-            this.performanceDateDataGridViewTextBoxColumn1.DataPropertyName = "performanceDate";
-            this.performanceDateDataGridViewTextBoxColumn1.HeaderText = "performanceDate";
-            this.performanceDateDataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.performanceDateDataGridViewTextBoxColumn1.Name = "performanceDateDataGridViewTextBoxColumn1";
-            this.performanceDateDataGridViewTextBoxColumn1.Width = 125;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "Performance1";
-            this.dataGridViewTextBoxColumn5.HeaderText = "Performance1";
-            this.dataGridViewTextBoxColumn5.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.Width = 390;
-            // 
-            // bindingSource2
-            // 
-            this.bindingSource2.DataSource = typeof(Kino.Properties.Timetable);
-            // 
             // SeanseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -289,13 +290,13 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

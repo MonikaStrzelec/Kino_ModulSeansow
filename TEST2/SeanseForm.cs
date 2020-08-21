@@ -16,13 +16,14 @@ using System.Windows.Forms;
 
 namespace Kino
 {
-    public partial class SeanseForm : Form
+    public partial class SeanseForm : Form, deleteCallbakck
     {
         SqlDataAdapter sda;
         SqlCommandBuilder scb;
         DataTable dt;
         private List<Timetable> timetableFilterList = null;
         KinoEntities context = new KinoEntities();
+        Timetable selectedElement;
 
 
         public SeanseForm()
@@ -142,9 +143,33 @@ namespace Kino
             int selectedRowCount = dataGridView.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount > 0)
             {
-                Timetable selectedElement = timetableFilterList[dataGridView.SelectedRows[0].Index];
-                FormularzSzczegolyFilmy formularzSeanse = new FormularzSzczegolyFilmy(selectedElement);
+                 selectedElement = timetableFilterList[dataGridView.SelectedRows[0].Index];
+                FormularzSzczegolyFilmy formularzSeanse = new FormularzSzczegolyFilmy(selectedElement,this);
                 formularzSeanse.Show();
+                
+            }
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        public void deleteElement()
+        {
+            if (selectedElement != null) {
+
+                
+                    context.Configuration.AutoDetectChangesEnabled = true;
+
+                    context.Timetables.Attach(selectedElement);
+
+                context.Entry(selectedElement).State = EntityState.Deleted;
+                context.SaveChanges();
+
+
+                
+
             }
         }
     }

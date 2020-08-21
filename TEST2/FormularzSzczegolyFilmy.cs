@@ -25,11 +25,12 @@ namespace Kino
         private List<Timetable> timetableFilterList = null;
         KinoEntities context;
         private Timetable element;
+        private deleteCallbakck callback;
 
-
-        public FormularzSzczegolyFilmy(Timetable element)
+        public FormularzSzczegolyFilmy(Timetable element, deleteCallbakck callbakck)
         {
             this.element = element;
+            this.callback = callbakck;
             InitializeComponent();
         }
 
@@ -44,7 +45,7 @@ namespace Kino
                 dataGridView1.AutoGenerateColumns = true;
 
                 context = new KinoEntities(); //tworzenie obiekyu bazy danych
-                context.Timetables.Load(); //ładowanie tabeli
+                                              //ładowanie tabeli
 
                 TimetableDomain domain = new TimetableDomain(this.element);// warstwa domenowa przygotująca wynik
                 timetableDomainClassBindingSource.DataSource = new BindingList<TimetableDomain>() { domain };
@@ -67,18 +68,8 @@ namespace Kino
             result = MessageBox.Show(info, caption, przycisk);
             if (result == DialogResult.Yes)
             {
-                using (var context = new KinoEntities())
-                {
-                    context.Configuration.AutoDetectChangesEnabled = true;
-                    using (var transaction = context.Database.BeginTransaction())
-                    {
-                        context.Timetables.Remove(element);
-                        context.Entry(element).State = EntityState.Deleted;
-                        context.SaveChanges();
-                        transaction.Commit();
-                        this.Close();
-                    }
-                }
+                callback.deleteElement();
+                this.Close();
             }
         }
 
@@ -151,4 +142,9 @@ namespace Kino
             //   }
         }
     }
+
+   public  interface  deleteCallbakck{
+         void deleteElement();
+    
+}
 }
