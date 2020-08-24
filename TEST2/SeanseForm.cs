@@ -57,13 +57,19 @@ namespace Kino
 
             if (sr.Start != null)
             {
-                if (sr.End != null)
+                if (!sr.Start.Date.Equals(sr.End.Date))
                 {
-                    timetableFilterList = context.Timetables.Local.Where(timetable => timetable.performanceDate >= sr.Start && sr.End >= timetable.performanceDate).ToList();
+                    if (sr.End != null)
+                    {
+                        timetableFilterList = context.Timetables.Local.Where(timetable => timetable.performanceDate >= sr.Start && sr.End >= timetable.performanceDate).ToList();
+                    }
+                    else
+                    {
+                        timetableFilterList = context.Timetables.Local.Where(timetable => timetable.performanceDate.Equals( sr.Start)).ToList();
+                    }
                 }
-                else
-                {
-                    timetableFilterList = context.Timetables.Local.Where(timetable => timetable.performanceDate == sr.Start).ToList();
+                else {
+                    timetableFilterList = context.Timetables.Local.Where(timetable => timetable.performanceDate.Date.Equals( sr.Start)).ToList();
                 }
             }
             else
@@ -115,16 +121,21 @@ namespace Kino
             try
             {
                 context = new KinoEntities(); //tworzenie obiekyu bazy danych
-                context.Timetables.Load(); //ładowanie tabeli
-                this.timetableFilterList = context.Timetables.Local.ToBindingList().Where(timetable => timetable.performanceDate >= DateTime.Now).ToList();
-                this.bindingSource1.DataSource = new BindingList<Timetable>(this.timetableFilterList);  //wiązanie formatki z tabelą
-            } 
+                 //ładowanie tabeli
+                uzupelnianieDataGridView();
+            }
             catch (Exception eror)
             {
                 MessageBox.Show("Sprawdź połączenie z bazą danych!");
             }
         }
 
+        private void uzupelnianieDataGridView()
+        {
+            context.Timetables.Load();
+            this.timetableFilterList = context.Timetables.Local.ToBindingList().Where(timetable => timetable.performanceDate >= DateTime.Now).ToList();
+            this.bindingSource1.DataSource = new BindingList<Timetable>(this.timetableFilterList);  //wiązanie formatki z tabelą
+        }
 
         private void doubleClickViewOnDataGridView1(object sender, EventArgs e)
         {   //oprogramowany doubleClic
@@ -168,7 +179,7 @@ namespace Kino
                 context.SaveChanges();
 
 
-                
+                uzupelnianieDataGridView();
 
             }
         }

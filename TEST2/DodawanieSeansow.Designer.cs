@@ -85,7 +85,7 @@
             this.buttonAddPerformance.Name = "buttonAddPerformance";
             this.buttonAddPerformance.Size = new System.Drawing.Size(249, 99);
             this.buttonAddPerformance.TabIndex = 0;
-            this.buttonAddPerformance.Text = "ADD PERFORMANCE";
+            this.buttonAddPerformance.Text = "CONFIRM";
             this.buttonAddPerformance.UseVisualStyleBackColor = true;
             this.buttonAddPerformance.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -224,6 +224,7 @@
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = "VR";
             this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
             // 
             // radioButton2
             // 
@@ -236,6 +237,7 @@
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "3D";
             this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
             // radioButton1
             // 
@@ -248,6 +250,7 @@
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "2D";
             this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // dataGridView1
             // 
@@ -260,7 +263,7 @@
             this.godzinaZakonczeniaDataGridViewTextBoxColumn,
             this.dlugoscReklamMinDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.domainSeansBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(445, 14);
+            this.dataGridView1.Location = new System.Drawing.Point(451, 14);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
@@ -268,6 +271,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(683, 185);
             this.dataGridView1.TabIndex = 16;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.MouseEnter += new System.EventHandler(this.none);
             // 
             // tytulDataGridViewTextBoxColumn
             // 
@@ -321,13 +325,15 @@
             this.czasRozpoczeciaDataGridViewTextBoxColumn,
             this.czasZakonczeniaDataGridViewTextBoxColumn});
             this.dataGridView2.DataSource = this.domainHoursOfPauseBindingSource;
-            this.dataGridView2.Location = new System.Drawing.Point(445, 203);
+            this.dataGridView2.Location = new System.Drawing.Point(451, 203);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersWidth = 51;
             this.dataGridView2.RowTemplate.Height = 24;
             this.dataGridView2.Size = new System.Drawing.Size(683, 202);
             this.dataGridView2.TabIndex = 17;
+            this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView2.MouseEnter += new System.EventHandler(this.none);
             // 
             // czasRozpoczeciaDataGridViewTextBoxColumn
             // 
@@ -372,11 +378,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(373, 69);
+            this.label5.Location = new System.Drawing.Point(330, 67);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(46, 17);
+            this.label5.Size = new System.Drawing.Size(12, 17);
             this.label5.TabIndex = 20;
-            this.label5.Text = "label5";
+            this.label5.Text = " ";
             // 
             // button3
             // 
@@ -393,18 +399,18 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(249, 428);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(46, 17);
+            this.label6.Size = new System.Drawing.Size(12, 17);
             this.label6.TabIndex = 22;
-            this.label6.Text = "label6";
+            this.label6.Text = " ";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(269, 456);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(46, 17);
+            this.label7.Size = new System.Drawing.Size(12, 17);
             this.label7.TabIndex = 23;
-            this.label7.Text = "label7";
+            this.label7.Text = " ";
             // 
             // label8
             // 

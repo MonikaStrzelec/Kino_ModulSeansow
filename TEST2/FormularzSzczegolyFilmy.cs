@@ -59,17 +59,22 @@ namespace Kino
 
         private void button2_Click(object sender, EventArgs e)
         { //USUWANIE SEANSU
-            sprawdSprzedarz(element);
-
-            string info = "Czy na pewno chcesz usunąć seans?";
-            string caption = "UWAGA!";
-            MessageBoxButtons przycisk = MessageBoxButtons.YesNo;
-            DialogResult result;
-            result = MessageBox.Show(info, caption, przycisk);
-            if (result == DialogResult.Yes)
+            if (sprawdSprzedarz(element) || czyMoznaUsunacLubEdytowac())
             {
-                callback.deleteElement();
-                this.Close();
+
+                string info = "Czy na pewno chcesz usunąć seans?";
+                string caption = "UWAGA!";
+                MessageBoxButtons przycisk = MessageBoxButtons.YesNo;
+                DialogResult result;
+                result = MessageBox.Show(info, caption, przycisk);
+                if (result == DialogResult.Yes)
+                {
+                    callback.deleteElement();
+                    this.Close();
+                }
+            }
+            else{
+                MessageBox.Show("Przykro mi, jest zarezerwowany bilet na ten seans lub seans jest w trakcie projekcji. Nie możesz go usunąć/edytować.");
             }
         }
 
@@ -83,21 +88,31 @@ namespace Kino
 
         private void button3_Click(object sender, EventArgs e)
         { //EDYCJA SEANSU- wywolanie formatki
-            sprawdSprzedarz(element);
-            int selectedRowCount = dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
-
-            if (selectedRowCount > 0)
+            if (sprawdSprzedarz(element) || czyMoznaUsunacLubEdytowac())
             {
-                //Timetable selectedElement = timetableFilterList[dataGridView1.SelectedRows[0].Index];
-                DodawanieSeansow dodawanieSeansow = new DodawanieSeansow(element);
-                dodawanieSeansow.Show();
+                int selectedRowCount = dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
+
+                if (selectedRowCount > 0)
+                {
+                    //Timetable selectedElement = timetableFilterList[dataGridView1.SelectedRows[0].Index];
+                    DodawanieSeansow dodawanieSeansow = new DodawanieSeansow(element);
+                    dodawanieSeansow.Show();
+                }
+            }
+            else {
+                MessageBox.Show("Przykro mi, jest zarezerwowany bilet na ten seans lub seans jest w trakcie projekcji. Nie możesz go usunąć/edytować.");
             }
         }
 
 
-        private bool czyMoznaUsunacLubEdytowac(Timetable t)
+        private bool czyMoznaUsunacLubEdytowac()
         {
             bool status = true;
+
+            DateTime zakonczenieSeansu = element.performanceDate.Add(element.Performance1.Movie1.movieTime).Add(element.Performance1.adsDuration);
+            if (element.performanceDate <= DateTime.Now && DateTime.Now <= zakonczenieSeansu) {
+                status = false;
+            }
             return status;
         }
 
@@ -114,33 +129,15 @@ namespace Kino
                 {
                     if (r.status == "aktywna" || r.status == "oplacona")
                     {
-                        MessageBox.Show("Przykro mi, jest zarezerwowany bilet na ten seans. Nie możesz go usunąć/edytować.");
+                        
                         status = false;
                     }
                 }
             }
             return status;
-            //   if (timetable.Performance1.idReservation.status == "aktywna")
-            //if(true)
-            //   {
-            //       
-            //   }
-
-            //   else if (Timetable.performanceDate + Performance.Movie.movieTime + Performance.adsDuration = DateTime.Now)
-            //   {
-            //       MessageBox.Show("nie ma mozliwości edycji/usunięcia filmu. Własnie trwa");
-            //   }
-
-            //   else if (Timetable.performanceDate + Performance.Movie.movieTime + Performance.adsDuration < DateTime.Now)
-            //   {
-            //       MessageBox.Show("nie ma mozliwości edycji filmu bo już się odbył");
-            //   }
-
-            //   else (Timetable.performanceDate + Performance.Movie.movieTime + Performance.adsDuration > DateTime.Now)
-            //   {
-            //       //idź dalej
-            //   }
         }
+
+       
     }
 
    public  interface  deleteCallbakck{

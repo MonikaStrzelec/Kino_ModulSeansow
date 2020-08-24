@@ -134,17 +134,18 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(328, 153);
+            this.button2.BackColor = System.Drawing.Color.Red;
+            this.button2.Location = new System.Drawing.Point(608, 153);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(266, 92);
             this.button2.TabIndex = 2;
             this.button2.Text = "DELETE";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(619, 153);
+            this.button3.Location = new System.Drawing.Point(332, 153);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(255, 92);
             this.button3.TabIndex = 3;
