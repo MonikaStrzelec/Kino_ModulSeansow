@@ -1,4 +1,5 @@
-﻿using Kino.Domena;
+﻿
+using Kino.Domena;
 using Kino.Properties;
 using System;
 using System.Collections.Generic;
@@ -38,6 +39,8 @@ namespace Kino
         EditParametersForm edycjaParametrow = null;
         TimeCleanAndAd czasSprzataniaIReklam = null;
 
+        private bool czyZmienionoCzasDodatkowy = false;
+        private int staryCzasDodatkow;
 
         public DodawanieSeansow()
         {
@@ -48,12 +51,13 @@ namespace Kino
 
 
         public DodawanieSeansow(Timetable timetableDoEdycji)
-        {
+        {   //dodawanie edycji
             this.edytowaneTimetable = timetableDoEdycji;
             InitializeComponent();
-            uzupelnianieEdycjiDanymi();
             buttonAddPerformance.Enabled = false;
-            this.monthCalendar1.MinDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
+            this.monthCalendar1.MinDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day).AddDays(1);
+            this.czasSprzataniaIReklam = new TimeCleanAndAd(timetableDoEdycji.Performance1.Movie1);
+            uzupelnianieEdycjiDanymi();
         }
 
 
@@ -68,16 +72,13 @@ namespace Kino
             idWybranejSali = sala;
 
             zaaktualuzujLabelki();
-
             this.dimParametersString = sala.Dim.name;
-
             filtrujFilmyiSaleZeWzgleduNaParametrFilmu();
             zaznaczanieNaFormatkachDanych(film, sala, terminSeansu);
 
-            switch (this.edytowaneTimetable.Performance1.Hall1.Dim.name) { 
-            
-            }
+            switch (this.edytowaneTimetable.Performance1.Hall1.Dim.name) {}
         }
+
 
         private void zaaktualuzujLabelki()
         {
@@ -85,6 +86,7 @@ namespace Kino
             czasWpisanyWLabel6();
             czasWpisanyWLabel7();
         }
+
 
         private void zaznaczanieNaFormatkachDanych(Movie film, Hall sala, DateTime data)
         {
@@ -105,9 +107,10 @@ namespace Kino
                     radioButton3.Checked = true;
                     break;
             }
+
             monthCalendar1.SelectionStart = new DateTime(data.Year, data.Month, data.Day);
             DateTime dt = DateTime.Now;
-            dt = dt.AddDays(43);
+            dt = dt.AddDays(1);
             this.monthCalendar1.MinDate = dt;
             dateTimePicker1.Value = data;
         }
@@ -213,6 +216,7 @@ namespace Kino
             }
         }
 
+
         private void pobierzWszystkieSeanseZFiltrami(String parametr, int idSali, DateTime data)
         {if (context != null)
             {
@@ -230,6 +234,7 @@ namespace Kino
                 dataGridView1.DataSource = domainSeansBindingSource.DataSource;
             }
         }
+
 
         private void dodajListeSeansowDoTablicy(List<Timetable> seanse)
         {
@@ -343,9 +348,6 @@ namespace Kino
 
                 dateTimePicker1.Format = DateTimePickerFormat.Time;
                 dateTimePicker1.ShowUpDown = true;
-
-                //context.Movies.Load();
-                //this.timetableBindingSource1.DataSource = context.Movies.Local.ToBindingList();
             }
             catch
             {
@@ -377,8 +379,7 @@ namespace Kino
             {
                 idWybranegoSeansu = ((Movie)(item));
                 zaaktualuzujLabelki();
-
-            } else { }
+            } else {}
             filtrujFilmy();
         }
 
@@ -392,11 +393,8 @@ namespace Kino
                 {
                     idWybranejSali = ((Hall)(item));
 
-                  
-                        pobierzWszystkieSeanseZFiltrami(dimParametersString, idWybranejSali.id, monthCalendar1.SelectionRange.Start.Date);
+                    pobierzWszystkieSeanseZFiltrami(dimParametersString, idWybranejSali.id, monthCalendar1.SelectionRange.Start.Date);
                     this.tytulNiezmieniony = false;
-
-
                 }
             } catch(Exception eex) { }
         }
@@ -473,8 +471,6 @@ namespace Kino
 
         private void comboBox1_MouseEnter(object sender, EventArgs e)
         {
-       
-
             if (!dimParametersString.Equals(String.Empty))
             {
                 filtrujFilmyiSaleZeWzgleduNaParametrFilmu();
@@ -491,9 +487,7 @@ namespace Kino
             try
             {
                 KinoEntities context = new KinoEntities();
-
                 context.DimsMovies.Load();
-
                 ZaaktualizujSaleZeWzgleduNaTyp();
 
                 this.tytulyFilmow = context.DimsMovies.Local
@@ -501,18 +495,12 @@ namespace Kino
                     .Select(dim => dim.Movie1)
                     .Where(movies => movies.movieState == 2 || movies.movieState == 3).ToList();
                 this.movieBindingSource.DataSource = new BindingList<Movie>(this.tytulyFilmow);  //wiązanie formatki z tabelą
-
-                //this.nazwySal = context.Halls.Local.Where(hall => hall.Dim.name.Equals(this.dimParametersString)).ToList();
-                //this.hallBindingSource.DataSource = new BindingList<Hall>(this.nazwySal);
             }
-            catch (Exception e) { 
-            
-            }
+            catch (Exception e) {}
         }
 
         private void ZaaktualizujSaleZeWzgleduNaTyp()
         {
-
             if (radioButton1.Checked == true)
             {
                 dimParametersString = "2D";
@@ -537,6 +525,7 @@ namespace Kino
             }
         }
 
+
         private void domainSeansBindingSource_CurrentChanged(object sender, EventArgs e) { }
 
 
@@ -546,12 +535,13 @@ namespace Kino
         private void button2_Click(object sender, EventArgs e)
         {
             Performance perf = this.edytowaneTimetable.Performance1;
-            if (czyZmienionoSale(perf) &&
-               czyZmienionoTypFilmu(perf) &&
-               czyZmienionoTytulFilmu(perf) &&
-               czyZmienionoTerminRozpoczeciaFilmu())
+            if (czyNieZmienionoSale(perf) &&
+               czyNieZmienionoTypFilmu(perf) &&
+               czyNieZmienionoTytulFilmu(perf) &&
+               czyNieZmienionoTerminRozpoczeciaFilmu()&&
+               czyNieZmienionoCzasuReklamISprzatania())
             {
-                MessageBox.Show("Nie zmieniłeś parametrów,!");
+                MessageBox.Show("Nie zmieniłeś parametrów!");
             }
             else
             {
@@ -559,29 +549,37 @@ namespace Kino
             }
         }
 
-        private bool czyZmienionoTerminRozpoczeciaFilmu()
+        private bool czyNieZmienionoCzasuReklamISprzatania() {
+            return staryCzasDodatkow == this.czasSprzataniaIReklam.sumTimeParameters();
+        }
+        private bool czyNieZmienionoTerminRozpoczeciaFilmu()
         {
             return (monthCalendar1.SelectionRange.Start.Date.Equals(edytowaneTimetable.performanceDate.Date) &&
                            this.edytowaneTimetable.performanceDate.TimeOfDay.ToString().Equals(dateTimePicker1.Value.ToString().Split(' ')[1])
                           );
         }
 
-        private bool czyZmienionoTytulFilmu(Performance perf)
+
+        private bool czyNieZmienionoTytulFilmu(Performance perf)
         {
             return this.tytulNiezmieniony;
         }
 
-        private bool czyZmienionoTypFilmu(Performance perf)
+
+        private bool czyNieZmienionoTypFilmu(Performance perf)
         {
             return perf.Hall1.Dim.name.Equals(dimParametersString);
         }
 
-        private bool czyZmienionoSale(Performance perf)
+
+        private bool czyNieZmienionoSale(Performance perf)
         {
             return idWybranejSali.id == perf.hall;
         }
 
-        private void monthCalendar1_DateChanged_1(object sender, DateRangeEventArgs e) {
+
+        private void monthCalendar1_DateChanged_1(object sender, DateRangeEventArgs e) 
+        {
             if (idWybranejSali != null)
             {
                 pobierzWszystkieSeanseZFiltrami(dimParametersString, idWybranejSali.id, monthCalendar1.SelectionRange.Start.Date);
@@ -601,8 +599,7 @@ namespace Kino
 
 
         private void czasWpisanyWLabel6()
-        {   //wpisanie czasu reklam i sprzatania
-            czasSprzataniaIReklam= czasSprzataniaIReklam !=null ? czasSprzataniaIReklam : new TimeCleanAndAd(idWybranegoSeansu);
+        {   //wpisanie czasu reklam i sprzatani
             label6.Text = czasSprzataniaIReklam.sumTimeParameters().ToString();
         }
 
@@ -613,7 +610,6 @@ namespace Kino
             try
             {
                 TimeSpan przeprasowanyCzasLabel5 = TimeSpan.Parse(label5.Text);
-                
                 suma =int.Parse( label6.Text) + (int)  przeprasowanyCzasLabel5.TotalMinutes;
             }
             catch (Exception e) { }
@@ -623,14 +619,16 @@ namespace Kino
 
         private void button3_Click(object sender, EventArgs e)
         {
+            if (this.czasSprzataniaIReklam != null) {
+                staryCzasDodatkow = this.czasSprzataniaIReklam.sumTimeParameters();
+            }
             KinoEntities contex = new KinoEntities();
             contex.Movies.Load();
             Movie znalezionyFilm = null;
-
             znalezionyFilm = contex.Movies.Local.Where(film => film.id == idWybranegoSeansu.id).First();
-
             new EditParametersForm( this).Show();
         }
+
 
         public void uaktualnijCzas(TimeCleanAndAd timeClean)
         {
@@ -638,30 +636,40 @@ namespace Kino
             zaaktualuzujLabelki();
         }
 
+
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             ZaaktualizujSaleZeWzgleduNaTyp();
-
         }
+
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             ZaaktualizujSaleZeWzgleduNaTyp();
         }
 
+
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
             ZaaktualizujSaleZeWzgleduNaTyp();
         }
+
 
         private void dataGridView2_MouseEnter(object sender, EventArgs e)
         {
             pobierzWszystkieSeanseZFiltrami(dimParametersString, idWybranejSali.id, monthCalendar1.SelectionRange.Start.Date);
         }
 
+
         private void dataGridView1_MouseEnter(object sender, EventArgs e)
         {
             pobierzWszystkieSeanseZFiltrami(dimParametersString, idWybranejSali.id, monthCalendar1.SelectionRange.Start.Date);
+        }
+
+
+        public void odswierz()
+        {
+            zaaktualuzujLabelki();
         }
     }
 }

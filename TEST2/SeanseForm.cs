@@ -44,7 +44,6 @@ namespace Kino
             }
 
             SelectionRange sr = new SelectionRange();
-
             try
             {
                 sr.Start = DateTime.Parse(this.textBox1.Text);
@@ -130,12 +129,14 @@ namespace Kino
             }
         }
 
+
         private void uzupelnianieDataGridView()
         {
             context.Timetables.Load();
             this.timetableFilterList = context.Timetables.Local.ToBindingList().Where(timetable => timetable.performanceDate >= DateTime.Now).ToList();
             this.bindingSource1.DataSource = new BindingList<Timetable>(this.timetableFilterList);  //wiązanie formatki z tabelą
         }
+
 
         private void doubleClickViewOnDataGridView1(object sender, EventArgs e)
         {   //oprogramowany doubleClic
@@ -157,30 +158,22 @@ namespace Kino
                  selectedElement = timetableFilterList[dataGridView.SelectedRows[0].Index];
                 FormularzSzczegolyFilmy formularzSeanse = new FormularzSzczegolyFilmy(selectedElement,this);
                 formularzSeanse.Show();
-                
             }
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
 
-        }
+        private void groupBox1_Enter(object sender, EventArgs e){}
+
 
         public void deleteElement()
         {
             if (selectedElement != null) {
-
-                
                     context.Configuration.AutoDetectChangesEnabled = true;
-
                     context.Timetables.Attach(selectedElement);
 
                 context.Entry(selectedElement).State = EntityState.Deleted;
                 context.SaveChanges();
-
-
                 uzupelnianieDataGridView();
-
             }
         }
     }

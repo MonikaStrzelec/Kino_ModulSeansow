@@ -15,6 +15,8 @@ namespace Kino
         private const int TWO_HOURS_MINUTES = 120;
         private const int ONE_AND_HALF_HOUR_MINUTES = 180;
 
+     
+
         private int TimeAd; //podawane w minutach
         private int TimeClean; //podawane w minutach
 
@@ -23,49 +25,93 @@ namespace Kino
         Movie movie = null;
 
 
-        public TimeCleanAndAd(Movie film) 
+        public TimeCleanAndAd(Movie film)
         {
             this.movie = film;
-        }
-
-        public TimeCleanAndAd(int czasSprzatania, int czasReklam) {
-            this.TimeAd = czasReklam;
-            this.TimeClean = czasSprzatania;
+            
         }
 
 
-    public int timeClean()
+        public TimeCleanAndAd(int czasSprzatania, int czasReklam)
         {
-            double totalMinutes = movie.movieTime.TotalMinutes;
-
-            if (totalMinutes < TWO_HOURS_MINUTES)
-            {
-                return TWENTY_MINUTES;
-            }
-            else if (totalMinutes < ONE_AND_HALF_HOUR_MINUTES)
-            {
-                return THIRTY_MINUTES;
-            }
-            else
-            {
-                return FOURTY_MINUTES;
-            }
+            this.TimeAd1 = czasReklam;
+            this.TimeClean1 = czasSprzatania;
+           
         }
-    
+
+
+        public int timeClean()
+        {
+            int czasSprzatania = 0;
+
+            if (movie != null)
+            {
+                double totalMinutes = movie.movieTime.TotalMinutes;
+
+                if (totalMinutes < TWO_HOURS_MINUTES)
+                {
+                    czasSprzatania = TWENTY_MINUTES;
+                }
+                else if (totalMinutes < ONE_AND_HALF_HOUR_MINUTES)
+                {
+                     czasSprzatania = THIRTY_MINUTES;
+                }
+                else
+                {
+                     czasSprzatania = FOURTY_MINUTES;
+                }
+
+                return czasSprzatania;
+            }
+
+
+            
+
+            if (czasSprzatania < 10) {
+                czasSprzatania = 10;
+            }
+
+            if (czasSprzatania > TWO_HOURS_MINUTES)
+            {
+                czasSprzatania = TWO_HOURS_MINUTES;
+            }
+
+            else { czasSprzatania = TimeClean1; }
+
+            return czasSprzatania;
+        }
+
 
         public int timeAd()
         {
+            int czas = 0;
+
             if (movie != null)
-            {
-                return movie.movieTime.TotalMinutes < TWO_HOURS_MINUTES ? TWENTY_MINUTES : THIRTY_MINUTES;
+            {   czas = movie.movieTime.TotalMinutes < TWO_HOURS_MINUTES ? TWENTY_MINUTES : THIRTY_MINUTES;
+                return czas;
             }
-            return (TimeAd + TimeClean) < TWO_HOURS_MINUTES ? TWENTY_MINUTES : THIRTY_MINUTES;
+
+            if (TimeAd1 < 15) {
+                czas = 15;
+            }
+
+            if (TimeAd1 > 45)
+            {
+                czas = 45;
+            }
+            else {
+                czas = TimeAd1;
+            }
+            return czas;
+        
         }
 
 
-        public int sumTimeParameters ()
+        public int sumTimeParameters()
         {
             return timeAd() + timeClean();
         }
-    } 
+    }
+
+ 
 }

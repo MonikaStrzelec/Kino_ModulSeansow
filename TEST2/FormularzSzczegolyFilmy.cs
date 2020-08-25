@@ -45,8 +45,6 @@ namespace Kino
                 dataGridView1.AutoGenerateColumns = true;
 
                 context = new KinoEntities(); //tworzenie obiekyu bazy danych
-                                              //ładowanie tabeli
-
                 TimetableDomain domain = new TimetableDomain(this.element);// warstwa domenowa przygotująca wynik
                 timetableDomainClassBindingSource.DataSource = new BindingList<TimetableDomain>() { domain };
             }
@@ -59,9 +57,8 @@ namespace Kino
 
         private void button2_Click(object sender, EventArgs e)
         { //USUWANIE SEANSU
-            if (sprawdSprzedarz(element) || czyMoznaUsunacLubEdytowac())
+            if (sprawdSprzedarz(element) && czyMoznaUsunacLubEdytowac())
             {
-
                 string info = "Czy na pewno chcesz usunąć seans?";
                 string caption = "UWAGA!";
                 MessageBoxButtons przycisk = MessageBoxButtons.YesNo;
@@ -73,7 +70,8 @@ namespace Kino
                     this.Close();
                 }
             }
-            else{
+            else
+            {
                 MessageBox.Show("Przykro mi, jest zarezerwowany bilet na ten seans lub seans jest w trakcie projekcji. Nie możesz go usunąć/edytować.");
             }
         }
@@ -88,7 +86,7 @@ namespace Kino
 
         private void button3_Click(object sender, EventArgs e)
         { //EDYCJA SEANSU- wywolanie formatki
-            if (sprawdSprzedarz(element) || czyMoznaUsunacLubEdytowac())
+            if (sprawdSprzedarz(element) && czyMoznaUsunacLubEdytowac())
             {
                 int selectedRowCount = dataGridView1.Rows.GetRowCount(DataGridViewElementStates.Selected);
 
@@ -129,19 +127,16 @@ namespace Kino
                 {
                     if (r.status == "aktywna" || r.status == "oplacona")
                     {
-                        
                         status = false;
                     }
                 }
             }
             return status;
         }
-
-       
     }
 
-   public  interface  deleteCallbakck{
+   public  interface  deleteCallbakck
+    {
          void deleteElement();
-    
-}
+    }
 }

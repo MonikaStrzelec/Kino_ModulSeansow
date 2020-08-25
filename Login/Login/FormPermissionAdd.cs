@@ -16,16 +16,15 @@ namespace Login
         public FormPermissionAdd()
         {
             InitializeComponent();
-
             refreshDataGridView();
         }
 
         string connection = "Data Source=35.228.52.182,1433;Network Library = DBMSSOCN; Initial Catalog =Kino;User ID = sqlserver; Password=Pa$$w0rd";
 
-        private void label1_Click(object sender, EventArgs e)
-        {
 
-        }
+        private void label1_Click(object sender, EventArgs e) { }
+
+
         private void refreshDataGridView()
         {
             try
@@ -38,17 +37,15 @@ namespace Login
                 var dataTable = new DataTable();
                 dataTable.Load(dataReader);
                 dataGridView1.DataSource = dataTable;
-
                 con.Close();
-
-                
-
             }
             catch (SqlException ex)
             {
                 MessageBox.Show(ex.ToString());
             }
         }
+
+
         private void buttonAddPermission_Click(object sender, EventArgs e)
         {
             bool check = User.CheckPermission("addPermission");
@@ -82,6 +79,7 @@ namespace Login
                 MessageBox.Show(ex.ToString());            }
         }
 
+
         private void buttonDeletePermission_Click(object sender, EventArgs e)
         {
             bool check = User.CheckPermission("deletePermission");
@@ -96,7 +94,6 @@ namespace Login
                     {
                         if (dataGridView1.SelectedRows.Count == 1)
                         {
-
                             SqlConnection con3 = new SqlConnection(connection);
                             SqlCommand cmd3 = new SqlCommand("DELETE FROM dbo.g1_permission WHERE id_permission=@idPermission;", con3);
                             cmd3.Parameters.AddWithValue("@idPermission", selectedItemId);
@@ -115,7 +112,6 @@ namespace Login
 
                 else
                     MessageBox.Show("You have no permission to delete a permission");
-
             }
 
             catch (SqlException ex)
