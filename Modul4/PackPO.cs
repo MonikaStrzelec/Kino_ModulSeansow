@@ -23,11 +23,11 @@ namespace Modul4
 
 
 
-        public void add(int PackID, Product product)
+        public void add(int PackID, Product product, int amount)
         {
             this.PackID = PackID;
             this.ProductID = product.IDProduct;
-            this.Amount = product.Amount;
+            this.Amount = amount;
             this.Price = product.Price;
             using (var context = new projektkinoEntities1())
             {

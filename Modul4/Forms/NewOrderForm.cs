@@ -70,6 +70,10 @@ namespace Modul4
                 MessageBox.Show("Musisz coś dodać do zamówienia");
                 return;
             }
+            if (true)
+            {
+
+            }
 
             Sale sale = new Sale();
             int userId = 1; // Do zmiany uprawnień
@@ -123,5 +127,7 @@ namespace Modul4
         {
             this.Close();
         }
+
+
     }
 }

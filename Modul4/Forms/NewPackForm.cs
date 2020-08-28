@@ -18,7 +18,7 @@ namespace Modul4
         public NewPackForm()
         {
             InitializeComponent();
-            
+
         }
 
         private void NewPackForm_Load(object sender, EventArgs e)
@@ -48,10 +48,29 @@ namespace Modul4
             {
                 Pack pack = new Pack();
                 int id = pack.add(textBox1.Text, numericUpDown1.Value);
-                foreach (Product product in listBox2.Items)
+                for (int i = 0; i < listBox2.Items.Count;)
                 {
+                    bool xyz = false;
+                    int counter = 0;
+                    Product product = (Product)listBox2.Items[i];
+                    for (int x = 0; x < listBox2.Items.Count; x++)
+                    {
+                        Product product1 = (Product)listBox2.Items[x];
+                        if (product == product1)
+                        {
+                            xyz = true;
+                            counter++;
+                            listBox2.Items.Remove(product1);
+                            x = -1;
+                        }
+
+                    }
+                    if (!xyz)
+                    {
+                        i++;
+                    }
                     PackPO packPO = new PackPO();
-                    packPO.add(id, product);
+                    packPO.add(id, product, counter);
                 }
                 MessageBox.Show("");
                 listBox2.Items.Clear();
@@ -64,7 +83,7 @@ namespace Modul4
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {   
+        {
             product = (Product)listBox2.SelectedItem;
             numericUpDown1.Value -= product.Price;
             listBox2.Items.Remove(listBox2.SelectedItem);
@@ -74,6 +93,7 @@ namespace Modul4
         {
             Close();
         }
+
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
