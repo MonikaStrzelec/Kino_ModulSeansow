@@ -37,14 +37,24 @@ namespace Modul4
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            listBox2.Items.Add(listBox1.SelectedItem);
-            UpdateValueLabel();
+            if (listBox1.SelectedItem == null)
+            {
+                MessageBox.Show("Select item to add!");
+            }
+            else
+                listBox2.Items.Add(listBox1.SelectedItem);
+                UpdateValueLabel();
         }
 
         private void undoBtn_Click(object sender, EventArgs e)
         {
-            listBox2.Items.Remove(listBox2.SelectedItem);
-            UpdateValueLabel();
+            if (listBox2.SelectedItem == null)
+            {
+                MessageBox.Show("Select item to delete!");
+            }
+            else
+                listBox2.Items.Remove(listBox2.SelectedItem);
+                UpdateValueLabel();
         }
 
         private void cancelOrderBtn_Click(object sender, EventArgs e)
