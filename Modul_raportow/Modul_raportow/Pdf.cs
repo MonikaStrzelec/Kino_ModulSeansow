@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using iText.Kernel.Font;
 using iText.IO.Font.Constants;
+using System.IO;
+using System.Windows.Forms;
 
 namespace Modul_raportow
 {
@@ -46,21 +48,33 @@ namespace Modul_raportow
             string genTime = DateTime.Today.ToShortDateString();
             string filename = name.Replace(" ","")+" "+genTime+" .pdf";
 
+            string filepath = exportFolder +"\\"+ filename;
             try
             {
-                string exportFile = System.IO.Path.Combine(exportFolder, filename);
+                if (File.Exists(filepath))
+                {
+                    MessageBox.Show("Raport "+name+" już istnieje. Proszę usunąć poprzednio wygenerowany raport i spróbować ponownie");
+                    return;
+                }
+                else
+                {
+                    string exportFile = System.IO.Path.Combine(exportFolder, filename);
 
-                PdfWriter writer = new PdfWriter(exportFile);
-                PdfDocument pdf = new PdfDocument(writer);
-                Document doc = new Document(pdf);
-                Paragraph title = new Paragraph(name).SetFont(helvetica);
-                title.SetFontSize(21);
-                doc.Add(new Paragraph(genTime).SetFont(helvetica));
-                doc.Add(title);
-                doc.Add(ToTable(data));
-                doc.Close();
-                pdf.Close();
-                writer.Close();
+                    PdfWriter writer = new PdfWriter(exportFile);
+                    PdfDocument pdf = new PdfDocument(writer);
+                    Document doc = new Document(pdf);
+                    Paragraph title = new Paragraph(name).SetFont(helvetica);
+                    title.SetFontSize(21);
+                    doc.Add(new Paragraph(genTime).SetFont(helvetica));
+                    doc.Add(title);
+                    doc.Add(ToTable(data));
+                    doc.Close();
+                    pdf.Close();
+                    writer.Close();
+                    
+                    MessageBox.Show("Wygenerowano raport: " + name);
+                }
+                
 
                     
                 

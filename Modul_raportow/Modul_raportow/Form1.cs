@@ -76,10 +76,6 @@ namespace Modul_raportow
                         MessageBox.Show("Wybierz jakiś raport");
                         break;
                 }
-
-                                
-                if (comboBox1.SelectedIndex != 0) MessageBox.Show("Raport został stworzony");
-
             }
 
             catch (Exception ex)
@@ -133,10 +129,10 @@ namespace Modul_raportow
             try
             {
 
-                DataTable workers= SQLObject.SendCommand("SELECT dbo.g1_user.id_user AS id, dbo.g1_pearson.first_name + ' '+dbo.g1_pearson.last_name AS name FROM dbo.g1_user INNER JOIN dbo.g1_pearson ON dbo.g1_pearson.id_pearson=dbo.g1_user.id_pearson");
+                DataTable workers= SQLObject.SendCommand("SELECT dbo.g1_user.id_user AS id, dbo.g1_pearson.id_pearson+' '+ dbo.g1_pearson.first_name + ' '+dbo.g1_pearson.last_name AS name FROM dbo.g1_user INNER JOIN dbo.g1_pearson ON dbo.g1_pearson.id_pearson=dbo.g1_user.id_pearson");
                 // comboBox2.Items.Add(row[0].ToString());
                 comboBox2.DisplayMember = workers.Columns[1].ColumnName;
-                    comboBox2.ValueMember = workers.Columns[0].ColumnName; ;
+                    comboBox2.ValueMember = workers.Columns[0].ColumnName; 
                     comboBox2.DataSource = workers;
 
                 comboBox2.SelectedIndex = 0;
