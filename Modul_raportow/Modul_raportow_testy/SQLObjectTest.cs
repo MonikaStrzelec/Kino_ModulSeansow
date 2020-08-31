@@ -38,14 +38,13 @@ namespace Modul_raportow_testy
 
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(SqlException))]
-        public void SQLObjectSendCommandFail()
-        {
-            SqlConnection con = new SqlConnection("Data Source=35.228.52.182;Initial Catalog=Kino;User ID=sqlserver;Password=Pa$$w0rd");
+        //[testmethod]
+        //public void sqlobjectsendcommandfail()
+        //{
+        //    sqlconnection con = new sqlconnection("data source=35.228.52.182;initial catalog=kino;user id=sqlserver;password=pa$$w0rd");
 
-            DataTable result = Modul_raportow.SQLObject.SendCommand("SELECT 1");
-            Assert.AreEqual(1, result.Rows[0][0]);
-        }
+        //    datatable result = modul_raportow.sqlobject.sendcommand("select 1");
+        //    assert.areequal(1, result.rows[0][0]);
+        //}
     }
 }
