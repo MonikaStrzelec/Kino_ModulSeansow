@@ -17,7 +17,6 @@ namespace Modul4
         public NewOrderForm()
         {
             InitializeComponent();
-
         }
 
         new private void Refresh()
@@ -51,8 +50,6 @@ namespace Modul4
                 using (var context = new projektkinoEntities1())
                 {
                     _context = context;
-                UpdateValueLabel();
-                    
                     foreach (Pack pack in listBox2.Items)
                     {
                         packlist.Add(pack);
@@ -71,7 +68,7 @@ namespace Modul4
                             {
                                 temp = true;
                             }
-                            else { MessageBox.Show("brak produktów na stanie!");
+                            else { MessageBox.Show("Lack of products");
                                 temp = false;
                                 break;
                             }
@@ -86,6 +83,7 @@ namespace Modul4
 
                 }
             }
+            UpdateValueLabel();
         }
 
         private void undoBtn_Click(object sender, EventArgs e)
@@ -103,13 +101,14 @@ namespace Modul4
         {
             valueLabel.Text = "0.00";
             listBox2.Items.Clear();
+            MessageBox.Show("Order cleared");
         }
 
         private void confirmOrderBtn_Click(object sender, EventArgs e)
         {
             if(!(listBox2.Items.Count > 0))
             {
-                MessageBox.Show("Musisz coś dodać do zamówienia");
+                MessageBox.Show("You have to add something to order");
                 return;
             }
             Sale sale = new Sale();
@@ -136,10 +135,9 @@ namespace Modul4
                 context.SaveChanges();
             }
 
-                    MessageBox.Show("Dodano zestaw");
-                    Refresh();
-
-                }
+            MessageBox.Show("Added pack");
+            Refresh();
+        }
 
         private void UpdateValueLabel()
         {

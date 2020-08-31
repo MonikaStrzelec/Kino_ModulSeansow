@@ -40,7 +40,6 @@ namespace Modul4
                 context.Entry(pack).State = System.Data.Entity.EntityState.Deleted;
                 context.SaveChanges();
             }
-            MessageBox.Show("Item deleted!");
         }
 
         public override string ToString()

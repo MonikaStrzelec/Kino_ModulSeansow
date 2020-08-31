@@ -32,11 +32,12 @@ namespace Modul4
         {
             if (String.IsNullOrWhiteSpace(textBox1.Text))
             {
-                MessageBox.Show("");
+                MessageBox.Show("Type name of the product");
             }
             else
             { 
                 Product.add(textBox1.Text, numericUpDown2.Value, (int)numericUpDown1.Value);
+                MessageBox.Show("Product added");
                 Refresh();
             }
                 
@@ -60,6 +61,7 @@ namespace Modul4
         private void button3_Click(object sender, EventArgs e)
         {
             Product.Delete(Helpers.GetIndex(dataGridView2));
+            MessageBox.Show("Product deleted");
             Refresh();
         }
 
@@ -82,14 +84,22 @@ namespace Modul4
 
         private void button5_Click(object sender, EventArgs e)
         {
-            EditPackForm editPackForm = new EditPackForm(Helpers.GetIndex(dataGridView1));
-            editPackForm.ShowDialog();
-            Refresh();
+            if(dataGridView1.Rows.Count > 0)
+            {
+                EditPackForm editPackForm = new EditPackForm(Helpers.GetIndex(dataGridView1));
+                editPackForm.ShowDialog();
+                Refresh();
+            }
+            else
+            {
+                MessageBox.Show("Empty grid view");
+            }    
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             Pack.Delete(Helpers.GetIndex(dataGridView1));
+            MessageBox.Show("Pack deleted");
             Refresh();
         }
     }

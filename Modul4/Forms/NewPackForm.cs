@@ -39,7 +39,6 @@ namespace Modul4
             else
             { 
                 listBox2.Items.Add(listBox1.SelectedItem);
-                listBox2.Items.Add(listBox1.SelectedItem);
                 product = (Product)listBox1.SelectedItem;
                 Price += product.Price;
                 numericUpDown1.Value = Price;
@@ -50,7 +49,7 @@ namespace Modul4
         {
             if (listBox2.Items.Count < 1 || String.IsNullOrWhiteSpace(textBox1.Text))
             {
-                MessageBox.Show("");
+                MessageBox.Show("Pack can't be empty and name can't be empty");
             }
             else
             {
@@ -80,7 +79,7 @@ namespace Modul4
                     PackPO packPO = new PackPO();
                     packPO.add(id, product, counter);
                 }
-                MessageBox.Show("");
+                MessageBox.Show("Pack added");
                 listBox2.Items.Clear();
             }
         }

@@ -29,6 +29,7 @@ namespace Modul4
         private void button1_Click(object sender, EventArgs e)
         {
             Product.edit(indexik, textBox1.Text, numericUpDown1.Value, (int)numericUpDown2.Value);
+            MessageBox.Show("Changes confirmed");
             Close();
         }
 

@@ -31,7 +31,6 @@ namespace Modul4
                 context.Product.Add(product);
                 context.SaveChanges();
             }
-            MessageBox.Show("Product added!");
 
         }
 
@@ -45,7 +44,6 @@ namespace Modul4
                 product.Amount = amount;
                 context.SaveChanges();
             }
-            MessageBox.Show("Item edited!");
         }
 
         public static void Delete(int index)
@@ -56,7 +54,6 @@ namespace Modul4
                 context.Entry(product).State = System.Data.Entity.EntityState.Deleted;
                 context.SaveChanges();
             }
-            MessageBox.Show("Item deleted!");
         }
 
         public override string ToString()

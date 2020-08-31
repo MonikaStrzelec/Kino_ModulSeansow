@@ -64,7 +64,7 @@ namespace Modul4
 
             if (listBox2.Items.Count < 1 || String.IsNullOrWhiteSpace(textBox1.Text))
             {
-                MessageBox.Show("");
+                MessageBox.Show("Put name of the pack");
             }
             else
             {
@@ -95,9 +95,15 @@ namespace Modul4
                     PackPO packPO = new PackPO();
                     packPO.add(id, product, counter);
                 }
-                MessageBox.Show("");
+                MessageBox.Show("Pack edited");
                 listBox2.Items.Clear();
+                Close();
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
