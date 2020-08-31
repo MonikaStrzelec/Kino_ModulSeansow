@@ -32,10 +32,18 @@ namespace Modul4
 
         private void button2_Click(object sender, EventArgs e)
         {
-            listBox2.Items.Add(listBox1.SelectedItem);
-            product = (Product)listBox1.SelectedItem;
-            Price += product.Price;
-            numericUpDown1.Value = Price;
+            if (listBox1.SelectedItem == null)
+            {
+                MessageBox.Show("Select item to add!");
+            }
+            else
+            { 
+                listBox2.Items.Add(listBox1.SelectedItem);
+                listBox2.Items.Add(listBox1.SelectedItem);
+                product = (Product)listBox1.SelectedItem;
+                Price += product.Price;
+                numericUpDown1.Value = Price;
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -84,9 +92,16 @@ namespace Modul4
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (listBox2.SelectedItem == null)
+            {
+                MessageBox.Show("Select item to delete!");
+            }
+            else
+            { 
             product = (Product)listBox2.SelectedItem;
             numericUpDown1.Value -= product.Price;
             listBox2.Items.Remove(listBox2.SelectedItem);
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)

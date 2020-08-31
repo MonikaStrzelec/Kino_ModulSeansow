@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,11 @@ namespace Modul4
 {
     public partial class NewOrderForm : Form
     {
+        projektkinoEntities1 _context;
         public NewOrderForm()
         {
             InitializeComponent();
+
         }
 
         new private void Refresh()
@@ -37,13 +40,52 @@ namespace Modul4
 
         private void addBtn_Click(object sender, EventArgs e)
         {
+            List<Pack> packlist = new List<Pack>();
+            bool temp = true;
             if (listBox1.SelectedItem == null)
             {
                 MessageBox.Show("Select item to add!");
             }
             else
-                listBox2.Items.Add(listBox1.SelectedItem);
+            {
+                using (var context = new projektkinoEntities1())
+                {
+                    _context = context;
                 UpdateValueLabel();
+                    
+                    foreach (Pack pack in listBox2.Items)
+                    {
+                        packlist.Add(pack);
+                    }
+                    listBox2.Items.Clear();
+                    packlist.Add((Pack)listBox1.SelectedItem);
+                    foreach (Pack pack in packlist)
+                    {
+                        List<PackPO> packPOs = context.PackPO.Where(x => x.PackID == pack.IDPack).ToList();
+                        foreach (PackPO packpo in packPOs)
+                        {
+                            Product product = (Product)context.Product.FirstOrDefault(x => x.IDProduct == packpo.ProductID);
+                            product.Amount = product.Amount - packpo.Amount;
+                            context.Set<Product>().AddOrUpdate(product);
+                            if (product.Amount >= 0)
+                            {
+                                temp = true;
+                            }
+                            else { MessageBox.Show("brak produktów na stanie!");
+                                temp = false;
+                                break;
+                            }
+
+                        }
+                        if (temp)
+                        {
+                            listBox2.Items.Add(pack);
+                        }
+                    }
+                    packlist.Clear();
+
+                }
+            }
         }
 
         private void undoBtn_Click(object sender, EventArgs e)
@@ -70,11 +112,6 @@ namespace Modul4
                 MessageBox.Show("Musisz coś dodać do zamówienia");
                 return;
             }
-            if (true)
-            {
-
-            }
-
             Sale sale = new Sale();
             int userId = 1; // Do zmiany uprawnień
             int id = sale.add(userId, DateTime.Now, GetPrice());
@@ -83,10 +120,26 @@ namespace Modul4
                 SalePO salePO = new SalePO();
                 salePO.add(id, pack);
             }
-            MessageBox.Show("Dodano zestaw");
-            Refresh();
 
-        }
+            using (var context = new projektkinoEntities1())
+            {
+                foreach (Pack pack in listBox2.Items)
+                {
+                    List<PackPO> packPOs = context.PackPO.Where(x => x.PackID == pack.IDPack).ToList();
+                    foreach (PackPO packpo in packPOs)
+                    {
+                        Product product = (Product)context.Product.FirstOrDefault(x => x.IDProduct == packpo.ProductID);
+                        product.Amount = product.Amount - packpo.Amount;
+                        context.Set<Product>().AddOrUpdate(product);
+                    }
+                }
+                context.SaveChanges();
+            }
+
+                    MessageBox.Show("Dodano zestaw");
+                    Refresh();
+
+                }
 
         private void UpdateValueLabel()
         {

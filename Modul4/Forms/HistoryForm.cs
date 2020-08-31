@@ -27,7 +27,9 @@ namespace Modul4
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Helpers.GetIndex(dataGridView1);
+            OrderDetailsForm orderDetailsForm = new OrderDetailsForm(Helpers.GetIndex(dataGridView1));
+            orderDetailsForm.ShowDialog();
+
         }
     }
 }
